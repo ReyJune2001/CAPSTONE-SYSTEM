@@ -132,15 +132,7 @@ body.active .wrapper .section{
     margin-left: 0;
     width: 100%;
 }
-h2{
-    margin-left: 500px;
-    color:black;
-    border: 1px solid black;
-    background: rgb(179, 209, 234);
-    padding: 10px; 
-    margin-top:0px;
-    
-}
+
 /*MAIN CONTAIN STYLES*/
         .main{
             display: flex;
@@ -156,8 +148,8 @@ h2{
         }
 
 /*USER PROFILE STYLES*/
-.admin_profile{
-    margin-left:86%;
+.admin_profile2{
+    margin-left:45%;
 }
 
 img{
@@ -249,18 +241,6 @@ img{
 
 /*FOR VOLUME TABLE CONTENT */
 
-        .tbl-container{
-                     max-width: 500px;
-                     max-height: 500px;
-                     
-        }
-        .tbl-fixed{
-                    overflow-x: scroll;
-                    overflow-y: scroll;
-                    height: fit-content;
-                    max-height: 50vh;
-                    margin-top: 40px;
-        }
         
         table, th, td {
           border: 1px solid black;
@@ -275,6 +255,42 @@ img{
         .paint-color-cell{
             white-space: nowrap;
         }
+
+/*FOR TABLE CONTAINER */
+
+
+    .container3, .container3-fluid, .container3-lg, .container3-md, .container3-sm, .container3-xl, .container3-xxl {
+    --bs-gutter-x: 3.9rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top:50px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color:rgb(225, 225, 212);
+}
+
+/*FOR SEARCH BAR */
+.searchfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        }
+
+        /*FOR FILTER BAR */
+        .filterfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        }
+        
 </style>
 </head>
 <body>
@@ -285,9 +301,48 @@ img{
                     <a href="#">
                         <i class="fas fa-bars"></i>       
                     </a>
+
+                    
                     
                 </div>
-                <div class="admin_profile">
+                <!--Search bar-->
+                <h4 style="font-size:25px; margin-top:5px; margin-left:20px;">Search</h4>
+                <form method="post">
+                
+                <input type="text" name="search" class="searchfield">
+                <button class="btn btn-primary btn-sm" name="submit">
+                <i class="fas fa-search"></i>
+            
+               </button>
+               </form>
+                
+                <!--Filter bar-->
+                <h4 style="font-size:25px; margin-top:5px; margin-left:70px;">Filter</h4>
+                <form action="#" method="post">
+                <select name="Level" class="filterfield">
+                   <option value="" disabled selected></option>
+                   <option value="admin">Paint color</option>
+                   <option value="user">Batch number</option>
+                   <option value="admin">Pi</option>
+                   <option value="user">Diameter</option>
+                   <option value="admin">Height</option>
+                   <option value="user">Descending</option>
+                   <option value="admin"></option>
+                   <option value="user">User</option>
+                   <option value="admin">Ascending</option>
+                   <option value="user">Descending</option>
+                   <option value="admin"></option>
+                   <option value="user">User</option>
+                   <option value="admin">Ascending</option>
+                   <option value="user">Descending</option>
+                   <option value="admin"></option>
+                   <option value="user">User</option>
+                 </select>
+                
+                
+               </form>
+                    
+                <div class="admin_profile2">
                 <a href="#" id="image">
                 <img src="IMAGES/sampleImage.jpg">
                 
@@ -295,23 +350,24 @@ img{
                 </div>
 
                 <div><h4 style="margin-left:17px; font-size:22px; margin-bottom:2px;">Rey June</h4></div>
+            
             </div>
 
             <!--MAIN CONTENT-->
     
-            <div class="container tbl-container">
-        <div class="row tbl-fixed">
-            <table>
-                <thead style="background: aqua;">
+            <div class="container3 target">
+            <table class="table table-striped">
+            <table style="width:100%">
+                
                   <tr>
                   <th scope="col" rowspan="2" class="bg-primary"> Date </th>
-                  <th scope="col" colspan="12" class="bg-primary">Initial Inventory of Paint Mix</th>
-                  <th scope="col" colspan="9" class="bg-warning">Ending Inventory</th>
+                  <th scope="col" colspan="12" class="bg-primary" style="padding-top:20px; padding-bottom:20px; font-size:20px;">Initial Inventory of Paint Mix</th>
+                  <th scope="col" colspan="9" class="bg-warning" style="font-size:20px;">Ending Inventory</th>
                        
                   </tr>
 
                   <tr>
-                  <th class="bg-primary">Paint<br>Color</th> 
+                  <th class="bg-primary">Paint Color</th> 
                   <th class="bg-primary">Supplier</th>
                   <th class="bg-primary">Batch Number</th> 
                   <th class="bg-primary">Pi</th> 
@@ -338,36 +394,174 @@ img{
                 <tbody>
                   <tr>
                     
-                  <td class="paint-color-cell"><input type="text"></td> 
-  <td><input type="text"></td> 
-  <td><input type="text"></td> 
-  <td><input type="text"></td> 
-  <td><input type="text"></td> 
-  <td><input type="text"></td>
-  <td><input type="text"></td>
-  <td><input type="text"></td> 
-  <td><input type="text"></td>
-  <td><input type="text"></td> 
-  <td><input type="text"></td>
-  <td><input type="text"></td> 
+                  <td class="paint-color-cell">01/05/24</td> 
+                  <td>Golden Brown</td> 
+                  <td>Nippon</td> 
+                  <td>01023</td> 
+                  <td>3.1416</td> 
+                  <td>18</td>
+                  <td>25</td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>64.6</td>
+                  <td>39.6</td> 
   
-  <td><input type="text"></td> 
-  <td><input type="text"></td> 
-  <td><input type="text"></td> 
-  <td><input type="text"></td> 
-  <td><input type="text"></td> 
-  <td><input type="text"></td>
-  <td><input type="text"></td> 
-  <td><input type="text"></td> 
-  <td><input type="text"></td>
-  
+                  <td>3.1416</td> 
+                  <td>18</td> 
+                  <td>12</td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>31.0</td> 
+                  <td>19.0</td>
+                
+                </tr>
 
-  
-          </tr>
-          </tr>
+                <tr>
                     
-                </tbody>
-              </table>
+                  <td class="paint-color-cell">01/05/24</td> 
+                  <td>Golden Brown</td> 
+                  <td>Nippon</td> 
+                  <td>01023</td> 
+                  <td>3.1416</td> 
+                  <td>18</td>
+                  <td>25</td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>64.6</td>
+                  <td>39.6</td> 
+  
+                  <td>3.1416</td> 
+                  <td>18</td> 
+                  <td>12</td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>31.0</td> 
+                  <td>19.0</td>
+                
+                </tr>
+
+                <tr>
+                    
+                  <td class="paint-color-cell">01/05/24</td> 
+                  <td>Golden Brown</td> 
+                  <td>Nippon</td> 
+                  <td>01023</td> 
+                  <td>3.1416</td> 
+                  <td>18</td>
+                  <td>25</td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>64.6</td>
+                  <td>39.6</td> 
+  
+                  <td>3.1416</td> 
+                  <td>18</td> 
+                  <td>12</td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>31.0</td> 
+                  <td>19.0</td>
+                
+                </tr>
+
+                <tr>
+                    
+                  <td class="paint-color-cell">01/05/24</td> 
+                  <td>Golden Brown</td> 
+                  <td>Nippon</td> 
+                  <td>01023</td> 
+                  <td>3.1416</td> 
+                  <td>18</td>
+                  <td>25</td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>64.6</td>
+                  <td>39.6</td> 
+  
+                  <td>3.1416</td> 
+                  <td>18</td> 
+                  <td>12</td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>31.0</td> 
+                  <td>19.0</td>
+                
+                </tr>
+
+                <tr>
+                    
+                  <td class="paint-color-cell">01/05/24</td> 
+                  <td>Golden Brown</td> 
+                  <td>Nippon</td> 
+                  <td>01023</td> 
+                  <td>3.1416</td> 
+                  <td>18</td>
+                  <td>25</td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>64.6</td>
+                  <td>39.6</td> 
+  
+                  <td>3.1416</td> 
+                  <td>18</td> 
+                  <td>12</td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>31.0</td> 
+                  <td>19.0</td>
+                
+                </tr>
+
+                <tr>
+                    
+                  <td class="paint-color-cell">01/05/24</td> 
+                  <td>Golden Brown</td> 
+                  <td>Nippon</td> 
+                  <td>01023</td> 
+                  <td>3.1416</td> 
+                  <td>18</td>
+                  <td>25</td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>64.6</td>
+                  <td>39.6</td> 
+  
+                  <td>3.1416</td> 
+                  <td>18</td> 
+                  <td>12</td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td>0.62</td>
+                  <td>0.38</td> 
+                  <td>31.0</td> 
+                  <td>19.0</td>
+                
+                </tr>
+          </tr>
+        </tbody>
+        </table>
         </div>
     </div>
 
@@ -415,8 +609,8 @@ img{
             
         </div>
         </div>
-
     </div>
+
      <!-- Logout Modal -->
      <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">

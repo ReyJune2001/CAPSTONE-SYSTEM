@@ -1,4 +1,4 @@
-<!--(1)-->
+<!--SIGNUP PAGE(1)-->
 
 <?php
 $success = 0;

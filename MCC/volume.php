@@ -264,7 +264,7 @@ img{
 /*FOR TABLE CONTAINER */
 
 
-    .container3{
+.container3, .container3-fluid, .container3-lg, .container3-md, .container3-sm, .container3-xl, .container3-xxl {
     --bs-gutter-x: 3.9rem;
     --bs-gutter-y: 0;
     width: 100%;
@@ -321,23 +321,15 @@ img{
 
      /*FOR SYSTEM RESPONSIVE */
 
-     @media only screen and (max-width: 1000px){ /*pag-ubos sa 1525 ang max-width, ma change dayon ang styles*/
+     @media only screen and (max-width: 1525px){ /*pag-ubos sa 1525 ang max-width, ma change dayon ang styles*/
         
-       /*FOR TABLE CONTAINER */
 
-
-       .container3 {
-   
+    .wrapper .section{
+    width: 100%;
+    margin-left: 300px;
+    transition: all 0.5s ease;
     
-    padding-right: 1190px;
-    padding-left: auto;
-    
-    
-}
-       body{
-       
-        background-color:red;
-       }
+    }
         }
 
 

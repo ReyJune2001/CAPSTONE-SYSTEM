@@ -13,7 +13,7 @@
     <title>Paint-Acetate Data Entry</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
-    <style>       
+    <style>
 *{
     
     list-style: none;
@@ -108,7 +108,7 @@ body{
 
 .wrapper .section .top_navbar{
     background: white;
-    height: 50px;
+    height: 2px;
     display: flex;
     align-items: center;
     padding: 0 30px;
@@ -132,39 +132,36 @@ body.active .wrapper .section{
     margin-left: 0;
     width: 100%;
 }
-h2{
-    margin-left: 500px;
-    color:black;
-    border: 1px solid black;
-    background: rgb(179, 209, 234);
-    padding: 10px; 
-    margin-top:0px;
-    
-}
-/*MAIN CONTAIN STYLES*/
-        .main{
-            display: flex;
-            flex: 1;
-            margin-top:14px;
-        }
-        main{
-            background-color: rgb(25, 142, 214);
-            padding: 23em 0 22em 0;
-            
-            flex: 1 1 150px;
-
-        }
 
 /*USER PROFILE STYLES*/
 .admin_profile{
-    margin-left:86%;
+    display:flex;
+    justify-content:flex-end;
+    margin-top:20px;
+    margin-right:32px;
+    
 }
+
+.img-admin {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    border: 3px solid transparent; /* Set a default border style */
+}
+
+.img-admin:hover {
+    border-color: blue; /* Change the border color to red on hover */
+    
+}
+     
 
 img{
     height: 50px;
     width: 50px;
-    border-radius: 50%;   
+    border-radius: 50%; 
+    
 }
+
   
   /*FOR ADMIN PROFILE MODAL */
 .container{
@@ -247,36 +244,109 @@ img{
    margin-top: 10px;
 }
 
+/*FOR VOLUME TABLE CONTENT */
+
+        
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          text-align: center;
+          
+          color: black;
+        }
+        .date-cell {
+        white-space: nowrap;
+        }
+        .paint-color-cell{
+            white-space: nowrap;
+        }
+
+/*FOR TABLE CONTAINER */
+
+
+    .container3, .container3-fluid, .container3-lg, .container3-md, .container3-sm, .container3-xl, .container3-xxl {
+    --bs-gutter-x: 3.9rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top:15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color:rgb(225, 225, 212);
+    
+}
+
+/*FOR SEARCH BAR */
+.searchfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        
+        }
+
+        /*FOR FILTER BAR */
+        .filterfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        }
+        
+        /*FOR SORT BAR */
+        .sortfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        }
+
+  
+        /*Operation Button */
+
+        .btn_opt {
+      display: flex;
+      justify-content: flex-end;
+      margin-top:50px;
+      margin-right:32px;
+    }
+
+     /*FOR SYSTEM RESPONSIVE */
+
+
 </style>
 </head>
 <body>
 <div class="wrapper">
         <div class="section">
+        <div class="admin_profile">
+                  
+                   <img src="IMAGES/sampleImage.jpg" class="img-admin" id="image">
+                   
+                <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">Rey June</h4>
+            
+                </div>
             <div class="top_navbar">
                 <div class="hamburger">
                     <a href="#">
                         <i class="fas fa-bars"></i>       
                     </a>
+
+                    
                     
                 </div>
-                <div class="admin_profile">
-                <a href="#" id="image">
-                <img src="IMAGES/sampleImage.jpg">
-                
-                </a>
-                </div>
-
-                <div><h4 style="margin-left:17px; font-size:22px; margin-bottom:2px;">Rey June</h4></div>
             </div>
 
-
-           <!--MAIN CONTENT-->
+            <!--MAIN CONTENT-->
     
-           <div class="main">
-              <main style="text-align:center; color:white;">MAIN CONTENT</main>
-           </div>
-
-
+            
      <!--Top menu -->
      <div class="sidebar">
 
@@ -430,6 +500,8 @@ img{
                 </div>
             </div>
         </div>
+
+        
 
 <!--FOR clickable image modal-->
 <script>

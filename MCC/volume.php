@@ -108,7 +108,7 @@ body{
 
 .wrapper .section .top_navbar{
     background: white;
-    height: 50px;
+    height: 2px;
     display: flex;
     align-items: center;
     padding: 0 30px;
@@ -133,30 +133,35 @@ body.active .wrapper .section{
     width: 100%;
 }
 
-/*MAIN CONTAIN STYLES*/
-        .main{
-            display: flex;
-            flex: 1;
-            margin-top:14px;
-        }
-        main{
-            background-color: rgb(25, 142, 214);
-            padding: 23em 0 22em 0;
-            
-            flex: 1 1 150px;
-
-        }
-
 /*USER PROFILE STYLES*/
-.admin_profile2{
-    margin-left:45%;
+.admin_profile{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:20px;
+    margin-right:32px;
+    
 }
+
+.img-admin {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    border: 3px solid transparent; /* Set a default border style */
+}
+
+.img-admin:hover {
+    border-color: blue; /* Change the border color to red on hover */
+    
+}
+     
 
 img{
     height: 50px;
     width: 50px;
-    border-radius: 50%;   
+    border-radius: 50%; 
+    
 }
+
   
   /*FOR ADMIN PROFILE MODAL */
 .container{
@@ -259,16 +264,18 @@ img{
 /*FOR TABLE CONTAINER */
 
 
-    .container3, .container3-fluid, .container3-lg, .container3-md, .container3-sm, .container3-xl, .container3-xxl {
+    .container3{
     --bs-gutter-x: 3.9rem;
     --bs-gutter-y: 0;
     width: 100%;
     padding-right: calc(var(--bs-gutter-x) * .5);
     padding-left: calc(var(--bs-gutter-x) * .5);
-    margin-top:50px;
+    padding-bottom:15px;
+    margin-top:15px;
     margin-right: auto;
     margin-left: auto;
     background-color:rgb(225, 225, 212);
+    
 }
 
 /*FOR SEARCH BAR */
@@ -279,6 +286,7 @@ img{
         background-color:rgb(225, 225, 212);
         border-color:#86b7fe;
         border-radius:5px;
+        
         }
 
         /*FOR FILTER BAR */
@@ -291,11 +299,60 @@ img{
         border-radius:5px;
         }
         
+        /*FOR SORT BAR */
+        .sortfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        }
+
+  
+        /*Operation Button */
+
+        .btn_opt {
+      display: flex;
+      justify-content: flex-end;
+      margin-top:50px;
+      margin-right:32px;
+    }
+
+     /*FOR SYSTEM RESPONSIVE */
+
+     @media only screen and (max-width: 1000px){ /*pag-ubos sa 1525 ang max-width, ma change dayon ang styles*/
+        
+       /*FOR TABLE CONTAINER */
+
+
+       .container3 {
+   
+    
+    padding-right: 1190px;
+    padding-left: auto;
+    
+    
+}
+       body{
+       
+        background-color:red;
+       }
+        }
+
+
 </style>
 </head>
 <body>
 <div class="wrapper">
         <div class="section">
+        <div class="admin_profile">
+                  
+                   <img src="IMAGES/sampleImage.jpg" class="img-admin" id="image">
+                   
+                <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">Rey June</h4>
+            
+                </div>
             <div class="top_navbar">
                 <div class="hamburger">
                     <a href="#">
@@ -326,30 +383,41 @@ img{
                    <option value="admin">Pi</option>
                    <option value="user">Diameter</option>
                    <option value="admin">Height</option>
-                   <option value="user">Descending</option>
-                   <option value="admin"></option>
-                   <option value="user">User</option>
-                   <option value="admin">Ascending</option>
-                   <option value="user">Descending</option>
-                   <option value="admin"></option>
-                   <option value="user">User</option>
-                   <option value="admin">Ascending</option>
-                   <option value="user">Descending</option>
-                   <option value="admin"></option>
-                   <option value="user">User</option>
+                   <option value="user">Conversion factor</option>
+                   <option value="admin">Volume</option>
+                   <option value="user">Paint ratio</option>
+                   <option value="admin">Acetate ratio</option>
+                   <option value="user">Paint Liter</option>
+                   <option value="admin">Acetate Liter</option>
+                   
                  </select>
                 
+                 <button class="btn btn-primary btn-sm"><i class="fa-solid fa-filter"></i></button>
+                 
+               </form>
+
+               <!--Sort bar-->
+               <h4 style="font-size:25px; margin-top:5px; margin-left:70px;">Sort</h4>
+                <form action="#" method="post">
+                <select name="Level" class="sortfield">
+                   <option value="" disabled selected></option>
+                   <option value="admin">Ascending</option>
+                   <option value="user">Descending</option>
+                   
+                 </select>
                 
+                 <button class="btn btn-primary btn-sm"><i class="fa-solid fa-arrow-down-wide-short"></i></button>
                </form>
                     
-                <div class="admin_profile2">
-                <a href="#" id="image">
-                <img src="IMAGES/sampleImage.jpg">
-                
-                </a>
-                </div>
+               
+            </div>
+            
 
-                <div><h4 style="margin-left:17px; font-size:22px; margin-bottom:2px;">Rey June</h4></div>
+            <!-- Operation Button -->
+
+            <div class="btn_opt">
+                <button class="btn btn-primary">Save report <i class="fa-solid fa-bookmark"></i></button>
+                <button class="btn btn-primary" style="margin-left:10px;">Data entry <i class="fa-solid fa-plus-minus"></i></button>
             
             </div>
 

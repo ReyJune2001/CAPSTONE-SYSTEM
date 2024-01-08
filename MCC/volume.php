@@ -319,18 +319,31 @@ img{
       margin-right:32px;
     }
 
-     /*FOR SYSTEM RESPONSIVE */
+     
 
-     @media only screen and (max-width: 1525px){ /*pag-ubos sa 1525 ang max-width, ma change dayon ang styles*/
-        
 
-    .wrapper .section{
-    width: 100%;
+/* MOBILE, LAPTOP , PC RESPONSIVE */
+
+@media only screen and (max-width: 1525px) {
+
+.wrapper .section {
+    width: 1220px;
     margin-left: 300px;
-    transition: all 0.5s ease;
-    
-    }
-        }
+
+}
+
+.container3 {
+    padding-top:2px;
+    padding-bottom:16px;
+}
+}
+
+@media only screen and (max-width: 1525px) {
+body.active .wrapper .section{
+   
+   width:1220px;
+}
+}
 
 
 </style>
@@ -417,7 +430,7 @@ img{
     
             <div class="container3 target">
             <table class="table table-striped">
-            <table style="width:100%">
+            <table style="width: calc(100%);">
                 
                   <tr>
                   <th scope="col" rowspan="2" class="bg-primary"> Date </th>

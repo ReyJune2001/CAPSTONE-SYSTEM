@@ -362,11 +362,9 @@ body.active .wrapper .section{
                 <div class="hamburger">
                     <a href="#">
                         <i class="fas fa-bars"></i>       
-                    </a>
-
-                    
-                    
+                    </a>   
                 </div>
+                
                 <!--Search bar-->
                 <h4 style="font-size:25px; margin-top:5px; margin-left:20px;">Search</h4>
                 <form method="post">

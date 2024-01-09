@@ -14,16 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
     <style>
-
-
-
-
-body{
-  background: rgb(195, 198, 247);
-}
-
-        
 *{
+    
     list-style: none;
     text-decoration: none;
     margin: 0;
@@ -108,7 +100,7 @@ body{
 }
 
 .wrapper .section{
-    width: calc(100% - 300px);
+    width: calc(134% - 300px);
     margin-left: 300px;
     transition: all 0.5s ease;
    
@@ -116,7 +108,7 @@ body{
 
 .wrapper .section .top_navbar{
     background: white;
-    height: 50px;
+    height: 2px;
     display: flex;
     align-items: center;
     padding: 0 30px;
@@ -140,20 +132,232 @@ body.active .wrapper .section{
     margin-left: 0;
     width: 100%;
 }
-h2{
-    margin-left: 500px;
-    color:black;
-    border: 1px solid black;
-    background: rgb(179, 209, 234);
-    padding: 10px; 
-    margin-top:0px;
+
+/*USER PROFILE STYLES*/
+.admin_profile{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:20px;
+    margin-right:32px;
     
 }
+
+.img-admin {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    border: 3px solid transparent; /* Set a default border style */
+}
+
+.img-admin:hover {
+    border-color: blue; /* Change the border color to red on hover */
+    
+}
+     
+
+img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%; 
+    
+}
+
+  
+  /*FOR ADMIN PROFILE MODAL */
+.container{
+   min-height: 50vh;
+   background-color: var(--light-bg);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding:20px;
+}
+
+.container .profile{
+   padding:20px;
+   box-shadow: var(--box-shadow);
+   text-align: center;
+   width: 400px;
+   border-radius: 5px;
+   
+}
+
+.container .profile img{
+   height: 160px;
+   width: 160px;
+   border-radius: 50%;
+   object-fit: cover;
+  
+   
+}
+
+/*FOR UPDATE MODAL */
+
+.container2{
+   min-height: 40vh;
+   
+}
+
+.container2 .profile2{
+   box-shadow: var(--box-shadow);
+   
+   border-radius: 5px;
+}
+
+.container2 .profile2 .img2{
+   Display: absolute;
+   height: 180px;
+   width: 180px;
+   margin-left: 140px;
+   margin-top:50px;
+   border-radius: 50%;
+   object-fit: cover;  
+}
+
+/*FOR UPDATE PROFILE */
+.update-profile form .flex{
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 20px;
+   gap:15px;
+}
+
+.update-profile form .flex .inputBox{
+   width: 50%;
+   margin-top: 20px;
+}
+
+.update-profile form .flex .inputBox span{
+   text-align: left;
+   display: block;
+   margin-top: 15px;
+   font-size: 17px;
+   color:var(--black);
+}
+
+.update-profile form .flex .inputBox .box{
+   width: 100%;
+   border-radius: 10px;
+   padding:12px 14px;
+   font-size: 17px;
+   color:var(--black);
+   margin-top: 10px;
+}
+
+/*FOR VOLUME TABLE CONTENT */
+
+        
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          text-align: center;
+          
+          color: black;
+        }
+        .date-cell {
+        white-space: nowrap;
+        }
+        .paint-color-cell{
+            white-space: nowrap;
+        }
+
+/*FOR TABLE CONTAINER */
+
+
+.container3, .container3-fluid, .container3-lg, .container3-md, .container3-sm, .container3-xl, .container3-xxl {
+    --bs-gutter-x: 3.9rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    padding-bottom:15px;
+    margin-top:15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color:rgb(225, 225, 212);
+    
+}
+
+/*FOR SEARCH BAR */
+.searchfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        
+        }
+
+        /*FOR FILTER BAR */
+        .filterfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        }
+        
+        /*FOR SORT BAR */
+        .sortfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        }
+
+  
+        /*Operation Button */
+
+        .btn_opt {
+      display: flex;
+      justify-content: flex-end;
+      margin-top:50px;
+      margin-right:32px;
+    }
+
+     
+
+
+/* MOBILE, LAPTOP , PC RESPONSIVE */
+
+@media only screen and (max-width: 1800px) {
+
+.wrapper .section {
+    width: 2000px;
+    margin-left: 300px;
+
+}
+
+.container3 {
+    padding-top:2px;
+    padding-bottom:16px;
+}
+}
+
+@media only screen and (max-width: 1800px) {
+body.active .wrapper .section{
+   
+   width:2400px;
+}
+}
+
+
 </style>
 </head>
 <body>
 <div class="wrapper">
         <div class="section">
+        <div class="admin_profile">
+                  
+                  <img src="IMAGES/sampleImage.jpg" class="img-admin" id="image">
+                  
+               <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">Rey June</h4>
+           
+        </div>
             <div class="top_navbar">
                 <div class="hamburger">
                     <a href="#">
@@ -162,8 +366,340 @@ h2{
                     </a>
                     
                 </div>
+
+                <!--Search bar-->
+                <h4 style="font-size:25px; margin-top:5px; margin-left:20px;">Search</h4>
+                <form method="post">
+                
+                <input type="text" name="search" class="searchfield">
+                <button class="btn btn-primary btn-sm" name="submit">
+                <i class="fas fa-search"></i>
+            
+               </button>
+               </form>
+                
+                <!--Filter bar-->
+                <h4 style="font-size:25px; margin-top:5px; margin-left:70px;">Filter</h4>
+                <form action="#" method="post">
+                <select name="Level" class="filterfield">
+                   <option value="" disabled selected></option>
+                   <option value="admin">Paint color</option>
+                   <option value="user">Batch number</option>
+                   <option value="admin">Pi</option>
+                   <option value="user">Diameter</option>
+                   <option value="admin">Height</option>
+                   <option value="user">Conversion factor</option>
+                   <option value="admin">Volume</option>
+                   <option value="user">Paint ratio</option>
+                   <option value="admin">Acetate ratio</option>
+                   <option value="user">Paint Liter</option>
+                   <option value="admin">Acetate Liter</option>
+                   
+                 </select>
+                
+                 <button class="btn btn-primary btn-sm"><i class="fa-solid fa-filter"></i></button>
+                 
+               </form>
+
+               <!--Sort bar-->
+               <h4 style="font-size:25px; margin-top:5px; margin-left:70px;">Sort</h4>
+                <form action="#" method="post">
+                <select name="Level" class="sortfield">
+                   <option value="" disabled selected></option>
+                   <option value="admin">Ascending</option>
+                   <option value="user">Descending</option>
+                   
+                 </select>
+                
+                 <button class="btn btn-primary btn-sm"><i class="fa-solid fa-arrow-down-wide-short"></i></button>
+               </form>
+                    
+               
+            </div>
+            
+
+            <!-- Operation Button -->
+
+            <div class="btn_opt">
+                <button class="btn btn-primary">Save report <i class="fa-solid fa-bookmark"></i></button>
+                <button class="btn btn-primary" style="margin-left:10px;">Data entry <i class="fa-solid fa-plus-minus"></i></button>
             
             </div>
+
+            <!--MAIN CONTENT-->
+    
+            <div class="container3 target">
+            <table class="table table-striped">
+            <table style="width:100%;">
+                
+                  <tr>
+                  <!--<th scope="col">#id</th>-->
+    <th scope="col" rowspan="2" class="bg-primary"> Date </th>
+    <th scope="col" colspan="5" class="bg-primary">Initial Inventory of Paint Mix</th>
+    <th scope="col" colspan="4" class="bg-primary">New Paint Mix</th>
+    <th scope="col" rowspan="2" class="bg-primary">Spray Viscocity</th>
+    <th scope="col" colspan="2" class="bg-primary">Ending Inventory</th>
+    <th scope="col" colspan="2" class="bg-primary">Total usage</th>
+    <th scope="col" colspan="2" class="bg-danger">Production Output</th>
+    <th scope="col" colspan="2" class="bg-success">Yield</th>
+    <th scope="col" colspan="1" class="bg-warning">Equipment Parameter</th>
+    <th scope="col" colspan="7" class="bg-warning">Spray Time (s)</th>
+    <th scope="col" rowspan="2" class="bg-warning">Abnormalities Encountered others Remarks</th>
+  </tr>
+
+  <tr>
+  <th class="bg-primary">Paint Color</th> <!--This is a  header column for Initial Inventory of Paint Mix-->
+  <th class="bg-primary">Supplier</th> <!--This is a  header column for Initial Inventory of Paint Mix-->
+  <th class="bg-primary">Batch Number</th> <!--This is a  header column for Initial Inventory of Paint Mix-->
+  <th class="bg-primary">Paint(L)</th> <!--This is a  header column for Initial Inventory of Paint Mix-->
+  <th class="bg-primary">Acetate(L)</th> <!--This is a  header column for Initial Inventory of Paint Mix-->
+  
+  <th class="bg-primary">Supplier</th> <!--This is a  header column of New Paint Mix-->
+  <th class="bg-primary">Batch Number</th> <!--This is a  header column of New Paint Mix-->
+  <th class="bg-primary">Paint(L)</th> <!--This is a  header column of New Paint Mix-->
+  <th class="bg-primary">Acetate(L)</th> <!--This is a  header column of New Paint Mix-->
+  
+  <th class="bg-primary">Paint(L)</th> <!--This is a  header column of Ending Inventory-->
+  <th class="bg-primary">Acetate(L)</th> <!--This is a  header column of Ending Inventory-->
+  
+  <th class="bg-primary">Paint(L)</th> <!--This is a  header column of Total usage-->
+  <th class="bg-primary">Acetate(L)</th> <!--This is a  header column of Total usage-->
+  
+  <th class="bg-danger">Customer</th> <!--This is a  header column of Production output-->
+  <th class="bg-danger">Quantity(Du)</th> <!--This is a  header column of Production output-->
+  
+  <th class="bg-success">Paint (Du'L)</th> <!--This is a  header column of yield-->
+  <th class="bg-success">Acetate (Du'L)</th> <!--This is a  header column of yield-->
+  
+  <th class="bg-warning">Fluid pressure(psi)</th> <!--This is a  header column of Equipment parameter-->
+  
+  <th class="bg-warning">Nozzle<br>1</th> <!--This is a  header column of Spray time(s)-->
+  <th class="bg-warning">Nozzle<br>2</th> <!--This is a  header column of Spray time(s)-->
+  <th class="bg-warning">Nozzle<br>3</th> <!--This is a  header column of Spray time(s)-->
+  <th class="bg-warning">Nozzle<br>4</th> <!--This is a  header column of Spray time(s)-->
+  <th class="bg-warning">Nozzle<br>6</th> <!--This is a  header column of Spray time(s)-->
+  <th class="bg-warning">Nozzle<br>9</th> <!--This is a  header column of Spray time(s)-->
+  <th class="bg-warning">Nozzle<br>10</th> <!--This is a  header column of Spray time(s)-->
+  </tr>
+  
+  <tr>
+                <tbody>
+                  <tr>
+                    
+                  <td class="paint-color-cell">01/08/24</td> 
+                  <td>Clear</td> 
+                  <td>Nippon</td> 
+                  <td>010433</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>Treasure Island</td>
+                  <td>010433</td>
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>1.38</td> 
+                  <td>12</td>
+                  <td>18</td> 
+  
+                  <td>34</td> 
+                  <td>54</td> 
+                  <td>pki</td> 
+                  <td>24</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>12.2</td> 
+                  <td>1</td> 
+                  <td>2</td>
+
+                  <td>3</td> 
+                  <td>4</td> 
+                  <td>6</td>
+                  <td>9</td> 
+                  <td>10</td> 
+                  <td>Very Good</td>
+                
+                </tr>
+
+                <tr>
+                    
+                  <td class="paint-color-cell">01/08/24</td> 
+                  <td>Clear</td> 
+                  <td>Nippon</td> 
+                  <td>010433</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>Treasure Island</td>
+                  <td>010433</td>
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>1.38</td> 
+                  <td>12</td>
+                  <td>18</td> 
+  
+                  <td>34</td> 
+                  <td>54</td> 
+                  <td>pki</td> 
+                  <td>24</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>12.2</td> 
+                  <td>1</td> 
+                  <td>2</td>
+
+                  <td>3</td> 
+                  <td>4</td> 
+                  <td>6</td>
+                  <td>9</td> 
+                  <td>10</td> 
+                  <td>Very Good</td>
+                
+                </tr>
+
+                <tr>
+                    
+                  <td class="paint-color-cell">01/08/24</td> 
+                  <td>Clear</td> 
+                  <td>Nippon</td> 
+                  <td>010433</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>Treasure Island</td>
+                  <td>010433</td>
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>1.38</td> 
+                  <td>12</td>
+                  <td>18</td> 
+  
+                  <td>34</td> 
+                  <td>54</td> 
+                  <td>pki</td> 
+                  <td>24</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>12.2</td> 
+                  <td>1</td> 
+                  <td>2</td>
+
+                  <td>3</td> 
+                  <td>4</td> 
+                  <td>6</td>
+                  <td>9</td> 
+                  <td>10</td> 
+                  <td>Very Good</td>
+                
+                </tr>
+
+                <tr>
+                    
+                  <td class="paint-color-cell">01/08/24</td> 
+                  <td>Clear</td> 
+                  <td>Nippon</td> 
+                  <td>010433</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>Treasure Island</td>
+                  <td>010433</td>
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>1.38</td> 
+                  <td>12</td>
+                  <td>18</td> 
+  
+                  <td>34</td> 
+                  <td>54</td> 
+                  <td>pki</td> 
+                  <td>24</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>12.2</td> 
+                  <td>1</td> 
+                  <td>2</td>
+
+                  <td>3</td> 
+                  <td>4</td> 
+                  <td>6</td>
+                  <td>9</td> 
+                  <td>10</td> 
+                  <td>Very Good</td>
+                
+                </tr>
+
+                <tr>
+                    
+                  <td class="paint-color-cell">01/08/24</td> 
+                  <td>Clear</td> 
+                  <td>Nippon</td> 
+                  <td>010433</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>Treasure Island</td>
+                  <td>010433</td>
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>1.38</td> 
+                  <td>12</td>
+                  <td>18</td> 
+  
+                  <td>34</td> 
+                  <td>54</td> 
+                  <td>pki</td> 
+                  <td>24</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>12.2</td> 
+                  <td>1</td> 
+                  <td>2</td>
+
+                  <td>3</td> 
+                  <td>4</td> 
+                  <td>6</td>
+                  <td>9</td> 
+                  <td>10</td> 
+                  <td>Very Good</td>
+                
+                </tr>
+
+                <tr>
+                    
+                  <td class="paint-color-cell">01/08/24</td> 
+                  <td>Clear</td> 
+                  <td>Nippon</td> 
+                  <td>010433</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>Treasure Island</td>
+                  <td>010433</td>
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>1.38</td> 
+                  <td>12</td>
+                  <td>18</td> 
+  
+                  <td>34</td> 
+                  <td>54</td> 
+                  <td>pki</td> 
+                  <td>24</td> 
+                  <td>12</td> 
+                  <td>18</td>
+                  <td>12.2</td> 
+                  <td>1</td> 
+                  <td>2</td>
+
+                  <td>3</td> 
+                  <td>4</td> 
+                  <td>6</td>
+                  <td>9</td> 
+                  <td>10</td> 
+                  <td>Very Good</td>
+                
+                </tr>
+
+          </tr>
+        </tbody>
+        </table>
+        </div>
+            
+        </div>
 
      <!--Top menu -->
      <div class="sidebar">
@@ -231,6 +767,109 @@ h2{
         </div>
     </div>
 
+
+   <!-- Clickable image modal -->
+   <div class="modal fade" id="clickable_image" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+
+                            <div class="profile">
+                                <div class="admin_modal">
+                                    <a href="#" id="image">
+                                        <img src="IMAGES/sampleImage.jpg">
+                                    </a>
+                                </div>
+
+                                 <h1 style="margin-top:20px;">Rey June</h1>
+
+                                    <div id="update_profile">
+                                        <button class="btn btn-primary btn-lg" style="font-size:25px; margin-top:20px;">Update profile</button>
+                                    </div>
+                            </div>
+
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+
+
+
+        <!-- Clickable update_admin modal -->
+        <div class="modal fade" id="clickable_update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <div class="container2">
+
+                            <div class="profile2">
+                                <div class="admin_modal">
+                                    <a href="#" id="image">
+                                        <img src="IMAGES/sampleImage.jpg" class="img2">
+                                    </a>
+                                </div>
+
+
+
+                                <div class="update-profile">
+                                <form action="" method="post" enctype="multipart/form-data">
+                                <div class="flex">
+                                <div class="inputBox">
+                                   <span></span>
+                                   <input type="text" name="update_name" placeholder="Name" class="box">
+                                   <span></span>
+                                   <input type="email" name="update_email" placeholder="Email" class="box">
+                                   <span></span>
+                                   <input type="file" name="update_image" accept="image/jpg, image/jpeg, image/png" class="box">
+                                </div>
+                                <div class="inputBox">
+                                   <span></span>
+                                   <input type="text" name="update_number" placeholder="Contact no." class="box">
+                                   <input type="hidden" name="old_pass">
+                                   <span></span>
+                                   <input type="password" name="update_pass" placeholder="Old password" class="box">
+                                   <span></span>
+                                   <input type="password" name="new_pass" placeholder="New password" class="box">
+                                   </div>
+                             </div>
+                             
+                             <div class="modal-footer">
+                             <button type="submit" class="btn btn-primary">Update</button>
+                             <a href="volume.php" class="btn btn-danger">Back</a>
+                            </div>
+                            </form>
+
+                       </div>            
+                            </div>
+
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+
+<!--FOR clickable image modal-->
+<script>
+   document.getElementById('image').addEventListener('click', function(){
+    var clickable_image = new bootstrap.Modal(document.getElementById('clickable_image'));
+    clickable_image.show();
+   })
+  </script>
+
+  <!--FOR clickable update_admin modal-->
+<script>
+   document.getElementById('update_profile').addEventListener('click', function(){
+    var clickable_image = new bootstrap.Modal(document.getElementById('clickable_update'));
+    clickable_image.show();
+   })
+  </script>
 
     <!--FOR SIDEBAR-->
 <script>

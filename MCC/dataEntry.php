@@ -318,6 +318,84 @@ img{
       margin-right:32px;
     }
 
+    /*MAIN CONTENT */
+
+.main1{
+            background-color: rgb(225, 225, 212);
+            padding: 2em 0 2em 0;
+            flex: 1 1 150px;
+            margin-top:20px;
+            margin-left:30px;
+            height:100%;
+            padding-left:30px;
+            padding-right:30px;
+    }
+
+        .left{
+           
+            background-color:  rgb(31, 102, 234);
+            padding: 3em 0 3em 0;
+            flex: 1 1 100px;
+            margin-left: auto;
+            text-align:center;
+            
+ 
+        }
+        .main2{
+            display: flex;
+            flex: 1;
+            
+            
+        }
+
+        .right{
+            background-color:  rgb(31, 102, 234);
+            padding: 3em 0 3em 0;
+            flex: 1 1 100px;
+            margin-right: auto;
+            text-align:center;
+
+        }
+        footer{
+            background-color:  rgb(31, 102, 234);
+            color:white;
+            padding: 1em 0 1em 0;
+            text-align:right;
+        }
+
+
+        
+        label{
+            color:white;
+            text-align:center;
+           
+
+        }
+
+        input{
+            width: 30%;
+            height: 35px;
+            margin-bottom: 20px;
+            border-color: #86;
+            border-radius: 5px;
+        }
+        
+        .selector {
+            width: 30%;
+            height: 35px;
+            margin-bottom: 20px;
+            border-color: #86;
+            border-radius: 5px;
+        }
+
+        .newpaint{
+            text-align:left;
+            margin-left:45px;
+        }
+
+        button{
+            margin-right:30px;
+        }
      /*FOR SYSTEM RESPONSIVE */
 
 
@@ -345,8 +423,144 @@ img{
             </div>
 
             <!--MAIN CONTENT-->
+            <form method="post">
+            <fieldset>
+            <div class="main1">
+            <div class="main2">
+            
+            <aside class="left">
+            <legend style=" color:white; font-weight:bold;">Initial Inventory</legend>
+            <br><br>
+
+            <label style="font-weight:bold; margin-left:40px;">Date:</label>
+            <input type="date" class="" name="date" autocomplete="off" required>
+            <label style="margin-left:50px;">Diameter:</label>
+         <input type="text" class="" name="diameter1" autocomplete="off" required>
+         <br>
+            <label>Paint Color:</label>
+         <select name="paint_color" class="selector" required>
+         <option value="">-- Select --</option>
+    <option value="Royal Blue" >Royal Blue</option>
+    <option value="Deft Blue" >Deft Blue</option>
+    <option value="Buff" >Buff</option>
+    <option value="Golden Brown" >Golden Brown</option>
+    <option value="Clear" >Clear</option>
+    <option value="White" >White</option>
+    <option value="Black" >Black</option>
+    <option value="Alpha Gray" >Alpha Gray</option>
+    <option value="Nile Green" >Nile Green</option>
+    <option value="Emirald Green" >Emirald Green</option>
+    <option value="Jade Green" >Jade Green</option>
+         </select>
+         <label style="margin-left:65px;">Height:</label>
+         <input type="text" class="" name="height1" autocomplete="off" required>
+         <br>
+        
+         <label style="margin-left:15px;">Supplier:</label>
+         <select name="supplier" class="selector" required>
+         <option value="">-- Select --</option>
+         <option value="Nippon" >Nippon</option>
+         <option value="Treasure Island" >Treasure Island</option>
+         <option value="Inkote" >Inkote</option>
+         <option value="Century" >Century</option>
+         </select>
+         <label style="margin-left:32px; margin-right:12px;">Paint ratio:</label>
+         <input type="text" class="" name="paint_ratio1" autocomplete="off" required>
+         
+         <br>
+         <label style="margin-left:7px;">Batch No:</label>
+         <input type="text" class="" name="batch_number" autocomplete="off" required>
+        
+         <label style="margin-left:18px; margin-right:10px;">Acetate ratio:</label>
+         <input type="text" class="" name="acetate_ratio1" autocomplete="off" required>
+         <br>
+         <br>
+         <div class="newpaint">
+         <legend style=" color:white; font-weight:bold;margin-left:5px; text-align:center;">New Paint Mix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Production Output</legend>
+            
+        
+            <br><br>
+
+            <label style="margin-left:41px;">Supplier:</label>
+         <select name="supplier" class="selector" required>
+         <option value="">-- Select --</option>
+         <option value="Nippon" >Nippon</option>
+         <option value="Treasure Island" >Treasure Island</option>
+         <option value="Inkote" >Inkote</option>
+         <option value="Century" >Century</option>
+         </select>
+         <label style="margin-left:38px;">Customer:</label>
+         <input type="text" class="" name="customer" autocomplete="off" required>
+        <br>
+         <label style="margin-left:38px;">Paint (L):</label>
+         <input type="text" class="" name="paintLiter" autocomplete="off" required>
+         <label style="margin-left:38px;">Quantity:</label>
+         <input type="text" class="" name="quantity" autocomplete="off" required>
+        <br>
+         <label style="margin-left:23px;">Acetate (L):</label>
+         <input type="text" class="" name="acetateLiter" autocomplete="off" required>
+         <br>
+
+         <label>Spay Viscosity:</label>
+         <input type="text" class="" name="sprayViscosity" autocomplete="off" required>
+         <br>
+    </div>
+            </aside>
+      
+            
+       <aside class="right">
+       <legend style=" color:white; font-weight:bold;">Ending Inventory</legend>
+            <br><br>
+
+            <label style="margin-left:25px;">Diameter:</label>
+         <input type="text" class="" name="diameter1" autocomplete="off" required>
+         <br>
+
+         <label style="margin-left:39px;">Height:</label>
+         <input type="text" class="" name="height1" autocomplete="off" required>
+         <br>
+            
+         <label style="margin-left:18px;">Paint ratio:</label>
+         <input type="text" class="" name="paint_ratio1" autocomplete="off" required>
+         <br>
+         <label>Acetate ratio:</label>
+         <input type="text" class="" name="acetate_ratio1" autocomplete="off" required>
+         <br><br>
+
+         <div class="yield">
+         <legend style=" color:white; font-weight:bold;">Yield</legend>
+            
+        
+            <br><br>
+         <label style="margin-left:50px;">Paint:</label>
+         <input type="text" class="" name="paint" autocomplete="off" required>
+         <br>
+         <label style="margin-left:35px;">Acetate:</label>
+         <input type="text" class="" name="acetate" autocomplete="off" required>
+         <br>
+         </div>
+         <br><br>
+         <div class="remarks">
+         <label style="margin-left:28px;">Remarks:</label>
+         <input type="text" style="height:60px;" class="" name="acetate" autocomplete="off" required>
+         
+         </div>
+       </aside>
+       
+    </div>
+    <footer>
+        <button class="btn btn-primary btn-lg" style="font-size:15px; border-color:white;">Add</button>
+        <button class="btn btn-success btn-lg" style="font-size:15px; border-color:white;">Update</button>
+        <button class="btn btn-danger btn-lg" style="font-size:15px; border-color:white;">Clear</button>
+                                  
+    </footer>
+    
+    </div>
+    </fieldset>
+    </form>
     
             
+
      <!--Top menu -->
      <div class="sidebar">
 

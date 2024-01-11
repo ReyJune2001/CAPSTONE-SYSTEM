@@ -14,16 +14,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
     <style>
-
-
-
-
-body{
-  background: rgb(195, 198, 247);
-}
-
-        
 *{
+    
     list-style: none;
     text-decoration: none;
     margin: 0;
@@ -116,7 +108,7 @@ body{
 
 .wrapper .section .top_navbar{
     background: white;
-    height: 50px;
+    height: 2px;
     display: flex;
     align-items: center;
     padding: 0 30px;
@@ -140,30 +132,341 @@ body.active .wrapper .section{
     margin-left: 0;
     width: 100%;
 }
-h2{
-    margin-left: 500px;
-    color:black;
-    border: 1px solid black;
-    background: rgb(179, 209, 234);
-    padding: 10px; 
-    margin-top:0px;
+
+/*USER PROFILE STYLES*/
+.admin_profile{
+    display:flex;
+    justify-content:flex-end;
+    margin-top:20px;
+    margin-right:32px;
     
 }
+
+.img-admin {
+    height: 55px;
+    width: 55px;
+    border-radius: 50%;
+    border: 3px solid transparent; /* Set a default border style */
+}
+
+.img-admin:hover {
+    border-color: blue; /* Change the border color to red on hover */
+    
+}
+     
+
+img{
+    height: 50px;
+    width: 50px;
+    border-radius: 50%; 
+    
+}
+
+  /*USER HOME PROFILE STYLES*/
+.Admin-Profile{
+    display:flex;
+    justify-content:start;
+    margin-top:20px;
+    margin-left:50px;
+    
+}
+
+.Img-Admin {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 5px solid; /* Set a default border style */
+    border-color:rgb(0, 255, 38);
+}
+
+  /*FOR ADMIN PROFILE MODAL */
+.container{
+   min-height: 50vh;
+   background-color: var(--light-bg);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding:20px;
+}
+
+.container .profile{
+   padding:20px;
+   box-shadow: var(--box-shadow);
+   text-align: center;
+   width: 400px;
+   border-radius: 5px;
+   
+}
+
+.container .profile img{
+   height: 160px;
+   width: 160px;
+   border-radius: 50%;
+   object-fit: cover;
+  
+   
+}
+
+/*FOR UPDATE MODAL */
+
+.container2{
+   min-height: 40vh;
+   
+}
+
+.container2 .profile2{
+   box-shadow: var(--box-shadow);
+   
+   border-radius: 5px;
+}
+
+.container2 .profile2 .img2{
+   Display: absolute;
+   height: 180px;
+   width: 180px;
+   margin-left: 140px;
+   margin-top:50px;
+   border-radius: 50%;
+   object-fit: cover;  
+}
+
+/*FOR UPDATE PROFILE */
+.update-profile form .flex{
+   display: flex;
+   justify-content: space-between;
+   margin-bottom: 20px;
+   gap:15px;
+}
+
+.update-profile form .flex .inputBox{
+   width: 50%;
+   margin-top: 20px;
+}
+
+.update-profile form .flex .inputBox span{
+   text-align: left;
+   display: block;
+   margin-top: 15px;
+   font-size: 17px;
+   color:var(--black);
+}
+
+.update-profile form .flex .inputBox .box{
+   width: 100%;
+   border-radius: 10px;
+   padding:12px 14px;
+   font-size: 17px;
+   color:var(--black);
+   margin-top: 10px;
+}
+
+/*FOR VOLUME TABLE CONTENT */
+
+        
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+          text-align: center;
+          
+          color: black;
+        }
+        .date-cell {
+        white-space: nowrap;
+        }
+        .paint-color-cell{
+            white-space: nowrap;
+        }
+
+/*FOR TABLE CONTAINER */
+
+
+    .container3, .container3-fluid, .container3-lg, .container3-md, .container3-sm, .container3-xl, .container3-xxl {
+    --bs-gutter-x: 3.9rem;
+    --bs-gutter-y: 0;
+    width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * .5);
+    padding-left: calc(var(--bs-gutter-x) * .5);
+    margin-top:15px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color:rgb(225, 225, 212);
+    
+}
+
+/*FOR SEARCH BAR */
+.searchfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        
+        }
+
+        /*FOR FILTER BAR */
+        .filterfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        }
+        
+        /*FOR SORT BAR */
+        .sortfield{
+        width: 150px; 
+        height:30px;
+        margin-left:5px;
+        background-color:rgb(225, 225, 212);
+        border-color:#86b7fe;
+        border-radius:5px;
+        }
+
+  
+        /*Operation Button */
+
+        .btn_opt {
+      display: flex;
+      justify-content: flex-end;
+      margin-top:50px;
+      margin-right:32px;
+    }
+
+    /*MAIN CONTENT */
+
+.main1{
+            background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(IMAGES/background2.jpg);
+            background-size: cover;
+            padding: 2em 0 2em 0;
+            flex: 1 1 150px;
+            margin-top:20px;
+            margin-left:30px;
+            height:100%;
+            padding-left:30px;
+            padding-right:30px;
+
+    }
+    header{
+            background-color: transparent;
+            padding: 2em 0 2em 0;
+            padding-bottom:0px;
+        }
+        .main2{
+            display: flex;
+            flex: 1;
+            
+            
+        }
+
+        .editProfile_container{
+            background-color: #3498db;
+            padding: 3em 0 3em 0;
+            flex: 1 1 100px;
+            margin-right: auto;
+            text-align:center;
+
+        }
+ 
+
+
+        
+        label{
+            color:white;
+            text-align:center;
+           
+
+        }
+
+        input{
+            width: 30%;
+            height: 35px;
+            margin-bottom: 20px;
+            border-color: #86;
+            border-radius: 5px;
+        }
+        
+        .selector {
+            width: 30%;
+            height: 35px;
+            margin-bottom: 20px;
+            border-color: #86;
+            border-radius: 5px;
+        }
+
+        .newpaint{
+            text-align:left;
+            margin-left:45px;
+        }
+
+        .operational_btn{
+            margin-right:30px;
+        }
+
+        /*FOR PARALLELOGRAM IN ADMIN PROFILE */
+        .parallelogram-button {
+      display: inline-block;
+      padding: 8px 40px;
+      
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .parallelogram-button1 {
+      background-color: #3498db;
+      transform: skew(20deg);
+      transform-origin: bottom right;
+    }
+
+    .parallelogram-button2 {
+      margin-left:20px;
+      background-color: #2ecc71;
+      transform: skew(20deg);
+      transform-origin: bottom right;
+    }
+
+    .parallelogram-button1:hover {
+      background-color: #2980b9;
+    }
+
+    .parallelogram-button2:hover {
+      background-color: #27ae60;
+    }
+
+    .profile-history-btn{
+        margin-left:300px;
+    }
+        
+     /*FOR SYSTEM RESPONSIVE */
+
+
 </style>
 </head>
 <body>
 <div class="wrapper">
         <div class="section">
+        <div class="admin_profile">
+                  
+                   <img src="IMAGES/sampleImage.jpg" class="img-admin" id="image">
+                   
+                <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">Rey June</h4>
+            
+                </div>
             <div class="top_navbar">
                 <div class="hamburger">
                     <a href="#">
-                        <i class="fas fa-bars"></i> 
-                        
+                        <i class="fas fa-bars"></i>       
                     </a>
+
+                    
                     
                 </div>
-            
             </div>
+
+            <!--MAIN CONTENT-->
+            
+
 
      <!--Top menu -->
      <div class="sidebar">
@@ -175,6 +478,18 @@ h2{
         </div>
             <!--menu item-->
             <ul>
+            <li>
+                <!-- Hidden hyperlink -->
+                <a href="hidden_profile.php" style="display:none;">Hidden Link
+
+                </a>
+            </li>
+            <li>
+                    <a href="profile.php" style="display:none;">
+                        <span class="icon"><i class="fa-solid fa-user"></i></span>
+                        <span class="item">Profile</span>
+                    </a>
+                </li>
                 <li>
                     <a href="dataEntry.php">
                         <span class="icon"><i class="fa-regular fa-keyboard"></i></span>
@@ -233,6 +548,47 @@ h2{
     </div>
 
 
+        <!-- Clickable image modal -->
+        <div class="modal fade" id="clickable_image" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container">
+
+                            <div class="profile">
+                                <div class="admin_modal">
+                                    <a href="#" id="image">
+                                        <img src="IMAGES/sampleImage.jpg">
+                                    </a>
+                                </div>
+
+                                 <h1 style="margin-top:20px;">Rey June</h1>
+
+                                    <div id="update_profile">
+                                    <a href="profile.php"><button class="btn btn-primary btn-lg" style="font-size:25px; margin-top:20px;">Update profile</button></a>
+                                    </div>
+                            </div>
+
+                        </div>
+                    </div>
+                
+                </div>
+            </div>
+        </div>
+
+        
+
+<!--FOR clickable image modal-->
+<script>
+   document.getElementById('image').addEventListener('click', function(){
+    var clickable_image = new bootstrap.Modal(document.getElementById('clickable_image'));
+    clickable_image.show();
+   })
+  </script>
+
     <!--FOR SIDEBAR-->
 <script>
     var hamburger = document.querySelector(".hamburger");
@@ -250,5 +606,7 @@ h2{
         });
     </script>
 
+    
+    
 </body>
 </html>

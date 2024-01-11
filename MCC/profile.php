@@ -10,7 +10,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <title>Paint-Acetate Data Entry</title>
+    <title>Profile</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
     <style>
@@ -27,6 +27,8 @@
 body{
     background: white;
 }
+
+
 
 .wrapper .sidebar{
     background: rgb(5, 68, 104);
@@ -162,7 +164,23 @@ img{
     
 }
 
-  
+  /*USER HOME PROFILE STYLES*/
+.Admin-Profile{
+    display:flex;
+    justify-content:start;
+    margin-top:20px;
+    margin-left:50px;
+    
+}
+
+.Img-Admin {
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 5px solid; /* Set a default border style */
+    border-color:rgb(0, 255, 38);
+}
+
   /*FOR ADMIN PROFILE MODAL */
 .container{
    min-height: 50vh;
@@ -321,7 +339,8 @@ img{
     /*MAIN CONTENT */
 
 .main1{
-            background-color: rgb(225, 225, 212);
+            background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(IMAGES/background2.jpg);
+            background-size: cover;
             padding: 2em 0 2em 0;
             flex: 1 1 150px;
             margin-top:20px;
@@ -329,17 +348,12 @@ img{
             height:100%;
             padding-left:30px;
             padding-right:30px;
-    }
 
-        .left{
-           
-            background-color:  rgb(31, 102, 234);
-            padding: 3em 0 3em 0;
-            flex: 1 1 100px;
-            margin-left: auto;
-            text-align:center;
-            
- 
+    }
+    header{
+            background-color: transparent;
+            padding: 2em 0 2em 0;
+            padding-bottom:0px;
         }
         .main2{
             display: flex;
@@ -348,32 +362,20 @@ img{
             
         }
 
-        .right{
-            background-color:  rgb(31, 102, 234);
+        .editProfile_container{
+            background-color: #39a8f1;
             padding: 3em 0 3em 0;
             flex: 1 1 100px;
             margin-right: auto;
             text-align:center;
-
-        }
-        footer{
-            background-color:  rgb(31, 102, 234);
-            color:white;
-            padding: 1em 0 1em 0;
-            text-align:right;
-        }
-
-
-        
-        label{
-            color:white;
-            text-align:center;
            
 
         }
+ 
+
 
         input{
-            width: 30%;
+            width: 20%;
             height: 35px;
             margin-bottom: 20px;
             border-color: #86;
@@ -396,7 +398,61 @@ img{
         .operational_btn{
             margin-right:30px;
         }
-        
+
+        /*FOR PARALLELOGRAM IN ADMIN PROFILE */
+        .parallelogram-button {
+      display: inline-block;
+      padding: 8px 40px;
+      
+      text-decoration: none;
+      transition: background-color 0.3s;
+    }
+
+    .parallelogram-button1 {
+      background-color:  #39a8f1;
+      transform: skew(20deg);
+      transform-origin: bottom right;
+    }
+
+    .parallelogram-button2 {
+      margin-left:20px;
+      background-color: #20da70;
+      transform: skew(20deg);
+      transform-origin: bottom right;
+    }
+
+    .parallelogram-button1:hover {
+      background-color:  #39a8f1;
+    }
+
+    .parallelogram-button2:hover {
+      background-color: #20da70;
+    }
+
+    .profile-history-btn{
+        margin-left:300px;
+    }
+      
+    
+
+    .main2{
+            display: flex;
+            flex: 1;
+            
+            
+        }
+
+
+    legend{
+        text-align:left;
+        margin-left:60px;
+        margin-bottom:40px;
+        font-size:30px;
+        color:black;
+    }
+
+
+    
      /*FOR SYSTEM RESPONSIVE */
 
 
@@ -404,168 +460,74 @@ img{
 </head>
 <body>
 <div class="wrapper">
-        <div class="section">
-        <div class="admin_profile">
-                  
-                   <img src="IMAGES/sampleImage.jpg" class="img-admin" id="image">
-                   
+    <div class="section">
+               <div class="admin_profile">     
+                   <img src="IMAGES/sampleImage.jpg" class="img-admin" id="image">    
                 <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">Rey June</h4>
-            
                 </div>
+
             <div class="top_navbar">
                 <div class="hamburger">
                     <a href="#">
                         <i class="fas fa-bars"></i>       
-                    </a>
-
-                    
-                    
+                    </a>   
                 </div>
             </div>
 
             <!--MAIN CONTENT-->
-            <form method="post">
-            <fieldset>
-            <div class="main1">
-            <div class="main2">
             
-            <aside class="left">
-            <legend style=" color:white; font-weight:bold;">Initial Inventory</legend>
-            <br><br>
-
-            <label style="font-weight:bold; margin-left:40px;">Date:</label>
-            <input type="date" class="" name="date" autocomplete="off" required>
-            <label style="margin-left:50px;">Diameter:</label>
-         <input type="text" class="" name="diameter1" autocomplete="off" required>
-         <br>
-            <label>Paint Color:</label>
-         <select name="paint_color" class="selector" required>
-         <option value="">-- Select --</option>
-    <option value="Royal Blue" >Royal Blue</option>
-    <option value="Deft Blue" >Deft Blue</option>
-    <option value="Buff" >Buff</option>
-    <option value="Golden Brown" >Golden Brown</option>
-    <option value="Clear" >Clear</option>
-    <option value="White" >White</option>
-    <option value="Black" >Black</option>
-    <option value="Alpha Gray" >Alpha Gray</option>
-    <option value="Nile Green" >Nile Green</option>
-    <option value="Emirald Green" >Emirald Green</option>
-    <option value="Jade Green" >Jade Green</option>
-         </select>
-         <label style="margin-left:65px;">Height:</label>
-         <input type="text" class="" name="height1" autocomplete="off" required>
-         <br>
-        
-         <label style="margin-left:15px;">Supplier:</label>
-         <select name="supplier" class="selector" required>
-         <option value="">-- Select --</option>
-         <option value="Nippon" >Nippon</option>
-         <option value="Treasure Island" >Treasure Island</option>
-         <option value="Inkote" >Inkote</option>
-         <option value="Century" >Century</option>
-         </select>
-         <label style="margin-left:32px; margin-right:12px;">Paint ratio:</label>
-         <input type="text" class="" name="paint_ratio1" autocomplete="off" required>
-         
-         <br>
-         <label style="margin-left:7px;">Batch No:</label>
-         <input type="text" class="" name="batch_number" autocomplete="off" required>
-        
-         <label style="margin-left:18px; margin-right:10px;">Acetate ratio:</label>
-         <input type="text" class="" name="acetate_ratio1" autocomplete="off" required>
-         <br>
-         <br>
-         <div class="newpaint">
-         <legend style=" color:white; font-weight:bold;margin-left:5px; text-align:center;">New Paint Mix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Production Output</legend>
             
         
-            <br><br>
+    <div class="main1">
+            <header>
+            <div class="Admin-Profile">
+                  
+                  <img src="IMAGES/sampleImage.jpg" class="Img-Admin" id="image">
+                  
+               <h4 style="margin-left:25px; font-size:40px; color:white; margin-top:80px; text-align:right;">Rey June</h4>
+            </div>
+            <div class="profile-history-btn">
+            <a href="profile.php" class="parallelogram-button parallelogram-button1" style="font-size:20px; color:white;">Edit Profile</a>
+            <a href="hidden_profile.php" class="parallelogram-button parallelogram-button2" style="font-size:20px; color:white;">History</a>
+           </div>
+            </header>
+            
+        <div class="main2">
+            
+            <div class="editProfile_container">
+                <form method="post">
+                <fieldset>
+                <div class="main2">
+                
+                    <div>
+                        <legend>Personal Details</legend>
+                       <label style="margin-left:300px; font-size:20px; color:black;">First name:</label>
+                       <input type="text" class="" name="name" autocomplete="off">
+                       <label style="margin-left:150px; font-size:20px; color:black;">Last name:</label>
+                       <input type="text" class="" name="" autocomplete="off">
+                       <br>
+                       <label style="margin-left:335px; font-size:20px; color:black;">Email:</label>
+                       <input type="text" class="" name="" autocomplete="off">
+                       <label style="margin-left:169px; font-size:20px; color:black;">Address:</label>
+                       <input type="text" class="" name="" autocomplete="off" >
+                       <br>
+                       <label style="margin-left:280px; font-size:20px; color:black;">Upload image:</label>
+                       <input type="file" name="update_image" accept="image/jpg, image/jpeg, image/png" class="box">
+                       <label style="margin-left:140px; font-size:20px; color:black;">Contact No:</label>
+                       <input type="text" class="" name="" autocomplete="off" >
+                    </div>
+                </div>
+                <br><br><br>
+                <button class="btn btn-primary" style="font-size:20px;">Save Changes</button>
 
-            <label style="margin-left:41px;">Supplier:</label>
-         <select name="supplier" class="selector" required>
-         <option value="">-- Select --</option>
-         <option value="Nippon" >Nippon</option>
-         <option value="Treasure Island" >Treasure Island</option>
-         <option value="Inkote" >Inkote</option>
-         <option value="Century" >Century</option>
-         </select>
-         <label style="margin-left:38px;">Customer:</label>
-         <input type="text" class="" name="customer" autocomplete="off" required>
-        <br>
-         <label style="margin-left:38px;">Paint (L):</label>
-         <input type="text" class="" name="paintLiter" autocomplete="off" required>
-         <label style="margin-left:38px;">Quantity:</label>
-         <input type="text" class="" name="quantity" autocomplete="off" required>
-        <br>
-         <label style="margin-left:23px;">Acetate (L):</label>
-         <input type="text" class="" name="acetateLiter" autocomplete="off" required>
-         <br>
-
-         <label>Spay Viscosity:</label>
-         <input type="text" class="" name="sprayViscosity" autocomplete="off" required>
-         <br>
+                </fieldset>
+                </form>
+            </div>
+        </div>
     </div>
-            </aside>
-      
-            
-       <aside class="right">
-       <legend style=" color:white; font-weight:bold;">Ending Inventory</legend>
-            <br><br>
-
-            <label style="margin-left:25px;">Diameter:</label>
-         <input type="text" class="" name="diameter1" autocomplete="off" required>
-         <br>
-
-         <label style="margin-left:39px;">Height:</label>
-         <input type="text" class="" name="height1" autocomplete="off" required>
-         <br>
-            
-         <label style="margin-left:18px;">Paint ratio:</label>
-         <input type="text" class="" name="paint_ratio1" autocomplete="off" required>
-         <br>
-         <label>Acetate ratio:</label>
-         <input type="text" class="" name="acetate_ratio1" autocomplete="off" required>
-         <br><br>
-
-         <div class="yield">
-         <legend style=" color:white; font-weight:bold;">Yield</legend>
-            
-        
-            <br><br>
-         <label style="margin-left:50px;">Paint:</label>
-         <input type="text" class="" name="paint" autocomplete="off" required>
-         <br>
-         <label style="margin-left:35px;">Acetate:</label>
-         <input type="text" class="" name="acetate" autocomplete="off" required>
-         <br>
-         </div>
-         <br><br>
-         <div class="remarks">
-         <label style="margin-left:28px;">Remarks:</label>
-         <input type="text" style="height:60px;" class="" name="acetate" autocomplete="off" required>
-         
-         </div>
-       </aside>
-       
-    </div>
-    <footer>
-        
-        <button class="btn btn-primary btn-lg operational_btn" style="font-size:15px; border-color:white;">Add</button>
-        <button class="btn btn-success btn-lg operational_btn" style="font-size:15px; border-color:white;">Update</button>
-        <button class="btn btn-danger btn-lg operational_btn" style="font-size:15px; border-color:white;">Clear</button>
-                                  
-    </footer>
-    
-    </div>
-    </fieldset>
-    </form>
-    
-            
 
      <!--Top menu -->
      <div class="sidebar">
-
            <!--profile image & text-->
            <div class="profile">
             <img src="IMAGES/logo.jpg" alt="profile_picture">
@@ -575,17 +537,19 @@ img{
             <!--menu item-->
             <ul>
             <li>
-                  <!-- Hidden hyperlink -->
-                  <a href="hidden_profile.php" style="display:none;">Hidden Link
+                <!-- Hidden hyperlink -->
+                <a href="hidden_profile.php" style="display:none;">Hidden Link
 
-                  </a>
-                    <a href="profile.php" style="display:none;">
+                </a>
+            </li>
+            <li>
+                    <a href="profile.php"  style="display:none;">
                         <span class="icon"><i class="fa-solid fa-user"></i></span>
                         <span class="item">Profile</span>
                     </a>
                 </li>
                 <li>
-                    <a href="dataEntry.php" class="active">
+                    <a href="dataEntry.php">
                         <span class="icon"><i class="fa-regular fa-keyboard"></i></span>
                         <span class="item">Data Entry</span>
                     </a>
@@ -609,7 +573,7 @@ img{
                     </a>
                 </li>
                 <li>
-                    <a href="#" id="logoutButton">
+                <a href="#" id="logoutButton">
                         <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
                         <span class="item">Logout</span>
                     </a>
@@ -620,6 +584,8 @@ img{
         </div>
 
     </div>
+
+
      <!-- Logout Modal -->
      <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -669,7 +635,9 @@ img{
                 
                 </div>
             </div>
-        </div> 
+        </div>
+
+        
 
 <!--FOR clickable image modal-->
 <script>

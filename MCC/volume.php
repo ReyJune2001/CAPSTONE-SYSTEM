@@ -646,6 +646,18 @@ body.active .wrapper .section{
         </div>
             <!--menu item-->
             <ul>
+            <li>
+                <!-- Hidden hyperlink -->
+                <a href="hidden_profile.php" style="display:none;">Hidden Link
+
+                </a>
+            </li>
+            <li>
+                    <a href="profile.php" style="display:none;">
+                        <span class="icon"><i class="fa-solid fa-user"></i></span>
+                        <span class="item">Profile</span>
+                    </a>
+                </li>
                 <li>
                     <a href="dataEntry.php">
                         <span class="icon"><i class="fa-regular fa-keyboard"></i></span>
@@ -722,7 +734,7 @@ body.active .wrapper .section{
                                  <h1 style="margin-top:20px;">Rey June</h1>
 
                                     <div id="update_profile">
-                                        <button class="btn btn-primary btn-lg" style="font-size:25px; margin-top:20px;">Update profile</button>
+                                    <a href="profile.php"><button class="btn btn-primary btn-lg" style="font-size:25px; margin-top:20px;">Update profile</button></a>
                                     </div>
                             </div>
 
@@ -733,61 +745,6 @@ body.active .wrapper .section{
             </div>
         </div>
 
-
-
-        <!-- Clickable update_admin modal -->
-        <div class="modal fade" id="clickable_update" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <div class="container2">
-
-                            <div class="profile2">
-                                <div class="admin_modal">
-                                    <a href="#" id="image">
-                                        <img src="IMAGES/sampleImage.jpg" class="img2">
-                                    </a>
-                                </div>
-
-
-
-                                <div class="update-profile">
-                                <form action="" method="post" enctype="multipart/form-data">
-                                <div class="flex">
-                                <div class="inputBox">
-                                   <span></span>
-                                   <input type="text" name="update_name" placeholder="Name" class="box">
-                                   <span></span>
-                                   <input type="email" name="update_email" placeholder="Email" class="box">
-                                   <span></span>
-                                   <input type="file" name="update_image" accept="image/jpg, image/jpeg, image/png" class="box">
-                                </div>
-                                <div class="inputBox">
-                                   <span></span>
-                                   <input type="text" name="update_number" placeholder="Contact no." class="box">
-                                   <input type="hidden" name="old_pass">
-                                   <span></span>
-                                   <input type="password" name="update_pass" placeholder="Old password" class="box">
-                                   <span></span>
-                                   <input type="password" name="new_pass" placeholder="New password" class="box">
-                                   </div>
-                             </div>
-                             
-                             <div class="modal-footer">
-                             <button type="submit" class="btn btn-primary">Update</button>
-                             <a href="volume.php" class="btn btn-danger">Back</a>
-                            </div>
-                            </form>
-
-                       </div>            
-                            </div>
-
-                        </div>
-                    </div>
-                
-                </div>
-            </div>
-        </div>
 
 <!--FOR clickable image modal-->
 <script>

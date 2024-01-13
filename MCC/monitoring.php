@@ -1,3 +1,44 @@
+<?php
+
+ include 'connect.php';
+
+ $id = 1;
+
+ $sql="Select * from `operator_admin_account` where id=$id";
+ $result=mysqli_query($con,$sql);
+ $row=mysqli_fetch_assoc($result);
+
+ /*TO FETCH THE DATA FROM DATABASE - */
+ $Name=$row['Name']; /*column name in the database */
+$Username=$row['Username'];
+$Profile_image = $row['Profile_image'];
+
+ /*TO UPDATE THE DATA FROM DATABASE */
+if(isset($_POST['submit'])){
+
+
+
+    // Handle image upload
+    $update_image = $_FILES['update_image']['name'];
+    $update_image_size = $_FILES['update_image']['size'];
+    $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
+    $update_image_folder = 'uploaded_image/' . $update_image;
+
+    if (!empty($update_image)) {
+        if ($update_image_size > 2000000) {
+            $message[] = 'Image is too large';
+        } else {
+            $image_update_query = mysqli_query($con, "UPDATE `operator_admin_account` SET Profile_image = '$update_image' WHERE id = '$id'") or die('Query failed');
+            if ($image_update_query) {
+                move_uploaded_file($update_image_tmp_name, $update_image_folder);
+            }
+    
+        }
+    }else {
+        die(mysqli_error($con));
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -353,9 +394,11 @@ body.active .wrapper .section{
         <div class="section">
         <div class="admin_profile">
                   
-                  <img src="IMAGES/sampleImage.jpg" class="img-admin" id="image">
+                  <img src="uploaded_image/<?php echo $Profile_image; ?>" class="img-admin" id="image">
                   
-               <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">Rey June</h4>
+               <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">
+               <?php echo $Username; ?>
+            </h4>
            
         </div>
             <div class="top_navbar">
@@ -793,11 +836,13 @@ body.active .wrapper .section{
                             <div class="profile">
                                 <div class="admin_modal">
                                     <a href="#" id="image">
-                                        <img src="IMAGES/sampleImage.jpg">
+                                        <img src="uploaded_image/<?php echo $Profile_image; ?>">
                                     </a>
                                 </div>
 
-                                 <h1 style="margin-top:20px;">Rey June</h1>
+                                 <h1 style="margin-top:20px;">
+                                 <?php echo $Name; ?>
+                                </h1>
 
                                     <div id="update_profile">
                                     <a href="profile.php"><button class="btn btn-primary btn-lg" style="font-size:25px; margin-top:20px;">Update profile</button></a>

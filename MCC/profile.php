@@ -1,3 +1,64 @@
+<?php
+
+ include 'connect.php';
+
+ $id = 1;
+
+ $sql="Select * from `operator_admin_account` where id=$id";
+ $result=mysqli_query($con,$sql);
+ $row=mysqli_fetch_assoc($result);
+
+ /*TO FETCH THE DATA FROM DATABASE - */
+
+$Name=$row['Name']; /*column name in the database */
+$Contact=$row['Contact'];
+$Username=$row['Username'];
+$Password=$row['Password'];
+$Email=$row['Email'];
+$Address=$row['Address'];
+$Profile_image = $row['Profile_image'];
+
+ /*TO UPDATE THE DATA FROM DATABASE */
+if(isset($_POST['submit'])){
+$Name=$_POST['update_name'];
+$Contact=$_POST['update_contact'];
+$Username=$_POST['update_username'];
+$Password=$_POST['update_password'];
+$Email=$_POST['update_email'];
+$Address=$_POST['update_address'];
+
+
+
+    // Handle image upload
+    $update_image = $_FILES['update_image']['name'];
+    $update_image_size = $_FILES['update_image']['size'];
+    $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
+    $update_image_folder = 'uploaded_image/' . $update_image;
+
+    if (!empty($update_image)) {
+        if ($update_image_size > 2000000) {
+            $message[] = 'Image is too large';
+        } else {
+            $image_update_query = mysqli_query($con, "UPDATE `operator_admin_account` SET Profile_image = '$update_image' WHERE id = '$id'") or die('Query failed');
+            if ($image_update_query) {
+                move_uploaded_file($update_image_tmp_name, $update_image_folder);
+            }
+    
+        }
+    }
+
+    $sql = "UPDATE `operator_admin_account` SET Name='$Name', Contact='$Contact', Username='$Username', Password='$Password', Email='$Email', Address='$Address' WHERE id=$id";
+
+    $result = mysqli_query($con, $sql);
+
+    if ($result) {
+        $updateSuccess = true;
+    } else {
+        die(mysqli_error($con));
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +68,9 @@
    
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <title>Profile</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
 
@@ -164,7 +225,7 @@ img{
     
 }
 
-  /*USER HOME PROFILE STYLES*/
+  /*ADMIN HOME PROFILE STYLES*/
 .Admin-Profile{
     display:flex;
     justify-content:start;
@@ -209,8 +270,6 @@ img{
    
 }
 
-/*FOR UPDATE MODAL */
-
 .container2{
    min-height: 40vh;
    
@@ -230,36 +289,6 @@ img{
    margin-top:50px;
    border-radius: 50%;
    object-fit: cover;  
-}
-
-/*FOR UPDATE PROFILE */
-.update-profile form .flex{
-   display: flex;
-   justify-content: space-between;
-   margin-bottom: 20px;
-   gap:15px;
-}
-
-.update-profile form .flex .inputBox{
-   width: 50%;
-   margin-top: 20px;
-}
-
-.update-profile form .flex .inputBox span{
-   text-align: left;
-   display: block;
-   margin-top: 15px;
-   font-size: 17px;
-   color:var(--black);
-}
-
-.update-profile form .flex .inputBox .box{
-   width: 100%;
-   border-radius: 10px;
-   padding:12px 14px;
-   font-size: 17px;
-   color:var(--black);
-   margin-top: 10px;
 }
 
 /*FOR VOLUME TABLE CONTENT */
@@ -339,6 +368,7 @@ img{
     /*MAIN CONTENT */
 
 .main1{
+
             background-image:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url(IMAGES/background2.jpg);
             background-size: cover;
             padding: 2em 0 2em 0;
@@ -400,7 +430,7 @@ img{
         }
 
         /*FOR PARALLELOGRAM IN ADMIN PROFILE */
-        .parallelogram-button {
+    .parallelogram-button {
       display: inline-block;
       padding: 8px 40px;
       
@@ -452,7 +482,45 @@ img{
     }
 
 
-    
+     /*FOR UPDATE ADMIN PROFILE */
+     .form-row label{
+        
+       
+
+     }
+     .form-column {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            
+        }
+
+        .form-column label {
+            flex: 1;
+            margin-right: 10px;
+            text-align: right;
+        }
+
+        .form-column input {
+            
+            width:15%;
+        }
+
+
+         /*FOR UPDATE SUCCESSFUL */
+ /* Customize modal styles */
+ .custom-modal .modal-content {
+    background-color: green; /* Background color */
+    color: #fff; /* Text  color */
+  }
+
+  .custom-modal .modal-header {
+    border-bottom: 1px solid #2c3e50; /* Border color for the header */
+  }
+
+  .custom-modal .modal-footer {
+    border-top: 1px solid #2c3e50; /* Border color for the footer */
+  }
      /*FOR SYSTEM RESPONSIVE */
 
 
@@ -462,8 +530,10 @@ img{
 <div class="wrapper">
     <div class="section">
                <div class="admin_profile">     
-                   <img src="IMAGES/sampleImage.jpg" class="img-admin" id="image">    
-                <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">Rey June</h4>
+                   <img src="uploaded_image/<?php echo $Profile_image; ?>" class="img-admin" id="image">    
+                <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">
+                <?php echo $Username; ?>
+                </h4>
                 </div>
 
             <div class="top_navbar">
@@ -480,11 +550,14 @@ img{
         
     <div class="main1">
             <header>
+
             <div class="Admin-Profile">
                   
-                  <img src="IMAGES/sampleImage.jpg" class="Img-Admin" id="image">
+                  <img src="uploaded_image/<?php echo $Profile_image; ?>" class="Img-Admin" id="image">
                   
-               <h4 style="margin-left:25px; font-size:40px; color:white; margin-top:80px; text-align:right;">Rey June</h4>
+               <h4 style="margin-left:25px; font-size:40px; color:white; margin-top:80px; text-align:right;">
+               <?php echo $Name; ?>
+            </h4>
             </div>
             <div class="profile-history-btn">
             <a href="profile.php" class="parallelogram-button parallelogram-button1" style="font-size:20px; color:white;">Edit Profile</a>
@@ -495,30 +568,63 @@ img{
         <div class="main2">
             
             <div class="editProfile_container">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                 <fieldset>
-                <div class="main2">
-                
-                    <div>
+
                         <legend>Personal Details</legend>
-                       <label style="margin-left:300px; font-size:20px; color:black;">First name:</label>
-                       <input type="text" class="" name="name" autocomplete="off">
-                       <label style="margin-left:150px; font-size:20px; color:black;">Last name:</label>
-                       <input type="text" class="" name="" autocomplete="off">
-                       <br>
-                       <label style="margin-left:335px; font-size:20px; color:black;">Email:</label>
-                       <input type="text" class="" name="" autocomplete="off">
-                       <label style="margin-left:169px; font-size:20px; color:black;">Address:</label>
-                       <input type="text" class="" name="" autocomplete="off" >
-                       <br>
-                       <label style="margin-left:280px; font-size:20px; color:black;">Upload image:</label>
-                       <input type="file" name="update_image" accept="image/jpg, image/jpeg, image/png" class="box">
-                       <label style="margin-left:140px; font-size:20px; color:black;">Contact No:</label>
-                       <input type="text" class="" name="" autocomplete="off" >
-                    </div>
-                </div>
+                  
+            <div class="form-column">
+            <label style="font-size:20px; color:black;">Name:</label>
+            <input type="text" class="" name="update_name" autocomplete="off"
+            value="<?php echo $Name; ?>">
+        
+
+        
+            <label style=" font-size:20px; color:black;">Contact No:</label>
+            <input type="text" class="" name="update_contact" style="margin-right:20%;" autocomplete="off" 
+            value="<?php echo $Contact; ?>">
+            </div>
+
+        <div class="form-column">
+            <label style=" font-size:20px; color:black;">Username:</label>
+            <input type="text" class="" name="update_username" autocomplete="off"
+            value="<?php echo $Username; ?>">
+
+
+        
+            <label style=" font-size:20px; color:black;">Password:</label>
+            <input type="password" class="" name="update_password" style="margin-right:20%;" autocomplete="off"
+            value="<?php echo $Password; ?>">
+        </div>
+
+        <div class="form-column">
+            <label style=" font-size:20px; color:black;">Email:</label>
+            <input type="text" class="" name="update_email" autocomplete="off"
+            value="<?php echo $Email; ?>">
+                       
+            <label style=" font-size:20px; color:black;">Address:</label>
+                <input type="text" class="" name="update_address" style="margin-right:20%;" autocomplete="off" 
+                value="<?php echo $Address; ?>">
+            </div>
+
+        <div class="form-row">
+            
+
+        <label style=" font-size:20px; color:black;">Upload image:&nbsp</label>
+                <input type="file" name="update_image" accept="image/jpg, image/jpeg, image/png" class="box" style="margin-right:38%;"
+                >
+                
+        </div>
+       
+
+                
+                
                 <br><br><br>
-                <button class="btn btn-primary" style="font-size:20px;">Save Changes</button>
+                <button type="submit" id="update" name="submit" class="btn btn-primary" style="font-size:20px;">Save Changes</button>
+                
+
+                
+
 
                 </fieldset>
                 </form>
@@ -585,6 +691,26 @@ img{
 
     </div>
 
+<!-- UPDATE SUCCESS Modal -->
+<div class="modal fade custom-modal" id="updateSuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Congrats!!!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Your profile has been updated successfully!
+            </div>
+            <div class="modal-footer">
+                <a href="profile.php" class="btn btn-primary">Thank you</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 
      <!-- Logout Modal -->
      <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -619,14 +745,16 @@ img{
                             <div class="profile">
                                 <div class="admin_modal">
                                     <a href="#" id="image">
-                                        <img src="IMAGES/sampleImage.jpg">
+                                        <img src="uploaded_image/<?php echo $Profile_image; ?>">
                                     </a>
                                 </div>
 
-                                 <h1 style="margin-top:20px;">Rey June</h1>
+                                 <h1 style="margin-top:20px;">
+                                 <?php echo $Name; ?>
+                                </h1>
 
                                     <div id="update_profile">
-                                        <a href="profile.php"><button class="btn btn-primary btn-lg" style="font-size:25px; margin-top:20px;">Update profile</button></a>
+                                        <a href="profile.php"><button class="btn btn-primary btn-lg" name="update_profile" style="font-size:25px; margin-top:20px;">Update profile</button></a>
                                     </div>
                             </div>
 
@@ -638,6 +766,8 @@ img{
         </div>
 
         
+
+
 
 <!--FOR clickable image modal-->
 <script>
@@ -665,6 +795,14 @@ img{
     </script>
 
     
-    
+    <!-- Check if the update was successful and trigger the modal -->
+<?php if (isset($updateSuccess) && $updateSuccess) : ?>
+    <script>
+        $(document).ready(function () {
+            $('#updateSuccessModal').modal('show');
+        });
+    </script>
+<?php endif; ?>
+
 </body>
 </html>

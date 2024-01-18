@@ -4,7 +4,7 @@
 
  $id = 1;
 
- $sql="Select * from `tbl_user` where id=$id";
+ $sql="Select * from `tbl_user` where userId=$id";
  $result=mysqli_query($con,$sql);
  $row=mysqli_fetch_assoc($result);
 
@@ -39,7 +39,7 @@ $Address=$_POST['update_address'];
         if ($update_image_size > 2000000) {
             $message[] = 'Image is too large';
         } else {
-            $image_update_query = mysqli_query($con, "UPDATE `tbl_user` SET Profile_image = '$update_image' WHERE id = '$id'") or die('Query failed');
+            $image_update_query = mysqli_query($con, "UPDATE `tbl_user` SET Profile_image = '$update_image' WHERE userId = '$id'") or die('Query failed');
             if ($image_update_query) {
                 move_uploaded_file($update_image_tmp_name, $update_image_folder);
             }
@@ -47,7 +47,7 @@ $Address=$_POST['update_address'];
         }
     }
 
-    $sql = "UPDATE `tbl_user` SET Name='$Name', Contact='$Contact', Username='$Username', Password='$Password', Email='$Email', Address='$Address' WHERE id=$id";
+    $sql = "UPDATE `tbl_user` SET Name='$Name', Contact='$Contact', Username='$Username', Password='$Password', Email='$Email', Address='$Address' WHERE userId=$id";
 
     $result = mysqli_query($con, $sql);
 

@@ -1,10 +1,11 @@
+<!--FOR ADMIN PROFILE-->
 <?php
 
  include 'connect.php';
 
  $id = 1;
 
- $sql="Select * from `operator_admin_account` where id=$id";
+ $sql="Select * from `tbl_user` where userID=$id";
  $result=mysqli_query($con,$sql);
  $row=mysqli_fetch_assoc($result);
 
@@ -28,7 +29,7 @@ if(isset($_POST['submit'])){
         if ($update_image_size > 2000000) {
             $message[] = 'Image is too large';
         } else {
-            $image_update_query = mysqli_query($con, "UPDATE `operator_admin_account` SET Profile_image = '$update_image' WHERE id = '$id'") or die('Query failed');
+            $image_update_query = mysqli_query($con, "UPDATE `tbl_user` SET Profile_image = '$update_image' WHERE userID = '$id'") or die('Query failed');
             if ($image_update_query) {
                 move_uploaded_file($update_image_tmp_name, $update_image_folder);
             }
@@ -38,6 +39,13 @@ if(isset($_POST['submit'])){
         die(mysqli_error($con));
     }
 }
+?>
+
+<!--FOR INSERT DATA INTO DATABSE-->
+<?php
+$date = $paint_color = $supplier = $batch_number = $pi1 = $diameter1 = $height1 = $conversion_factor1 = $volume1 = $paint_ratio1 = $acetate_ratio1 = $paint_liter1 =
+ $acetate_liter1 = $pi2 = $diameter2 = $height2 = $conversion_factor2 = $volume2 = $paint_ratio2 = $acetate_ratio2 = $paint_liter2 = $acetate_liter2 = '';
+
 ?>
 
 <!DOCTYPE html>
@@ -476,12 +484,15 @@ img{
             <aside class="left">
             <legend style=" color:white; font-weight:bold;">Initial Inventory</legend>
             <br><br>
-
+            
+            <div class="form-column">
             <label style="font-weight:bold; margin-left:40px;">Date:</label>
             <input type="date" class="" name="date" autocomplete="off" required>
             <label style="margin-left:50px;">Diameter:</label>
-         <input type="text" class="" name="diameter1" autocomplete="off" required>
-         <br>
+         <input type="text" class="" name="diameter" autocomplete="off" required>
+           </div>
+
+           <div class="form-column">
             <label>Paint Color:</label>
          <select name="paint_color" class="selector" required>
          <option value="">-- Select --</option>
@@ -498,9 +509,10 @@ img{
     <option value="Jade Green" >Jade Green</option>
          </select>
          <label style="margin-left:65px;">Height:</label>
-         <input type="text" class="" name="height1" autocomplete="off" required>
-         <br>
+         <input type="text" class="" name="height" autocomplete="off" required>
+         </div>
         
+         <div class="form-column">
          <label style="margin-left:15px;">Supplier:</label>
          <select name="supplier" class="selector" required>
          <option value="">-- Select --</option>
@@ -510,36 +522,40 @@ img{
          <option value="Century" >Century</option>
          </select>
          <label style="margin-left:32px; margin-right:12px;">Paint ratio:</label>
-         <input type="text" class="" name="paint_ratio1" autocomplete="off" required>
+         <input type="text" class="" name="paint_ratio" autocomplete="off" required>
          
-         <br>
+         </div>
+
+         <div class="form-column">
          <label style="margin-left:7px;">Batch No:</label>
          <input type="text" class="" name="batch_number" autocomplete="off" required>
         
          <label style="margin-left:18px; margin-right:10px;">Acetate ratio:</label>
-         <input type="text" class="" name="acetate_ratio1" autocomplete="off" required>
-         <br>
+         <input type="text" class="" name="acetate_ratio" autocomplete="off" required>
+        </div>
          <br>
          <div class="newpaint">
-         <legend style=" color:white; font-weight:bold;margin-left:5px; text-align:center;">New Paint Mix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Production Output</legend>
+         <legend style=" color:white; font-weight:bold;margin-left:140px;">New Paint Mix&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Production Output</legend>
             
         
             <br><br>
 
             <label style="margin-left:41px;">Supplier:</label>
-         <select name="supplier" class="selector" required>
+         <select name="supplier1" class="selector" required>
          <option value="">-- Select --</option>
          <option value="Nippon" >Nippon</option>
          <option value="Treasure Island" >Treasure Island</option>
          <option value="Inkote" >Inkote</option>
          <option value="Century" >Century</option>
          </select>
-         <label style="margin-left:38px;">Customer:</label>
+         <label style="margin-left:65px;">Customer:</label>
          <input type="text" class="" name="customer" autocomplete="off" required>
         <br>
          <label style="margin-left:38px;">Paint (L):</label>
          <input type="text" class="" name="paintLiter" autocomplete="off" required>
-         <label style="margin-left:38px;">Quantity:</label>
+         <label style="margin-left:71px;">Quantity:</label>
          <input type="text" class="" name="quantity" autocomplete="off" required>
         <br>
          <label style="margin-left:23px;">Acetate (L):</label>
@@ -554,7 +570,7 @@ img{
       
             
        <aside class="right">
-       <legend style=" color:white; font-weight:bold;">Ending Inventory</legend>
+       <legend style=" color:white; font-weight:bold; margin-left:30px;">Ending Inventory</legend>
             <br><br>
 
             <label style="margin-left:25px;">Diameter:</label>
@@ -573,7 +589,7 @@ img{
          <br><br>
 
          <div class="yield">
-         <legend style=" color:white; font-weight:bold;">Yield</legend>
+         <legend style=" color:white; font-weight:bold; margin-left:30px;">Yield</legend>
             
         
             <br><br>
@@ -587,7 +603,7 @@ img{
          <br><br>
          <div class="remarks">
          <label style="margin-left:28px;">Remarks:</label>
-         <input type="text" style="height:60px;" class="" name="acetate" autocomplete="off" required>
+         <input type="text" style="height:60px;" class="" name="remarks" autocomplete="off" required>
          
          </div>
        </aside>

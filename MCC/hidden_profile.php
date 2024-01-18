@@ -4,7 +4,7 @@
 
  $id = 1;
 
- $sql="Select * from `operator_admin_account` where id=$id";
+ $sql="Select * from `tbl_user` where id=$id";
  $result=mysqli_query($con,$sql);
  $row=mysqli_fetch_assoc($result);
 
@@ -39,7 +39,7 @@ $Address=$_POST['update_address'];
         if ($update_image_size > 2000000) {
             $message[] = 'Image is too large';
         } else {
-            $image_update_query = mysqli_query($con, "UPDATE `operator_admin_account` SET Profile_image = '$update_image' WHERE id = '$id'") or die('Query failed');
+            $image_update_query = mysqli_query($con, "UPDATE `tbl_user` SET Profile_image = '$update_image' WHERE id = '$id'") or die('Query failed');
             if ($image_update_query) {
                 move_uploaded_file($update_image_tmp_name, $update_image_folder);
             }
@@ -47,7 +47,7 @@ $Address=$_POST['update_address'];
         }
     }
 
-    $sql = "UPDATE `operator_admin_account` SET Name='$Name', Contact='$Contact', Username='$Username', Password='$Password', Email='$Email', Address='$Address' WHERE id=$id";
+    $sql = "UPDATE `tbl_user` SET Name='$Name', Contact='$Contact', Username='$Username', Password='$Password', Email='$Email', Address='$Address' WHERE id=$id";
 
     $result = mysqli_query($con, $sql);
 
@@ -544,8 +544,8 @@ img{
             </h4>
             </div>
             <div class="profile-history-btn">
-            <a href="profile.php" class="parallelogram-button parallelogram-button1" style="font-size:20px; color:black;">Edit Profile</a>
-            <a href="hidden_profile.php" class="parallelogram-button parallelogram-button2" style="font-size:20px; color:black;">History</a>
+            <a href="profile.php" class="parallelogram-button parallelogram-button1" style="font-size:20px; color:white;">Edit Profile</a>
+            <a href="hidden_profile.php" class="parallelogram-button parallelogram-button2" style="font-size:20px; color:white;">History</a>
            </div>
             </header>
             <form method="post">

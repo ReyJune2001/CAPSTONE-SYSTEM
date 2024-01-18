@@ -4,7 +4,7 @@
 
  $id = 1;
 
- $sql="Select * from `operator_admin_account` where id=$id";
+ $sql="Select * from `tbl_user` where userID=$id";
  $result=mysqli_query($con,$sql);
  $row=mysqli_fetch_assoc($result);
 
@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
         if ($update_image_size > 2000000) {
             $message[] = 'Image is too large';
         } else {
-            $image_update_query = mysqli_query($con, "UPDATE `operator_admin_account` SET Profile_image = '$update_image' WHERE id = '$id'") or die('Query failed');
+            $image_update_query = mysqli_query($con, "UPDATE `tbl_user` SET Profile_image = '$update_image' WHERE userID = '$id'") or die('Query failed');
             if ($image_update_query) {
                 move_uploaded_file($update_image_tmp_name, $update_image_folder);
             }
@@ -298,9 +298,6 @@ img{
         .date-cell {
         white-space: nowrap;
         }
-        .paint-color-cell{
-            white-space: nowrap;
-        }
 
 /*FOR TABLE CONTAINER */
 
@@ -529,26 +526,26 @@ body.active .wrapper .section{
                 <tbody>
                   <tr>
                     
-                  <td class="paint-color-cell">01/08/24</td> 
-                  <td>Clear</td> 
-                  <td>Nippon</td> 
-                  <td>010433</td> 
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>Treasure Island</td>
-                  <td>010433</td>
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>1.38</td> 
-                  <td>12</td>
-                  <td>18</td> 
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
   
-                  <td>34</td> 
-                  <td>54</td> 
-                  <td>pki</td> 
-                  <td>24</td> 
-                  <td>12</td> 
-                  <td>18</td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
                   <td>12.2</td> 
                   <td>1</td> 
                   <td>2</td>
@@ -561,29 +558,28 @@ body.active .wrapper .section{
                   <td>Very Good</td>
                 
                 </tr>
-
                 <tr>
                     
-                  <td class="paint-color-cell">01/08/24</td> 
-                  <td>Clear</td> 
-                  <td>Nippon</td> 
-                  <td>010433</td> 
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>Treasure Island</td>
-                  <td>010433</td>
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>1.38</td> 
-                  <td>12</td>
-                  <td>18</td> 
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
   
-                  <td>34</td> 
-                  <td>54</td> 
-                  <td>pki</td> 
-                  <td>24</td> 
-                  <td>12</td> 
-                  <td>18</td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
                   <td>12.2</td> 
                   <td>1</td> 
                   <td>2</td>
@@ -596,29 +592,28 @@ body.active .wrapper .section{
                   <td>Very Good</td>
                 
                 </tr>
-
                 <tr>
                     
-                  <td class="paint-color-cell">01/08/24</td> 
-                  <td>Clear</td> 
-                  <td>Nippon</td> 
-                  <td>010433</td> 
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>Treasure Island</td>
-                  <td>010433</td>
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>1.38</td> 
-                  <td>12</td>
-                  <td>18</td> 
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
   
-                  <td>34</td> 
-                  <td>54</td> 
-                  <td>pki</td> 
-                  <td>24</td> 
-                  <td>12</td> 
-                  <td>18</td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
                   <td>12.2</td> 
                   <td>1</td> 
                   <td>2</td>
@@ -631,29 +626,28 @@ body.active .wrapper .section{
                   <td>Very Good</td>
                 
                 </tr>
-
                 <tr>
                     
-                  <td class="paint-color-cell">01/08/24</td> 
-                  <td>Clear</td> 
-                  <td>Nippon</td> 
-                  <td>010433</td> 
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>Treasure Island</td>
-                  <td>010433</td>
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>1.38</td> 
-                  <td>12</td>
-                  <td>18</td> 
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
   
-                  <td>34</td> 
-                  <td>54</td> 
-                  <td>pki</td> 
-                  <td>24</td> 
-                  <td>12</td> 
-                  <td>18</td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
                   <td>12.2</td> 
                   <td>1</td> 
                   <td>2</td>
@@ -666,29 +660,28 @@ body.active .wrapper .section{
                   <td>Very Good</td>
                 
                 </tr>
-
                 <tr>
                     
-                  <td class="paint-color-cell">01/08/24</td> 
-                  <td>Clear</td> 
-                  <td>Nippon</td> 
-                  <td>010433</td> 
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>Treasure Island</td>
-                  <td>010433</td>
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>1.38</td> 
-                  <td>12</td>
-                  <td>18</td> 
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
   
-                  <td>34</td> 
-                  <td>54</td> 
-                  <td>pki</td> 
-                  <td>24</td> 
-                  <td>12</td> 
-                  <td>18</td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
                   <td>12.2</td> 
                   <td>1</td> 
                   <td>2</td>
@@ -701,29 +694,28 @@ body.active .wrapper .section{
                   <td>Very Good</td>
                 
                 </tr>
-
                 <tr>
                     
-                  <td class="paint-color-cell">01/08/24</td> 
-                  <td>Clear</td> 
-                  <td>Nippon</td> 
-                  <td>010433</td> 
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>Treasure Island</td>
-                  <td>010433</td>
-                  <td>12</td> 
-                  <td>18</td>
-                  <td>1.38</td> 
-                  <td>12</td>
-                  <td>18</td> 
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
   
-                  <td>34</td> 
-                  <td>54</td> 
-                  <td>pki</td> 
-                  <td>24</td> 
-                  <td>12</td> 
-                  <td>18</td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
                   <td>12.2</td> 
                   <td>1</td> 
                   <td>2</td>
@@ -736,6 +728,40 @@ body.active .wrapper .section{
                   <td>Very Good</td>
                 
                 </tr>
+                <tr>
+                    
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+  
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                  <td>12.2</td> 
+                  <td>1</td> 
+                  <td>2</td>
+
+                  <td>3</td> 
+                  <td>4</td> 
+                  <td>6</td>
+                  <td>9</td> 
+                  <td>10</td> 
+                  <td>Very Good</td>
+                
+                </tr>   
 
           </tr>
         </tbody>

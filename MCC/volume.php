@@ -4,7 +4,7 @@
 
  $id = 1;
 
- $sql="Select * from `operator_admin_account` where id=$id";
+ $sql="Select * from `tbl_user` where userID=$id";
  $result=mysqli_query($con,$sql);
  $row=mysqli_fetch_assoc($result);
 
@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
         if ($update_image_size > 2000000) {
             $message[] = 'Image is too large';
         } else {
-            $image_update_query = mysqli_query($con, "UPDATE `operator_admin_account` SET Profile_image = '$update_image' WHERE id = '$id'") or die('Query failed');
+            $image_update_query = mysqli_query($con, "UPDATE `tbl_user` SET Profile_image = '$update_image' WHERE userID = '$id'") or die('Query failed');
             if ($image_update_query) {
                 move_uploaded_file($update_image_tmp_name, $update_image_folder);
             }
@@ -298,9 +298,6 @@ img{
         .date-cell {
         white-space: nowrap;
         }
-        .paint-color-cell{
-            white-space: nowrap;
-        }
 
 /*FOR TABLE CONTAINER */
 
@@ -422,7 +419,7 @@ body.active .wrapper .section{
                 <!--Filter bar-->
                 <h4 style="font-size:25px; margin-top:5px; margin-left:70px;">Filter</h4>
                 <form action="#" method="post">
-                <select name="Level" class="filterfield">
+                <select name="" class="filterfield">
                    <option value="" disabled selected></option>
                    <option value="admin">Paint color</option>
                    <option value="user">Batch number</option>
@@ -508,171 +505,195 @@ body.active .wrapper .section{
                 <tbody>
                   <tr>
                     
-                  <td class="paint-color-cell">01/05/24</td> 
-                  <td>Golden Brown</td> 
-                  <td>Nippon</td> 
-                  <td>01023</td> 
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
                   <td>3.1416</td> 
-                  <td>18</td>
-                  <td>25</td>
+                  <td></td>
+                  <td></td>
                   <td>0.5263526</td>
                   <td>104.3</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>64.6</td>
-                  <td>39.6</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
   
                   <td>3.1416</td> 
-                  <td>18</td> 
-                  <td>12</td> 
+                  <td></td> 
+                  <td></td> 
                   <td>0.0163871</td> 
                   <td>50.0</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>31.0</td> 
-                  <td>19.0</td>
+                  <td></td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                
+                </tr>
+                <tr>
+                    
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>3.1416</td> 
+                  <td></td>
+                  <td></td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+  
+                  <td>3.1416</td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                
+                </tr>
+                <tr>
+                    
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>3.1416</td> 
+                  <td></td>
+                  <td></td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+  
+                  <td>3.1416</td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                
+                </tr>
+                <tr>
+                    
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>3.1416</td> 
+                  <td></td>
+                  <td></td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+  
+                  <td>3.1416</td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                
+                </tr>
+                <tr>
+                    
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>3.1416</td> 
+                  <td></td>
+                  <td></td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+  
+                  <td>3.1416</td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                
+                </tr>
+                <tr>
+                    
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>3.1416</td> 
+                  <td></td>
+                  <td></td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+  
+                  <td>3.1416</td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
+                
+                </tr>
+                <tr>
+                    
+                  <td class="date-cell"></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>3.1416</td> 
+                  <td></td>
+                  <td></td>
+                  <td>0.5263526</td>
+                  <td>104.3</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td>
+                  <td></td> 
+  
+                  <td>3.1416</td> 
+                  <td></td> 
+                  <td></td> 
+                  <td>0.0163871</td> 
+                  <td>50.0</td> 
+                  <td></td>
+                  <td></td> 
+                  <td></td> 
+                  <td></td>
                 
                 </tr>
 
-                <tr>
-                    
-                  <td class="paint-color-cell">01/05/24</td> 
-                  <td>Golden Brown</td> 
-                  <td>Nippon</td> 
-                  <td>01023</td> 
-                  <td>3.1416</td> 
-                  <td>18</td>
-                  <td>25</td>
-                  <td>0.5263526</td>
-                  <td>104.3</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>64.6</td>
-                  <td>39.6</td> 
-  
-                  <td>3.1416</td> 
-                  <td>18</td> 
-                  <td>12</td> 
-                  <td>0.0163871</td> 
-                  <td>50.0</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>31.0</td> 
-                  <td>19.0</td>
                 
-                </tr>
-
-                <tr>
-                    
-                  <td class="paint-color-cell">01/05/24</td> 
-                  <td>Golden Brown</td> 
-                  <td>Nippon</td> 
-                  <td>01023</td> 
-                  <td>3.1416</td> 
-                  <td>18</td>
-                  <td>25</td>
-                  <td>0.5263526</td>
-                  <td>104.3</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>64.6</td>
-                  <td>39.6</td> 
-  
-                  <td>3.1416</td> 
-                  <td>18</td> 
-                  <td>12</td> 
-                  <td>0.0163871</td> 
-                  <td>50.0</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>31.0</td> 
-                  <td>19.0</td>
-                
-                </tr>
-
-                <tr>
-                    
-                  <td class="paint-color-cell">01/05/24</td> 
-                  <td>Golden Brown</td> 
-                  <td>Nippon</td> 
-                  <td>01023</td> 
-                  <td>3.1416</td> 
-                  <td>18</td>
-                  <td>25</td>
-                  <td>0.5263526</td>
-                  <td>104.3</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>64.6</td>
-                  <td>39.6</td> 
-  
-                  <td>3.1416</td> 
-                  <td>18</td> 
-                  <td>12</td> 
-                  <td>0.0163871</td> 
-                  <td>50.0</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>31.0</td> 
-                  <td>19.0</td>
-                
-                </tr>
-
-                <tr>
-                    
-                  <td class="paint-color-cell">01/05/24</td> 
-                  <td>Golden Brown</td> 
-                  <td>Nippon</td> 
-                  <td>01023</td> 
-                  <td>3.1416</td> 
-                  <td>18</td>
-                  <td>25</td>
-                  <td>0.5263526</td>
-                  <td>104.3</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>64.6</td>
-                  <td>39.6</td> 
-  
-                  <td>3.1416</td> 
-                  <td>18</td> 
-                  <td>12</td> 
-                  <td>0.0163871</td> 
-                  <td>50.0</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>31.0</td> 
-                  <td>19.0</td>
-                
-                </tr>
-
-                <tr>
-                    
-                  <td class="paint-color-cell">01/05/24</td> 
-                  <td>Golden Brown</td> 
-                  <td>Nippon</td> 
-                  <td>01023</td> 
-                  <td>3.1416</td> 
-                  <td>18</td>
-                  <td>25</td>
-                  <td>0.5263526</td>
-                  <td>104.3</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>64.6</td>
-                  <td>39.6</td> 
-  
-                  <td>3.1416</td> 
-                  <td>18</td> 
-                  <td>12</td> 
-                  <td>0.0163871</td> 
-                  <td>50.0</td> 
-                  <td>0.62</td>
-                  <td>0.38</td> 
-                  <td>31.0</td> 
-                  <td>19.0</td>
-                
-                </tr>
           </tr>
         </tbody>
         </table>

@@ -10,11 +10,11 @@ if ($_SERVER['REQUEST_METHOD']=='POST'){
   $Password = $_POST['Password'];
   
  // Check if the login credentials match an admin account
- $admin_sql = "SELECT * FROM `operator_admin_account` WHERE Username = '$Username' AND password = '$Password' AND Level = 'Admin'";
+ $admin_sql = "SELECT * FROM `tbl_user` WHERE Username = '$Username' AND password = '$Password' AND Level = 'Admin'";
  $admin_result = mysqli_query($con, $admin_sql);
 
  // Check if the login credentials match a user account
- $user_sql = "SELECT * FROM `operator_admin_account` WHERE Username = '$Username' AND password = '$Password' AND Level = 'Operator'";
+ $user_sql = "SELECT * FROM `tbl_user` WHERE Username = '$Username' AND password = '$Password' AND Level = 'Operator'";
  $user_result = mysqli_query($con, $user_sql);
 
 

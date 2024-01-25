@@ -13,40 +13,196 @@
  $Name=$row['Name']; /*column name in the database */
 $Username=$row['Username'];
 $Profile_image = $row['Profile_image'];
+?>
 
- /*TO UPDATE THE DATA FROM DATABASE */
-if(isset($_POST['submit'])){
+<?php
+   include 'connect.php';
+
+// Fetch and check the data from the database using a JOIN query
+/*
+$sql = "SELECT
+    paint.paint_color,
+    supplier.supplier_name, supplier.newSupplier_name,
+    customer.customer_name,entry.*
+    FROM tbl_entry AS entry         /*target the table with foreign key*/
+   /* LEFT JOIN tbl_paint AS paint ON entry.paintID = paint.paintID
+    LEFT JOIN tbl_supplier AS supplier ON paint.supplierID = supplier.supplierID
+    LEFT JOIN tbl_customer AS customer ON entry.customerID = customer.customerID";
+
+$result = mysqli_query($con, $sql);
+$row = mysqli_fetch_assoc($result);
+
+/* TO FETCH AND UPDATE THE DATA FROM DATABASE - */
+/*$date = $row['date']; /*VARIABLE is equal to column name in the database
+$paint_color = $row['paint_color'];
+$supplier_name = $row['supplier_name'];
+$batchNumber = $row['batchNumber'];
+$diameter = $row['diameter'];
+$height = $row['height'];
+$paintRatio = $row['paintRatio'];
+$acetateRatio = $row['acetateRatio'];
+$newSupplier_name = $row['newSupplier_name'];
+$NewacetateL = $row['NewacetateL'];
+$NewpaintL = $row['NewpaintL'];
+$sprayViscosity = $row['sprayViscosity'];
+$customer_name = $row['customer_name'];
+$quantity = $row['quantity'];
+$Endingdiameter = $row['Endingdiameter'];
+$Endingheight = $row['Endingheight'];
+$EndingpaintRatio = $row['EndingpaintRatio'];
+$EndingacetateRatio = $row['EndingacetateRatio'];
+$paintYield = $row['paintYield'];
+$acetateYield = $row['acetateYield'];
+$remarks = $row['remarks'];
+*/
+
+//FOR INSERT DATA INTO DATABSE
+
+$date = $paint_color = $supplier_name = $batchNumber = $diameter = $height = $paintRatio = $acetateRatio = $newSupplier_name =
+$NewacetateL = $NewpaintL = $sprayViscosity = $customer_name = $quantity = $Endingdiameter = $Endingheight =
+$EndingpaintRatio = $EndingacetateRatio = $paintYield = $acetateYield = $remarks = $DetailsID = $supplierID = $receiveID = $details = $receiver_name = '';
+
+if (isset($_POST['submit'])) {
+    $date = $_POST['date'];
+    $paint_color = $_POST['paint_color'];
+    $supplier_name = $_POST['supplier_name'];
+    $batchNumber = $_POST['batchNumber'];
+    $diameter = $_POST['diameter'];
+    $height = $_POST['height'];
+    $paintRatio = $_POST['paintRatio'];
+    $acetateRatio = $_POST['acetateRatio'];
+    $newSupplier_name = $_POST['newSupplier_name'];
+    $NewacetateL = isset($_POST['NewacetateL']) ? $_POST['NewacetateL'] : '';
+    $NewpaintL = isset($_POST['NewpaintL']) ? $_POST['NewpaintL'] : '';
+    $sprayViscosity = $_POST['sprayViscosity'];
+    $customer_name = isset($_POST['customer_name']) ? $_POST['customer_name'] : '';
+    $quantity = $_POST['quantity'];
+    $Endingdiameter = $_POST['Endingdiameter'];
+    $Endingheight = $_POST['Endingheight'];
+    $EndingpaintRatio = $_POST['EndingpaintRatio'];
+    $EndingacetateRatio = $_POST['EndingacetateRatio'];
+    $paintYield = $_POST['paintYield'];
+    $acetateYield = $_POST['acetateYield'];
+    $remarks = $_POST['remarks'];
 
 
+    /*Para nga ma-insert ang mga data sa mga tables, kinahanglan
+    na mag insert ka nga magkasunod-sunod og foreign key, dependi kong unsay
+    una nga table with foreign key */
 
-    // Handle image upload
-    $update_image = $_FILES['update_image']['name'];
-    $update_image_size = $_FILES['update_image']['size'];
-    $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
-    $update_image_folder = 'uploaded_image/' . $update_image;
+    // Insert into tbl_customer
+    $sql = "INSERT INTO `tbl_customer` (customer_name, userID) VALUES ('$customer_name', '$id')";
+    $result = mysqli_query($con, $sql);
 
-    if (!empty($update_image)) {
-        if ($update_image_size > 2000000) {
-            $message[] = 'Image is too large';
-        } else {
-            $image_update_query = mysqli_query($con, "UPDATE `tbl_user` SET Profile_image = '$update_image' WHERE userID = '$id'") or die('Query failed');
-            if ($image_update_query) {
-                move_uploaded_file($update_image_tmp_name, $update_image_folder);
-            }
+    if (!$result) {
+        die(mysqli_error($con));
+    }
+
+    // Get the customerID of the newly inserted customer
+    $customerID = mysqli_insert_id($con);
+
+    // Insert into tbl_supplier
+    $sql = "INSERT INTO `tbl_supplier` (supplier_name, newSupplier_name) VALUES ('$supplier_name', '$newSupplier_name')";
+    $result = mysqli_query($con, $sql);
+
+    if (!$result) {
+        die(mysqli_error($con));
+    }
+
+    // Get the supplierID of the newly inserted supplier
+    $supplierID = mysqli_insert_id($con);
+
+    // Insert into tbl_received
+    $sql = "INSERT INTO `tbl_received` (userID, receiver_name) VALUES ('$id','$receiver_name')";
+    $result = mysqli_query($con, $sql);
+
+    if (!$result) {
+        die(mysqli_error($con));
+    }
+
+    // Get the receiveID of the newly inserted receive
+    $receiveID = mysqli_insert_id($con);
+
+    // Insert into tbl_receivedetails
+    $sql = "INSERT INTO `tbl_receivedetails` (receiveID, details) VALUES ('$receiveID', '$details' )";
+    $result = mysqli_query($con, $sql);
+
+    if (!$result) {
+        die(mysqli_error($con));
+    }
+
+    // Get the DetailsID of the newly inserted Details
+    $DetailsID = mysqli_insert_id($con);
+
+    // Insert into tbl_paint
+    $sql = "INSERT INTO `tbl_paint` (paint_color, supplierID, DetailsID) VALUES ('$paint_color', '$supplierID', '$DetailsID' )";
+    $result = mysqli_query($con, $sql);
+
+    if (!$result) {
+        die(mysqli_error($con));
+    }
+
+    // Get the paintID of the newly inserted paint
+    $paintID = mysqli_insert_id($con);
+
+    // Insert into tbl_entry
+    $sql = "INSERT INTO `tbl_entry` (userID, customerID, paintID, date, batchNumber, diameter, height, paintRatio, acetateRatio, NewacetateL, NewpaintL, sprayViscosity, quantity, Endingdiameter, Endingheight, EndingpaintRatio, EndingacetateRatio, paintYield, acetateYield, remarks)
+    VALUES ('$id', '$customerID', '$paintID', '$date', '$batchNumber', '$diameter', '$height', '$paintRatio', '$acetateRatio', '$NewacetateL', '$NewpaintL', '$sprayViscosity', '$quantity', '$Endingdiameter', '$Endingheight', '$EndingpaintRatio', '$EndingacetateRatio', '$paintYield', '$acetateYield', '$remarks')";
+
+    $result = mysqli_query($con, $sql);
+
+    if (!$result) {
+        die(mysqli_error($con));
+    }
+
+    // Get the EntryID of the newly inserted Entry
+    $EntryID = mysqli_insert_id($con);
     
-        }
-    }else {
+    /*
+    $sql = "UPDATE `tbl_customer` SET customer_name='$customer_name' WHERE customerID=$customerID";
+
+    $result = mysqli_query($con, $sql);
+    if (!$result) {
+        die(mysqli_error($con));
+    }
+
+    $sql = "UPDATE `tbl_supplier` SET supplier_name='$supplier_name',newSupplier_name='$newSupplier_name',  WHERE supplierID=$supplierID";
+
+    $result = mysqli_query($con, $sql);
+    if (!$result) {
+        die(mysqli_error($con));
+    }
+
+    $sql = "UPDATE `tbl_paint` SET paint_color='$paint_color' WHERE paintID=$paintID";
+
+    $result = mysqli_query($con, $sql);
+    if (!$result) {
+        die(mysqli_error($con));
+    }
+
+    $sql = "UPDATE `tbl_entry` SET date='$date',batchNumber='$batchNumber',diameter='$diameter',
+    height='$height',paintRatio='$paintRatio',acetateRatio='$acetateRatio',
+    NewacetateL='$NewacetateL',NewpaintL='$NewpaintL',sprayViscosity='$sprayViscosity',
+    quantity='$quantity',Endingdiameter='$Endingdiameter',Endingheight='$Endingheight',
+    EndingpaintRatio='$EndingpaintRatio',EndingacetateRatio='$EndingacetateRatio',paintYield='$paintYield',
+    acetateYield='$acetateYield',remarks='$remarks' WHERE customerID=$customerID";
+
+    $result = mysqli_query($con, $sql);
+    if ($result) {
+        $updateSuccess = true;
+    } else {
+        die(mysqli_error($con));
+    } */
+    if ($result) {
+        $updateSuccess = true;
+    } else {
         die(mysqli_error($con));
     }
 }
 ?>
 
-<!--FOR INSERT DATA INTO DATABSE-->
-<?php
-$date = $paint_color = $supplier = $batch_number = $pi1 = $diameter1 = $height1 = $conversion_factor1 = $volume1 = $paint_ratio1 = $acetate_ratio1 = $paint_liter1 =
- $acetate_liter1 = $pi2 = $diameter2 = $height2 = $conversion_factor2 = $volume2 = $paint_ratio2 = $acetate_ratio2 = $paint_liter2 = $acetate_liter2 = '';
 
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -409,7 +565,7 @@ img{
         footer{
             background-color:  rgb(31, 102, 234);
             color:white;
-            padding: 1em 0 1em 0;
+            padding: 2em 0 2em 0;
             text-align:right;
         }
 
@@ -444,8 +600,35 @@ img{
         }
 
         .operational_btn{
-            margin-right:30px;
+            margin-right:42%;
+            padding-left:80px;
+            padding-right:80px;
+            padding-top:15px;
+            padding-bottom:15px;
+            font-size:50px;
         }
+
+
+        /*FOR UPDATE SUCCESSFUL */
+ /* Customize modal styles */
+ .custom-modal .modal-content {
+    background-color: green; /* Background color */
+    color: #fff; /* Text  color */
+  }
+
+  .custom-modal .modal-header {
+    border-bottom: 1px solid #2c3e50; /* Border color for the header */
+  }
+
+                /*HEADER MODAL OF UPDATE */
+                .center-modal-title {
+        font-size:30px;
+        margin-left:175px;
+    }
+
+  .custom-modal .modal-footer {
+    border-top: 1px solid #2c3e50; /* Border color for the footer */
+  }
         
      /*FOR SYSTEM RESPONSIVE */
 
@@ -487,51 +670,51 @@ img{
             
             <div class="form-column">
             <label style="font-weight:bold; margin-left:40px;">Date:</label>
-            <input type="date" class="" name="date" autocomplete="off" required>
+            <input type="date" class="" name="date" autocomplete="off" value="<?php echo $date; ?>" required>
             <label style="margin-left:50px;">Diameter:</label>
-         <input type="text" class="" name="diameter" autocomplete="off" required>
+         <input type="text" class="" name="diameter" autocomplete="off" value="<?php echo $diameter; ?>" required>
            </div>
 
            <div class="form-column">
             <label>Paint Color:</label>
          <select name="paint_color" class="selector" required>
          <option value="">-- Select --</option>
-    <option value="Royal Blue" >Royal Blue</option>
-    <option value="Deft Blue" >Deft Blue</option>
-    <option value="Buff" >Buff</option>
-    <option value="Golden Brown" >Golden Brown</option>
-    <option value="Clear" >Clear</option>
-    <option value="White" >White</option>
-    <option value="Black" >Black</option>
-    <option value="Alpha Gray" >Alpha Gray</option>
-    <option value="Nile Green" >Nile Green</option>
-    <option value="Emirald Green" >Emirald Green</option>
-    <option value="Jade Green" >Jade Green</option>
+    <option value="Royal Blue" <?php if($paint_color == 'Royal Blue') echo 'selected'; ?>>Royal Blue</option>
+    <option value="Deft Blue" <?php if($paint_color == 'Deft Blue') echo 'selected'; ?>>Deft Blue</option>
+    <option value="Buff" <?php if($paint_color == 'Buff') echo 'selected'; ?>>Buff</option>
+    <option value="Golden Brown" <?php if($paint_color == 'Golden Brown') echo 'selected'; ?>>Golden Brown</option>
+    <option value="Clear" <?php if($paint_color == 'Clear') echo 'selected'; ?>>Clear</option>
+    <option value="White" <?php if($paint_color == 'White') echo 'selected'; ?>>White</option>
+    <option value="Black" <?php if($paint_color == 'Black') echo 'selected'; ?>>Black</option>
+    <option value="Alpha Gray" <?php if($paint_color == 'Alpha Gray') echo 'selected'; ?>>Alpha Gray</option>
+    <option value="Nile Green" <?php if($paint_color == 'Nile Green') echo 'selected'; ?>>Nile Green</option>
+    <option value="Emirald Green" <?php if($paint_color == 'Emirald Green') echo 'selected'; ?>>Emirald Green</option>
+    <option value="Jade Green" <?php if($paint_color == 'Jade Green') echo 'selected'; ?>>Jade Green</option>
          </select>
          <label style="margin-left:65px;">Height:</label>
-         <input type="text" class="" name="height" autocomplete="off" required>
+         <input type="text" class="" name="height" autocomplete="off" value="<?php echo $height; ?>" required>
          </div>
         
          <div class="form-column">
          <label style="margin-left:15px;">Supplier:</label>
-         <select name="supplier" class="selector" required>
+         <select name="supplier_name" class="selector" required>
          <option value="">-- Select --</option>
-         <option value="Nippon" >Nippon</option>
-         <option value="Treasure Island" >Treasure Island</option>
-         <option value="Inkote" >Inkote</option>
-         <option value="Century" >Century</option>
+         <option value="Nippon" <?php if($supplier_name == 'Nippon') echo 'selected'; ?>>Nippon</option>
+         <option value="Treasure Island" <?php if($supplier_name == 'Treasure Island') echo 'selected'; ?>>Treasure Island</option>
+         <option value="Inkote" <?php if($supplier_name == 'Inkote') echo 'selected'; ?>>Inkote</option>
+         <option value="Century" <?php if($supplier_name == 'Century') echo 'selected'; ?>>Century</option>
          </select>
          <label style="margin-left:32px; margin-right:12px;">Paint ratio:</label>
-         <input type="text" class="" name="paint_ratio" autocomplete="off" required>
+         <input type="text" class="" name="paintRatio" autocomplete="off" value="<?php echo $paintRatio; ?>" required>
          
          </div>
 
          <div class="form-column">
          <label style="margin-left:7px;">Batch No:</label>
-         <input type="text" class="" name="batch_number" autocomplete="off" required>
+         <input type="text" class="" name="batchNumber" autocomplete="off" value="<?php echo $batchNumber; ?>" required>
         
          <label style="margin-left:18px; margin-right:10px;">Acetate ratio:</label>
-         <input type="text" class="" name="acetate_ratio" autocomplete="off" required>
+         <input type="text" class="" name="acetateRatio" autocomplete="off" value="<?php echo $acetateRatio; ?>" required>
         </div>
          <br>
          <div class="newpaint">
@@ -542,28 +725,28 @@ img{
         
             <br><br>
 
-            <label style="margin-left:41px;">Supplier:</label>
-         <select name="supplier1" class="selector" required>
+            <label style="margin-left:40px;">Supplier:</label>
+         <select name="newSupplier_name" class="selector" required>
          <option value="">-- Select --</option>
-         <option value="Nippon" >Nippon</option>
-         <option value="Treasure Island" >Treasure Island</option>
-         <option value="Inkote" >Inkote</option>
-         <option value="Century" >Century</option>
+         <option value="Nippon" <?php if($newSupplier_name == 'Nippon') echo 'selected'; ?>>Nippon</option>
+         <option value="Treasure Island" <?php if($newSupplier_name == 'Treasure Island') echo 'selected'; ?>>Treasure Island</option>
+         <option value="Inkote" <?php if($newSupplier_name == 'Inkote') echo 'selected'; ?>>Inkote</option>
+         <option value="Century" <?php if($newSupplier_name == 'Century') echo 'selected'; ?>>Century</option>
          </select>
          <label style="margin-left:65px;">Customer:</label>
-         <input type="text" class="" name="customer" autocomplete="off" required>
+         <input type="text" class="" name="customer_name" autocomplete="off" value="<?php echo $customer_name; ?>" required>
         <br>
          <label style="margin-left:38px;">Paint (L):</label>
-         <input type="text" class="" name="paintLiter" autocomplete="off" required>
+         <input type="text" class="" name="NewpaintL" autocomplete="off" value="<?php echo $NewpaintL; ?>" required>
          <label style="margin-left:71px;">Quantity:</label>
-         <input type="text" class="" name="quantity" autocomplete="off" required>
+         <input type="text" class="" name="quantity" autocomplete="off" value="<?php echo $quantity; ?>" required>
         <br>
          <label style="margin-left:23px;">Acetate (L):</label>
-         <input type="text" class="" name="acetateLiter" autocomplete="off" required>
+         <input type="text" class="" name="NewacetateL" autocomplete="off" value="<?php echo $NewacetateL; ?>" required>
          <br>
 
          <label>Spay Viscosity:</label>
-         <input type="text" class="" name="sprayViscosity" autocomplete="off" required>
+         <input type="text" class="" name="sprayViscosity" autocomplete="off" value="<?php echo $sprayViscosity; ?>"required>
          <br>
     </div>
             </aside>
@@ -574,18 +757,18 @@ img{
             <br><br>
 
             <label style="margin-left:25px;">Diameter:</label>
-         <input type="text" class="" name="diameter1" autocomplete="off" required>
+         <input type="text" class="" name="Endingdiameter" autocomplete="off" value="<?php echo $Endingdiameter; ?>"required>
          <br>
 
          <label style="margin-left:39px;">Height:</label>
-         <input type="text" class="" name="height1" autocomplete="off" required>
+         <input type="text" class="" name="Endingheight" autocomplete="off" value="<?php echo $Endingheight; ?>"required>
          <br>
             
          <label style="margin-left:18px;">Paint ratio:</label>
-         <input type="text" class="" name="paint_ratio1" autocomplete="off" required>
+         <input type="text" class="" name="EndingpaintRatio" autocomplete="off" value="<?php echo $EndingpaintRatio; ?>"required>
          <br>
          <label>Acetate ratio:</label>
-         <input type="text" class="" name="acetate_ratio1" autocomplete="off" required>
+         <input type="text" class="" name="EndingacetateRatio" autocomplete="off" value="<?php echo $EndingacetateRatio; ?>"required>
          <br><br>
 
          <div class="yield">
@@ -594,27 +777,24 @@ img{
         
             <br><br>
          <label style="margin-left:50px;">Paint:</label>
-         <input type="text" class="" name="paint" autocomplete="off" required>
+         <input type="text" class="" name="paintYield" autocomplete="off" value="<?php echo $paintYield; ?>" required>
          <br>
          <label style="margin-left:35px;">Acetate:</label>
-         <input type="text" class="" name="acetate" autocomplete="off" required>
+         <input type="text" class="" name="acetateYield" autocomplete="off" value="<?php echo $acetateYield; ?>" required>
          <br>
          </div>
          <br><br>
          <div class="remarks">
          <label style="margin-left:28px;">Remarks:</label>
-         <input type="text" style="height:60px;" class="" name="remarks" autocomplete="off" required>
+         <input type="text" style="height:60px;" class="" name="remarks" autocomplete="off" value="<?php echo $remarks; ?>" required>
          
          </div>
        </aside>
        
     </div>
     <footer>
-        
-        <button class="btn btn-primary btn-lg operational_btn" style="font-size:15px; border-color:white;">Add</button>
-        <button class="btn btn-success btn-lg operational_btn" style="font-size:15px; border-color:white;">Update</button>
-        <button class="btn btn-danger btn-lg operational_btn" style="font-size:15px; border-color:white;">Clear</button>
-                                  
+        <button type="submit" id="update" class="btn btn-success btn-lg operational_btn" name="submit" style="font-size:20px; border-color:white;">Add</button>
+                               
     </footer>
     
     </div>
@@ -680,6 +860,26 @@ img{
         </div>
 
     </div>
+
+        <!-- INSERT SUCCESS Modal -->
+        <div class="modal fade custom-modal" id="updateSuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title center-modal-title" id="exampleModalLabel">Congrats!!!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                <h5 style="text-align:center;">Your Entry data has been added successfully!</h5>
+                </div>
+                <div class="modal-footer">
+                    <a href="dataEntry.php" class="btn btn-primary">OK</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
      <!-- Logout Modal -->
      <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -758,7 +958,14 @@ img{
         });
     </script>
 
-    
+    <!-- Check if the update was successful and trigger the modal -->
+    <?php if (isset($updateSuccess) && $updateSuccess) : ?>
+        <script>
+            $(document).ready(function () {
+                $('#updateSuccessModal').modal('show');
+            });
+        </script>
+    <?php endif; ?>
     
 </body>
 </html>

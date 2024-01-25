@@ -8,7 +8,7 @@ $sql = "Select * from `tbl_user` where userID=$id";
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_assoc($result);
 
-/* TO FETCH THE DATA FROM DATABASE - */
+/* TO FETCH AND UPDATE THE DATA FROM DATABASE - */
 $Name = $row['Name']; /*column name in the database */
 $Contact = $row['Contact'];
 $Username = $row['Username'];
@@ -17,7 +17,7 @@ $Email = $row['Email'];
 $Address = $row['Address'];
 $Profile_image = $row['Profile_image'];
 
-/* TO UPDATE THE DATA FROM DATABASE */
+/* TO ADD AND UPDATE THE DATA FROM DATABASE */
 if (isset($_POST['submit'])) {
     $Name = $_POST['update_name'];
     $Contact = $_POST['update_contact'];
@@ -518,9 +518,17 @@ if (isset($_POST['submit'])) {
     border-bottom: 1px solid #2c3e50; /* Border color for the header */
   }
 
+              /*HEADER MODAL OF UPDATE */
+              .center-modal-title {
+        font-size:30px;
+        margin-left:175px;
+    }
+
   .custom-modal .modal-footer {
     border-top: 1px solid #2c3e50; /* Border color for the footer */
   }
+
+
      /*FOR SYSTEM RESPONSIVE */
 
 
@@ -666,14 +674,14 @@ if (isset($_POST['submit'])) {
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Congrats!!!</h5>
+                    <h5 class="modal-title center-modal-title" id="exampleModalLabel">Congrats!!!</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Your profile has been updated successfully!
+                    <h5 style="text-align:center;">Your profile has been updated successfully!</h5>
                 </div>
                 <div class="modal-footer">
-                    <a href="profile.php" class="btn btn-primary">Thank you</a>
+                    <a href="profile.php" class="btn btn-primary">OK</a>
                 </div>
             </div>
         </div>

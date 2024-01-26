@@ -354,11 +354,6 @@ body.active .wrapper .section{
     border-radius: 50%;
     border: 3px solid transparent; /* Set a default border style */
 }
-
-.img-admin:hover {
-    border-color: blue; /* Change the border color to red on hover */
-    
-}
      
 
 img{
@@ -528,13 +523,12 @@ img{
 
 .main1{
             background-color: rgb(225, 225, 212);
-            padding: 2em 0 2em 0;
+            padding:5%;
             flex: 1 1 150px;
             margin-top:20px;
             margin-left:30px;
-            height:100%;
-            padding-left:30px;
-            padding-right:30px;
+            height:50%;
+            
     }
 
         .left{
@@ -629,6 +623,25 @@ img{
   .custom-modal .modal-footer {
     border-top: 1px solid #2c3e50; /* Border color for the footer */
   }
+
+
+/* Style for the select option in admin profile */
+.dropdown {
+    border: none;
+    font-size: 23px;
+    width: 6%;
+    text-align: center;
+    
+}
+
+/* Style for the options within the dropdown */
+.dropdown option {
+    padding:10px;
+    font-size: 20px;
+    text-align: center;
+}
+
+
         
      /*FOR SYSTEM RESPONSIVE */
 
@@ -638,15 +651,17 @@ img{
 <body>
 <div class="wrapper">
         <div class="section">
+
         <div class="admin_profile">
-                  
-                   <img src="uploaded_image/<?php echo $Profile_image; ?>" class="img-admin" id="image">
-                   
-                <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">
-                <?php echo $Username; ?>
-            </h4>
-            
-                </div>
+        <img src="uploaded_image/<?php echo $Profile_image; ?>" class="img-admin" id="image">
+
+        <select class="dropdown" required onchange="handleDropdownChange(this)">
+        <option><?php echo $Username; ?></option>
+        <option>&nbsp;Edit Profile&nbsp;</option>
+        <option>Logout</option>
+        </select>
+        </div>
+
             <div class="top_navbar">
                 <div class="hamburger">
                     <a href="#">
@@ -899,47 +914,27 @@ img{
         </div>
     </div>
 
-
-        <!-- Clickable image modal -->
-        <div class="modal fade" id="clickable_image" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-
-                            <div class="profile">
-                                <div class="admin_modal">
-                                    <a href="#" id="image">
-                                        <img src="uploaded_image/<?php echo $Profile_image; ?>">
-                                    </a>
-                                </div>
-
-                                 <h1 style="margin-top:20px;">
-                                 <?php echo $Name; ?>
-                                </h1>
-
-                                    <div id="update_profile">
-                                        <a href="profile.php"><button class="btn btn-primary btn-lg" style="font-size:25px; margin-top:20px;">Update profile</button></a>
-                                    </div>
-                            </div>
-
-                        </div>
-                    </div>
-                
-                </div>
-            </div>
-        </div> 
-
-<!--FOR clickable image modal-->
+<!-- FOR clickable image dropdown -->
 <script>
-   document.getElementById('image').addEventListener('click', function(){
-    var clickable_image = new bootstrap.Modal(document.getElementById('clickable_image'));
-    clickable_image.show();
-   })
-  </script>
+    function handleDropdownChange(selectElement) {
+        var selectedValue = selectElement.value;
+
+        // Redirect based on the selected option
+        switch (selectedValue) {
+            case "edit_profile":
+                // Replace 'edit_profile_url' with the actual URL for editing the profile
+                window.location.href = 'profile.php';
+                break;
+            case "logout":
+                // Replace 'logout_url' with the actual URL for logging out
+                window.location.href = 'login.php';
+                break;
+            default:
+                // Handle the default case or do nothing
+                break;
+        }
+    }
+</script>
 
     <!--FOR SIDEBAR-->
 <script>

@@ -61,15 +61,22 @@ if (isset($_POST['submit'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
     <title>Profile</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
 
     <style>
         * {
@@ -204,11 +211,6 @@ if (isset($_POST['submit'])) {
             /* Set a default border style */
         }
 
-        .img-admin:hover {
-            border-color: blue;
-            /* Change the border color to red on hover */
-
-        }
 
         img {
             height: 50px;
@@ -462,37 +464,34 @@ if (isset($_POST['submit'])) {
         .profile-history-btn {
             margin-left: 300px;
         }
-      
-    
 
-    .main2{
+
+
+        .main2 {
             display: flex;
             flex: 1;
-            
-            
+
+
         }
 
 
-    legend{
-        text-align:left;
-        margin-left:60px;
-        margin-bottom:40px;
-        font-size:30px;
-        color:black;
-    }
+        legend {
+            text-align: left;
+            margin-left: 60px;
+            margin-bottom: 40px;
+            font-size: 30px;
+            color: black;
+        }
 
 
-     /*FOR UPDATE ADMIN PROFILE */
-     .form-row label{
-        
-       
+        /*FOR UPDATE ADMIN PROFILE */
+        .form-row label {}
 
-     }
-     .form-column {
+        .form-column {
             display: flex;
             justify-content: space-between;
             margin-bottom: 10px;
-            
+
         }
 
         .form-column label {
@@ -502,46 +501,70 @@ if (isset($_POST['submit'])) {
         }
 
         .form-column input {
-            
-            width:15%;
+
+            width: 15%;
         }
 
 
-         /*FOR UPDATE SUCCESSFUL */
- /* Customize modal styles */
- .custom-modal .modal-content {
-    background-color: green; /* Background color */
-    color: #fff; /* Text  color */
-  }
+        /*FOR UPDATE SUCCESSFUL */
+        /* Customize modal styles */
+        .custom-modal .modal-content {
+            background-color: green;
+            /* Background color */
+            color: #fff;
+            /* Text  color */
+        }
 
-  .custom-modal .modal-header {
-    border-bottom: 1px solid #2c3e50; /* Border color for the header */
-  }
+        .custom-modal .modal-header {
+            border-bottom: 1px solid #2c3e50;
+            /* Border color for the header */
+        }
 
-              /*HEADER MODAL OF UPDATE */
-              .center-modal-title {
-        font-size:30px;
-        margin-left:175px;
-    }
+        /*HEADER MODAL OF UPDATE */
+        .center-modal-title {
+            font-size: 30px;
+            margin-left: 175px;
+        }
 
-  .custom-modal .modal-footer {
-    border-top: 1px solid #2c3e50; /* Border color for the footer */
-  }
-
-
-     /*FOR SYSTEM RESPONSIVE */
+        .custom-modal .modal-footer {
+            border-top: 1px solid #2c3e50;
+            /* Border color for the footer */
+        }
 
 
-</style>
+        /* Style for the select option in admin profile */
+        .dropdown {
+            border: none;
+            font-size: 23px;
+            width: 6%;
+            text-align: center;
+
+        }
+
+        /* Style for the options within the dropdown */
+        .dropdown option {
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
+
+        /*FOR SYSTEM RESPONSIVE */
+    </style>
 </head>
+
 <body>
     <div class="wrapper">
         <div class="section">
             <div class="admin_profile">
                 <img src="uploaded_image/<?php echo $Profile_image; ?>" class="img-admin" id="image">
-                <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">
-                    <?php echo $Username; ?>
-                </h4>
+
+                <select class="dropdown" required onchange="handleDropdownChange(this)">
+                    <option>
+                        <?php echo $Username; ?>
+                    </option>
+                    <option value="edit_profile">&nbsp;Edit Profile&nbsp;</option>
+                    <option value="logout">Logout</option>
+                </select>
             </div>
 
             <div class="top_navbar">
@@ -563,8 +586,10 @@ if (isset($_POST['submit'])) {
                         </h4>
                     </div>
                     <div class="profile-history-btn">
-                        <a href="profile.php" class="parallelogram-button parallelogram-button1" style="font-size:20px; color:white;">Edit Profile</a>
-                        <a href="hidden_profile.php" class="parallelogram-button parallelogram-button2" style="font-size:20px; color:white;">History</a>
+                        <a href="profile.php" class="parallelogram-button parallelogram-button1"
+                            style="font-size:20px; color:white;">Edit Profile</a>
+                        <a href="hidden_profile.php" class="parallelogram-button parallelogram-button2"
+                            style="font-size:20px; color:white;">History</a>
                     </div>
                 </header>
 
@@ -577,35 +602,46 @@ if (isset($_POST['submit'])) {
 
                                 <div class="form-column">
                                     <label style="font-size:20px; color:black;">Name:</label>
-                                    <input type="text" class="form-control" name="update_name" style="text-align: center;" autocomplete="off" value="<?php echo $Name; ?>">
+                                    <input type="text" class="form-control" name="update_name"
+                                        style="text-align: center;" autocomplete="off" value="<?php echo $Name; ?>">
 
                                     <label style=" font-size:20px; color:black;">Contact No:</label>
-                                    <input type="text" class="form-control" name="update_contact" style="margin-right:20%; text-align: center;" autocomplete="off" value="<?php echo $Contact; ?>">
+                                    <input type="text" class="form-control" name="update_contact"
+                                        style="margin-right:20%; text-align: center;" autocomplete="off"
+                                        value="<?php echo $Contact; ?>">
                                 </div>
 
                                 <div class="form-column">
                                     <label style=" font-size:20px; color:black;">Username:</label>
-                                    <input type="text" class="form-control" name="update_username" style="text-align: center;" autocomplete="off" value="<?php echo $Username; ?>">
+                                    <input type="text" class="form-control" name="update_username"
+                                        style="text-align: center;" autocomplete="off" value="<?php echo $Username; ?>">
 
                                     <label style=" font-size:20px; color:black;">Password:</label>
-                                    <input type="password" class="form-control form-outline" name="update_password" style="margin-right:20%; text-align: center;" autocomplete="off" value="<?php echo $Password; ?>">
+                                    <input type="password" class="form-control form-outline" name="update_password"
+                                        style="margin-right:20%; text-align: center;" autocomplete="off"
+                                        value="<?php echo $Password; ?>">
                                 </div>
 
                                 <div class="form-column">
                                     <label style=" font-size:20px; color:black;">Email:</label>
-                                    <input type="text" class="form-control" name="update_email" style="text-align: center;" autocomplete="off" value="<?php echo $Email; ?>">
+                                    <input type="text" class="form-control" name="update_email"
+                                        style="text-align: center;" autocomplete="off" value="<?php echo $Email; ?>">
 
                                     <label style=" font-size:20px; color:black;">Address:</label>
-                                    <input type="text" class="form-control" name="update_address" style="margin-right:20%; text-align: center;" autocomplete="off" value="<?php echo $Address; ?>">
+                                    <input type="text" class="form-control" name="update_address"
+                                        style="margin-right:20%; text-align: center;" autocomplete="off"
+                                        value="<?php echo $Address; ?>">
                                 </div>
 
                                 <div class="form-row">
                                     <label style=" font-size:20px; color:black;">Upload image:&nbsp</label>
-                                    <input type="file" name="update_image" accept="image/jpg, image/jpeg, image/png" class="box" style="margin-right:38%;">
+                                    <input type="file" name="update_image" accept="image/jpg, image/jpeg, image/png"
+                                        class="box" style="margin-right:38%;">
                                 </div>
 
                                 <br><br><br>
-                                <button type="submit" id="update" name="submit" class="btn btn-primary" style="font-size:20px;">Save Changes</button>
+                                <button type="submit" id="update" name="submit" class="btn btn-primary"
+                                    style="font-size:20px;">Save Changes</button>
 
                             </fieldset>
                         </form>
@@ -656,12 +692,7 @@ if (isset($_POST['submit'])) {
                             <span class="item">Reports</span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#" id="logoutButton">
-                            <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
-                            <span class="item">Logout</span>
-                        </a>
-                    </li>
+
                 </ul>
 
             </div>
@@ -670,7 +701,8 @@ if (isset($_POST['submit'])) {
     </div>
 
     <!-- UPDATE SUCCESS Modal -->
-    <div class="modal fade custom-modal" id="updateSuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade custom-modal" id="updateSuccessModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -682,25 +714,6 @@ if (isset($_POST['submit'])) {
                 </div>
                 <div class="modal-footer">
                     <a href="profile.php" class="btn btn-primary">OK</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Logout Modal -->
-    <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Logout Confirmation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to logout?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <a href="login.php" class="btn btn-primary">Logout</a>
                 </div>
             </div>
         </div>
@@ -727,7 +740,8 @@ if (isset($_POST['submit'])) {
                             </h1>
 
                             <div id="update_profile">
-                                <a href="profile.php"><button class="btn btn-primary btn-lg" name="update_profile" style="font-size:25px; margin-top:20px;">Update profile</button></a>
+                                <a href="profile.php"><button class="btn btn-primary btn-lg" name="update_profile"
+                                        style="font-size:25px; margin-top:20px;">Update profile</button></a>
                             </div>
                         </div>
                     </div>
@@ -736,12 +750,19 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 
-    <!-- FOR clickable image modal -->
+    <!-- FOR clickable image dropdown -->
     <script>
-        document.getElementById('image').addEventListener('click', function () {
-            var clickable_image = new bootstrap.Modal(document.getElementById('clickable_image'));
-            clickable_image.show();
-        })
+        function handleDropdownChange(select) {
+            var selectedValue = select.value;
+
+            if (selectedValue === "edit_profile") {
+                // Redirect to the edit profile page
+                window.location.href = "profile.php"; // Change the URL accordingly
+            } else if (selectedValue === "logout") {
+                // Redirect to the logout page
+                window.location.href = "login.php"; // Change the URL accordingly
+            }
+        }
     </script>
 
     <!-- FOR SIDEBAR -->
@@ -752,17 +773,8 @@ if (isset($_POST['submit'])) {
         })
     </script>
 
-    <!-- FOR LOGOUT MODAL -->
-    <script>
-        // Show the logout modal when the logout button is clicked
-        document.getElementById('logoutButton').addEventListener('click', function () {
-            var myModal = new bootstrap.Modal(document.getElementById('logoutModal'));
-            myModal.show();
-        });
-    </script>
-
     <!-- Check if the update was successful and trigger the modal -->
-    <?php if (isset($updateSuccess) && $updateSuccess) : ?>
+    <?php if (isset($updateSuccess) && $updateSuccess): ?>
         <script>
             $(document).ready(function () {
                 $('#updateSuccessModal').modal('show');
@@ -771,4 +783,5 @@ if (isset($_POST['submit'])) {
     <?php endif; ?>
 
 </body>
+
 </html>

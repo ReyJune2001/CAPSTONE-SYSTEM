@@ -16,11 +16,11 @@ if (isset($_POST['updatedata'])) {
     $Endingheight = $_POST['Endingheight'];
     $EndingpaintRatio = $_POST['EndingpaintRatio'];
     $EndingacetateRatio = $_POST['EndingacetateRatio'];
-   
-        // Update supplier table
-        $sql = "UPDATE `tbl_supplier` SET supplier_name='$supplier_name' WHERE supplierID=$id";
-        $result = mysqli_query($con, $sql);
- 
+
+    // Update supplier table
+    $sql = "UPDATE `tbl_supplier` SET supplier_name='$supplier_name' WHERE supplierID=$id";
+    $result = mysqli_query($con, $sql);
+
 
     if ($result) {
         // Update paint table

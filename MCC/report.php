@@ -1,3 +1,18 @@
+<?php
+
+include 'connect.php';
+
+$id = 1;
+
+$sql = "Select * from `tbl_user` where userID=$id";
+$result = mysqli_query($con, $sql);
+$row = mysqli_fetch_assoc($result);
+
+/*TO FETCH THE DATA FROM DATABASE - */
+$Name = $row['Name']; /*column name in the database */
+$Username = $row['Username'];
+$Profile_image = $row['Profile_image'];
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -437,6 +452,22 @@ img{
     .profile-history-btn{
         margin-left:300px;
     }
+
+      /* Style for the select option in admin profile */
+      .dropdown {
+            border: none;
+            font-size: 23px;
+            width: 6%;
+            text-align: center;
+
+        }
+
+        /* Style for the options within the dropdown */
+        .dropdown option {
+            padding: 10px;
+            font-size: 20px;
+            text-align: center;
+        }
         
      /*FOR SYSTEM RESPONSIVE */
 
@@ -447,12 +478,14 @@ img{
 <div class="wrapper">
         <div class="section">
         <div class="admin_profile">
-                  
-                   <img src="IMAGES/sampleImage.jpg" class="img-admin" id="image">
-                   
-                <h4 style="margin-left:17px; font-size:22px; margin-top:13px; text-align:right;">Rey June</h4>
-            
-                </div>
+        <img src="uploaded_image/<?php echo $Profile_image; ?>" class="img-admin" id="image">
+
+        <select class="dropdown" required onchange="handleDropdownChange(this)">
+        <option value="admin"><?php echo $Username; ?></option>
+        <option value="edit_profile">&nbsp;Edit Profile&nbsp;</option>
+        <option value="logout" >Logout</option>
+        </select>
+        </div>
             <div class="top_navbar">
                 <div class="hamburger">
                     <a href="#">
@@ -514,37 +547,12 @@ img{
                         <span class="item">Reports</span>
                     </a>
                 </li>
-                <li>
-                <a href="#" id="logoutButton">
-                        <span class="icon"><i class="fas fa-sign-out-alt"></i></span>
-                        <span class="item">Logout</span>
-                    </a>
-                </li>
+        
             </ul>
             
         </div>
         </div>
 
-    </div>
-
-
-     <!-- Logout Modal -->
-     <div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Logout Confirmation</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to logout?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                    <a href="login.php" class="btn btn-primary">Logout</a>
-                </div>
-            </div>
-        </div>
     </div>
 
 
@@ -580,6 +588,20 @@ img{
         </div>
 
         
+        <!-- FOR clickable image dropdown -->
+<script>
+    function handleDropdownChange(select) {
+        var selectedValue = select.value;
+
+        if (selectedValue === "edit_profile") {
+            // Redirect to the edit profile page
+            window.location.href = "profile.php"; // Change the URL accordingly
+        } else if (selectedValue === "logout") {
+            // Redirect to the logout page
+            window.location.href = "login.php"; // Change the URL accordingly
+        }
+    }
+</script>
 
 <!--FOR clickable image modal-->
 <script>
@@ -595,18 +617,6 @@ img{
     hamburger.addEventListener("click", function(){
         document.querySelector("body").classList.toggle("active");
     })
-  </script>
-
-    <!--FOR LOGOUT MODAL-->
-    <script>
-    // Show the logout modal when the logout button is clicked
-        document.getElementById('logoutButton').addEventListener('click', function() {
-            var myModal = new bootstrap.Modal(document.getElementById('logoutModal'));
-            myModal.show();
-        });
-    </script>
-
-    
-    
+  </script> 
 </body>
 </html>

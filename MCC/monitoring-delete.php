@@ -1,7 +1,7 @@
 <?php
 include 'connect.php';
 
-if(isset($_POST['deletedata'])){
+if (isset($_POST['deletedata'])) {
     $delete = $_POST['userID'];
 
     // Delete from tbl_customer
@@ -21,7 +21,7 @@ if(isset($_POST['deletedata'])){
     $result_entry = mysqli_query($con, $sql_entry);
 
     // Check if all deletes were successful
-    if($result_customer && $result_supplier && $result_paint && $result_entry){
+    if ($result_customer && $result_supplier && $result_paint && $result_entry) {
         //echo "Deleted successfully";
         header('location: monitoring.php');
     } else {

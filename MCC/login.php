@@ -22,14 +22,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Admin login successful
     session_start();
     $_SESSION['Username'] = $Username;
+    $_SESSION['Level'] = 'Admin';  // Set a session variable to identify the user level
     $login_admin = 1;
     header('location:dataEntry.php');
+    exit();
   } elseif ($user_result && mysqli_num_rows($user_result) > 0) {
     // User login successful
     session_start();
     $_SESSION['Username'] = $Username;
+    $_SESSION['Level'] = 'Operator';  // Set a session variable to identify the user level
     $login_user = 1;
     header('location:mobile_dataEntry.php');
+    exit();
   } else {
     // Invalid credentials
     $invalid = 1;

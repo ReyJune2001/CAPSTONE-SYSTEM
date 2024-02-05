@@ -1,4 +1,12 @@
 <?php
+// Include the session check at the beginning of restricted pages
+session_start();
+
+// Check if the user is not logged in or is not an admin or operator
+if (!isset($_SESSION['Username']) || ($_SESSION['Level'] != 'Admin' && $_SESSION['Level'] != 'Operator')) {
+    header('Location: login.php'); // Redirect to the login page if not authenticated
+    exit();
+}
 
 include 'connect.php';
 
@@ -12,11 +20,9 @@ $row = mysqli_fetch_assoc($result);
 $Name = $row['Name']; /*column name in the database */
 $Username = $row['Username'];
 $Profile_image = $row['Profile_image'];
-?>
 
-<!--FOR FETCHING DATA FROM DATABASE-->
-<?php
-include 'connect.php';
+
+//FOR FETCHING DATA FROM DATABASE
 
 // Fetch and check the data from the database using a JOIN query
 $sql = "SELECT
@@ -35,22 +41,38 @@ if (!$result) {
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-   
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <title>Paint-Acetate Volume</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+        crossorigin="anonymous"></script>
 
     <!--FOR DATATABLES STYLING-->
-     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
-     
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css">
+    
+
+    <!--FOR DATA TABLES SCRIPT-->
+    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
+
     <style>
         * {
 
@@ -163,26 +185,28 @@ if (!$result) {
         }
 
         /* Set initial styles for the sidebar and section */
-body .wrapper .sidebar {
-    left: 0;
-    transition: left 0.5s ease; /* Add a transition for smooth animation */
-}
+        body .wrapper .sidebar {
+            left: 0;
+            transition: left 0.5s ease;
+            /* Add a transition for smooth animation */
+        }
 
-body .wrapper .section {
-    margin-left: 300px;
-    transition: margin-left 0.5s ease, width 0.5s ease; /* Add transitions for smooth animation */
-    width: calc(100% - 300px);
-}
+        body .wrapper .section {
+            margin-left: 300px;
+            transition: margin-left 0.5s ease, width 0.5s ease;
+            /* Add transitions for smooth animation */
+            width: calc(100% - 300px);
+        }
 
-/* Apply styles when body has the 'active' class */
-body.active .wrapper .sidebar {
-    left: -300px;
-}
+        /* Apply styles when body has the 'active' class */
+        body.active .wrapper .sidebar {
+            left: -300px;
+        }
 
-body.active .wrapper .section {
-    margin-left: 0;
-    width: 100%;
-}
+        body.active .wrapper .section {
+            margin-left: 0;
+            width: 100%;
+        }
 
         /*USER PROFILE STYLES*/
         .admin_profile {
@@ -495,9 +519,9 @@ body.active .wrapper .section {
         /*MAIN CONTENT */
 
         div.dataTables_wrapper {
-        width: 100%;
-        margin: 0 auto;
-    }
+            width: 100%;
+            margin: 0 auto;
+        }
 
         .main1 {
             background-color: rgb(225, 225, 212);
@@ -515,319 +539,375 @@ body.active .wrapper .section {
 
         /* FOR SEARCH BAR */
         .dataTables_wrapper .dataTables_filter input {
-    border: 1px solid #aaa;
-    border-radius: 3px;
-    padding: 5px;
-    background-color: white;
-    margin-left: 3px;
-}
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            padding: 5px;
+            background-color: white;
+            margin-left: 3px;
+        }
+
         /* FOR SHOW ENTRIES */
-.dataTables_wrapper .dataTables_length select {
-    border: 1px solid #aaa;
-    border-radius: 3px;
-    padding: 5px;
-    background-color:white;
-    padding: 8px;
-}
+        .dataTables_wrapper .dataTables_length select {
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            padding: 5px;
+            background-color: white;
+            padding: 8px;
+        }
+
+
+        /* FOR CLOCK */
+
+        .clockcontainer {
+            width: 295px;
+            height: 180px;
+            position: absolute;
+            top: 95%;
+
+
+        }
+
+        .clock {
+
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .clock span {
+            font-size: 20px;
+            width: 30px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+        }
+
+        /*FOR FILTER BAR */
+        .filterfield {
+            width: 150px;
+            height: 40px;
+            margin-left: 2%;
+            background-color: white;
+            border-color: #86b7fe;
+            border-radius: 5px;
+
+        }
+
 
 
         /*FOR SYSTEM RESPONSIVE */
-
     </style>
 </head>
-<body>
-<div class="wrapper">
-        <div class="section">
-        <div class="admin_profile">
-        <img src="uploaded_image/<?php echo $Profile_image; ?>" class="img-admin" id="image">
 
-        <select class="dropdown" required onchange="handleDropdownChange(this)">
-        <option><?php echo $Username; ?></option>
-        <option value="edit_profile">&nbsp;Edit Profile&nbsp;</option>
-        <option value="logout">Logout</option>
-        </select>
-        </div>
+<body>
+    <div class="wrapper">
+        <div class="section">
+            <div class="admin_profile">
+                <img src="uploaded_image/<?php echo $Profile_image; ?>" class="img-admin" id="image">
+
+                <select class="dropdown" required onchange="handleDropdownChange(this)">
+                    <option>
+                        <?php echo $Username; ?>
+                    </option>
+                    <option value="edit_profile">&nbsp;Edit Profile&nbsp;</option>
+                    <option value="logout">Logout</option>
+                </select>
+            </div>
             <div class="top_navbar">
                 <div class="hamburger">
                     <a href="#">
-                        <i class="fas fa-bars"></i>       
-                    </a>   
+                        <i class="fas fa-bars"></i>
+                    </a>
                 </div>
             </div>
-            
+
 
 
             <!--MAIN CONTENT-->
 
             <div class="main1">
+                <!--Filter bar-->
+                <div class="col-md-8">
+                <div class="form-group">
+                    <label style="margin-left:20%;">From date:</label>
+                    <input type="date" style="text-align: center;" class="filterfield" id="min" name="min"
+                        autocomplete="off" required>
+
+                    <label style="margin-left:3%;">To date:</label>
+                    <input type="date" style="text-align: center;" class="filterfield" id="max" name="max"
+                        autocomplete="off" required>
+
+                </div>
+            </div>
+
                 <div class="main2">
-                            <table id="datatables" class="display" style="width:100%;">
-                                <thead> 
-                                    <tr>
-                                        <th colspan="13" style="text-align:center; background-color:#007BFF;">Initial Inventory</th>
-                                        <th colspan="10" style="text-align:center; background-color:#FFC107">Ending Inventory</th>
-                                        
-                                    </tr>
-                                
-                                    <tr>
-                                        <th class="bg-primary" style="text-align:center;">Date</th>
-                                        <th class="bg-primary" style="text-align:center;">Paint Color</th>
-                                        <th class="bg-primary" style="text-align:center;">Supplier</th>
-                                        <th class="bg-primary" style="text-align:center;">Batch Number</th>
-                                        <th class="bg-primary" style="text-align:center;">Pi</th>
-                                        <th class="bg-primary" style="text-align:center;">Diameter</th>
-                                        <th class="bg-primary" style="text-align:center;">Height</th>
-                                        <th class="bg-primary" style="text-align:center;">Conversion Factor</th>
-                                        <th class="bg-primary" style="text-align:center;">Volume</th>
-                                        <th class="bg-primary" style="text-align:center;">Paint Ratio</th>
-                                        <th class="bg-primary" style="text-align:center;">Acetate Ratio</th>
-                                        <th class="bg-primary" style="text-align:center;">Paint (L)</th>
-                                        <th class="bg-primary" style="text-align:center;">Acetate (L)</th>
 
-                                        <th class="bg-warning" style="text-align:center;">Pi</th>
-                                        <th class="bg-warning" style="text-align:center;">Diameter</th>
-                                        <th class="bg-warning" style="text-align:center;">Height</th>
-                                        <th class="bg-warning" style="text-align:center;">Conversion Factor</th>
-                                        <th class="bg-warning" style="text-align:center;">Volume</th>
-                                        <th class="bg-warning" style="text-align:center;">Paint Ratio</th>
-                                        <th class="bg-warning" style="text-align:center;">Acetate Ratio</th>
-                                        <th class="bg-warning" style="text-align:center;">Paint (L)</th>
-                                        <th class="bg-warning" style="text-align:center;">Acetate (L)</th>
-                                        <th class="bg-warning" style="text-align:center;">Operation</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+                
 
-                                    <?php
-                                    // Loop through the results and display data in the table
-                                    
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        echo "<tr class='edit-row' data-entry-id='{$row['EntryID']}' data-date='{$row['date']}' data-paint-color='{$row['paint_color']}'
+                    <table id="datatables" class="display" style="width:100%;">
+                        <thead>
+                            <tr>
+                                <th colspan="13" style="text-align:center; background-color:#007BFF;">Initial Inventory
+                                </th>
+                                <th colspan="10" style="text-align:center; background-color:#FFC107">Ending Inventory
+                                </th>
+
+                            </tr>
+
+                            <tr>
+                                <th class="bg-primary" style="text-align:center;">Date</th>
+                                <th class="bg-primary" style="text-align:center;">Paint Color</th>
+                                <th class="bg-primary" style="text-align:center;">Supplier</th>
+                                <th class="bg-primary" style="text-align:center;">Batch Number</th>
+                                <th class="bg-primary" style="text-align:center;">Pi</th>
+                                <th class="bg-primary" style="text-align:center;">Diameter</th>
+                                <th class="bg-primary" style="text-align:center;">Height</th>
+                                <th class="bg-primary" style="text-align:center;">Conversion Factor</th>
+                                <th class="bg-primary" style="text-align:center;">Volume</th>
+                                <th class="bg-primary" style="text-align:center;">Paint Ratio</th>
+                                <th class="bg-primary" style="text-align:center;">Acetate Ratio</th>
+                                <th class="bg-primary" style="text-align:center;">Paint (L)</th>
+                                <th class="bg-primary" style="text-align:center;">Acetate (L)</th>
+
+                                <th class="bg-warning" style="text-align:center;">Pi</th>
+                                <th class="bg-warning" style="text-align:center;">Diameter</th>
+                                <th class="bg-warning" style="text-align:center;">Height</th>
+                                <th class="bg-warning" style="text-align:center;">Conversion Factor</th>
+                                <th class="bg-warning" style="text-align:center;">Volume</th>
+                                <th class="bg-warning" style="text-align:center;">Paint Ratio</th>
+                                <th class="bg-warning" style="text-align:center;">Acetate Ratio</th>
+                                <th class="bg-warning" style="text-align:center;">Paint (L)</th>
+                                <th class="bg-warning" style="text-align:center;">Acetate (L)</th>
+                                <th class="bg-warning" style="text-align:center;">Operation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            <?php
+                            // Loop through the results and display data in the table
+                            
+                            while ($row = mysqli_fetch_assoc($result)) {
+                                echo "<tr class='edit-row' data-entry-id='{$row['EntryID']}' data-date='{$row['date']}' data-paint-color='{$row['paint_color']}'
                 data-supplier-name='{$row['supplier_name']}' data-batch-number='{$row['batchNumber']}' data-diameter='{$row['diameter']}'
                 data-height='{$row['height']}' data-paint-ratio='{$row['paintRatio']}' data-acetate-ratio='{$row['acetateRatio']}' 
                 data-endingdiameter='{$row['Endingdiameter']}' data-endingheight='{$row['Endingheight']}' data-endingpaintratio='{$row['EndingpaintRatio']}'
                 data-endingacetateratio='{$row['EndingacetateRatio']}'>";
-                                        echo "<td class='date-cell'>{$row['date']}</td>";
-                                        echo "<td>{$row['paint_color']}</td>";
-                                        echo "<td>{$row['supplier_name']}</td>";
-                                        echo "<td>{$row['batchNumber']}</td>";
-                                        echo "<td style='color:blue;'>3.1416</td>";
-                                        echo "<td>{$row['diameter']}</td>";
-                                        echo "<td>{$row['height']}</td>";
-                                        echo "<td style='color:blue;'>0.5263526</td>";
-                                        echo "<td style='color:blue;'>104.3</td>";
-                                        echo "<td>{$row['paintRatio']}</td>";
-                                        echo "<td>{$row['acetateRatio']}</td>";
-                                        echo "<td style='color:blue;'>22.2</td>";
-                                        echo "<td style='color:blue;'>25.3</td>";
-                                        echo "<td style='color:red;'>3.1416</td>";
-                                        echo "<td>{$row['Endingdiameter']}</td>";
-                                        echo "<td>{$row['Endingheight']}</td>";
-                                        echo "<td style='color:red;'>0.0163871</td>";
-                                        echo "<td style='color:red;'>50.0</td>";
-                                        echo "<td>{$row['EndingpaintRatio']}</td>";
-                                        echo "<td>{$row['EndingacetateRatio']}</td>";
-                                        echo "<td style='color:red;'>25.5</td>";
-                                        echo "<td style='color:red;'>25.5</td>";
-                                        echo "<td class='crud'><div style='display: flex; gap: 10px;'>
+                                echo "<td class='date-cell'>{$row['date']}</td>";
+                                echo "<td>{$row['paint_color']}</td>";
+                                echo "<td>{$row['supplier_name']}</td>";
+                                echo "<td>{$row['batchNumber']}</td>";
+                                echo "<td style='color:blue;'>3.1416</td>";
+                                echo "<td>{$row['diameter']}</td>";
+                                echo "<td>{$row['height']}</td>";
+                                echo "<td style='color:blue;'>0.5263526</td>";
+                                echo "<td style='color:blue;'>104.3</td>";
+                                echo "<td>{$row['paintRatio']}</td>";
+                                echo "<td>{$row['acetateRatio']}</td>";
+                                echo "<td style='color:blue;'>22.2</td>";
+                                echo "<td style='color:blue;'>25.3</td>";
+                                echo "<td style='color:red;'>3.1416</td>";
+                                echo "<td>{$row['Endingdiameter']}</td>";
+                                echo "<td>{$row['Endingheight']}</td>";
+                                echo "<td style='color:red;'>0.0163871</td>";
+                                echo "<td style='color:red;'>50.0</td>";
+                                echo "<td>{$row['EndingpaintRatio']}</td>";
+                                echo "<td>{$row['EndingacetateRatio']}</td>";
+                                echo "<td style='color:red;'>25.5</td>";
+                                echo "<td style='color:red;'>25.5</td>";
+                                echo "<td class='crud'><div style='display: flex; gap: 10px;'>
                 <button class='btn btn-info text-light editbtn'>Update</button>
                 <button class='btn btn-danger confirm_dltbtn' data-entry-id='{$row['EntryID']}'>Delete</button>
                 </div></td>";
 
-                                        // Add more table data based on your columns
-                                        echo "</tr>";
+                                // Add more table data based on your columns
+                                echo "</tr>";
 
-                                        // Save data from the current row for later use in the modal
-                                        $id = $row['EntryID'];
-                                        $date = $row['date'];
-                                        $paint_color = $row['paint_color'];
-                                        $supplier_name = $row['supplier_name'];
-                                        $batchNumber = $row['batchNumber'];
-                                        $diameter = $row['diameter'];
-                                        $height = $row['height'];
-                                        $paintRatio = $row['paintRatio'];
-                                        $acetateRatio = $row['acetateRatio'];
-                                        $Endingdiameter = $row['Endingdiameter'];
-                                        $Endingheight = $row['Endingheight'];
-                                        $EndingpaintRatio = $row['EndingpaintRatio'];
-                                        $EndingacetateRatio = $row['EndingacetateRatio'];
+                                // Save data from the current row for later use in the modal
+                                $id = $row['EntryID'];
+                                $date = $row['date'];
+                                $paint_color = $row['paint_color'];
+                                $supplier_name = $row['supplier_name'];
+                                $batchNumber = $row['batchNumber'];
+                                $diameter = $row['diameter'];
+                                $height = $row['height'];
+                                $paintRatio = $row['paintRatio'];
+                                $acetateRatio = $row['acetateRatio'];
+                                $Endingdiameter = $row['Endingdiameter'];
+                                $Endingheight = $row['Endingheight'];
+                                $EndingpaintRatio = $row['EndingpaintRatio'];
+                                $EndingacetateRatio = $row['EndingacetateRatio'];
 
-                                    }
-                                    ?>
+                            }
+                            ?>
 
-                                    <!--########################################################################################-->
-                                    <!--Update data modal-->
+                            <!--########################################################################################-->
+                            <!--Update data modal-->
 
-                                    <div class="modal fade" id="editmodal" tabindex="-1"
-                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header"
-                                                    style="background-color: #337ab7; color: white;">
-                                                    <h5 class="modal-title center-modal-title">UPDATE</h5>
-                                                    <button type="button" class="btn-close"
-                                                        data-bs-dismiss="modal"></button>
+                            <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background-color: #337ab7; color: white;">
+                                            <h5 class="modal-title center-modal-title">UPDATE</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                        </div>
+                                        <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
+                                            <form method="post" action="volume-update.php" id="updateForm">
+                                                <input type="hidden" name="userID" id="update_id">
+                                                <fieldset>
+                                                    <label style="color:blue;font-weight:bold;">Date:</label>
+                                                    <input type="date" class="form-control" id="date" name="date"
+                                                        autocomplete="off" required value="<?php echo $date; ?>">
+                                                </fieldset>
+                                                <br><br>
+                                                <fieldset>
+                                                    <legend style="color:blue; font-weight:bold;">Initial
+                                                        Inventory of Paint Mix</legend><br><br>
+
+                                                    <label>Paint Color:</label>
+                                                    <select name="paint_color" id="paint_color" required>
+                                                        <option value="">-- Select --</option>
+                                                        <option value="Royal Blue" <?php if ($paint_color == "Royal Blue")
+                                                            echo "selected"; ?>>
+                                                            Royal Blue</option>
+                                                        <option value="Deft Blue" <?php if ($paint_color == "Deft Blue")
+                                                            echo "selected"; ?>>Deft Blue</option>
+                                                        <option value="Buff" <?php if ($paint_color == "Buff")
+                                                            echo "selected"; ?>>Buff</option>
+                                                        <option value="Golden Brown" <?php if ($paint_color == "Golden Brown")
+                                                            echo "selected"; ?>>
+                                                            Golden Brown</option>
+                                                        <option value="Clear" <?php if ($paint_color == "Clear")
+                                                            echo "selected"; ?>>Clear</option>
+                                                        <option value="White" <?php if ($paint_color == "White")
+                                                            echo "selected"; ?>>White</option>
+                                                        <option value="Black" <?php if ($paint_color == "Black")
+                                                            echo "selected"; ?>>Black</option>
+                                                        <option value="Alpha Gray" <?php if ($paint_color == "Alpha Gray")
+                                                            echo "selected"; ?>>
+                                                            Alpha Gray</option>
+                                                        <option value="Nile Green" <?php if ($paint_color == "Nile Green")
+                                                            echo "selected"; ?>>Nile Green</option>
+                                                        <option value="Emirald Green" <?php if ($paint_color == "Emirald Green")
+                                                            echo "selected"; ?>>
+                                                            Emirald Green</option>
+                                                        <option value="Jade Green" <?php if ($paint_color == "Jade Green")
+                                                            echo "selected"; ?>>Jade Green</option>
+                                                    </select>
+
+                                                    <label>Supplier:</label>
+                                                    <select name="supplier_name" id="supplier_name" required>
+                                                        <option value="">-- Select --</option>
+                                                        <option value="Nippon" <?php if ($supplier_name == "Nippon")
+                                                            echo "selected"; ?>>
+                                                            Nippon</option>
+                                                        <option value="Treasure Island" <?php if ($supplier_name == "Treasure Island")
+                                                            echo "selected"; ?>>Treasure Island</option>
+                                                        <option value="Inkote" <?php if ($supplier_name == "Inkote")
+                                                            echo "selected"; ?>>
+                                                            Inkote</option>
+                                                        <option value="Century" <?php if ($supplier_name == "Century")
+                                                            echo "selected"; ?>>
+                                                            Century</option>
+                                                    </select>
+                                                    <br><br>
+                                                    <label>Batch #:</label>
+                                                    <input type="text" class="form-control" name="batchNumber"
+                                                        id="batchNumber" autocomplete="off" required
+                                                        value="<?php echo $batchNumber; ?>">
+                                                    <br>
+
+                                                    <label>Diameter:</label>
+                                                    <input type="text" class="form-control" name="diameter"
+                                                        id="diameter" autocomplete="off"
+                                                        value="<?php echo $diameter; ?>">
+                                                    <br>
+                                                    <label>Height:</label>
+                                                    <input type="text" class="form-control" name="height" id="height"
+                                                        autocomplete="off" value="<?php echo $height; ?>">
+                                                    <br>
+                                                    <label>Paint ratio:</label>
+                                                    <input type="text" class="form-control" name="paintRatio"
+                                                        id="paintRatio" autocomplete="off"
+                                                        value="<?php echo $paintRatio; ?>">
+                                                    <br>
+                                                    <label>Acetate ratio:</label>
+                                                    <input type="text" class="form-control" name="acetateRatio"
+                                                        id="acetateRatio" autocomplete="off"
+                                                        value="<?php echo $acetateRatio; ?>">
+
+                                                </fieldset>
+                                                <br><br>
+
+                                                <fieldset>
+                                                    <legend style="color:blue;font-weight:bold;">Ending
+                                                        Inventory:</legend><br><br>
+
+
+                                                    <label>Diameter:</label>
+                                                    <input type="text" class="form-control" name="Endingdiameter"
+                                                        id="Endingdiameter" autocomplete="off"
+                                                        value="<?php echo $Endingdiameter; ?>">
+                                                    <br>
+                                                    <label>Height:</label>
+                                                    <input type="text" class="form-control" name="Endingheight"
+                                                        id="Endingheight" autocomplete="off"
+                                                        value="<?php echo $Endingheight; ?>">
+                                                    <br>
+                                                    <label>Paint ratio:</label>
+                                                    <input type="text" class="form-control" name="EndingpaintRatio"
+                                                        id="EndingpaintRatio" autocomplete="off"
+                                                        value="<?php echo $EndingpaintRatio; ?>">
+                                                    <br>
+                                                    <label>Acetate ratio:</label>
+                                                    <input type="text" class="form-control" name="EndingacetateRatio"
+                                                        id="EndingacetateRatio" autocomplete="off"
+                                                        value="<?php echo $EndingacetateRatio; ?>">
+
+                                                </fieldset>
+                                                <br><br>
+
+                                                <div class="modal-footer">
+
+                                                    <button type="submit" name="updatedata"
+                                                        class="btn btn-info text-light">Update</button>
+                                                    <button class="btn btn-danger" class="btn-close"
+                                                        data-bs-dismiss="modal" style="color:white">Cancel</button>
                                                 </div>
-                                                <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
-                                                    <form method="post" action="volume-update.php" id="updateForm">
-                                                        <input type="hidden" name="userID" id="update_id">
-                                                        <fieldset>
-                                                            <label style="color:blue;font-weight:bold;">Date:</label>
-                                                            <input type="date" class="form-control" id="date"
-                                                                name="date" autocomplete="off" required
-                                                                value="<?php echo $date; ?>">
-                                                        </fieldset>
-                                                        <br><br>
-                                                        <fieldset>
-                                                            <legend style="color:blue; font-weight:bold;">Initial
-                                                                Inventory of Paint Mix</legend><br><br>
-
-                                                            <label>Paint Color:</label>
-                                                            <select name="paint_color" id="paint_color" required>
-                                                                <option value="">-- Select --</option>
-                                                                <option value="Royal Blue" <?php if ($paint_color == "Royal Blue")
-                                                                    echo "selected"; ?>>
-                                                                    Royal Blue</option>
-                                                                <option value="Deft Blue" <?php if ($paint_color == "Deft Blue")
-                                                                    echo "selected"; ?>>Deft Blue</option>
-                                                                <option value="Buff" <?php if ($paint_color == "Buff")
-                                                                    echo "selected"; ?>>Buff</option>
-                                                                <option value="Golden Brown" <?php if ($paint_color == "Golden Brown")
-                                                                    echo "selected"; ?>>
-                                                                    Golden Brown</option>
-                                                                <option value="Clear" <?php if ($paint_color == "Clear")
-                                                                    echo "selected"; ?>>Clear</option>
-                                                                <option value="White" <?php if ($paint_color == "White")
-                                                                    echo "selected"; ?>>White</option>
-                                                                <option value="Black" <?php if ($paint_color == "Black")
-                                                                    echo "selected"; ?>>Black</option>
-                                                                <option value="Alpha Gray" <?php if ($paint_color == "Alpha Gray")
-                                                                    echo "selected"; ?>>
-                                                                    Alpha Gray</option>
-                                                                <option value="Nile Green" <?php if ($paint_color == "Nile Green")
-                                                                    echo "selected"; ?>>Nile Green</option>
-                                                                <option value="Emirald Green" <?php if ($paint_color == "Emirald Green")
-                                                                    echo "selected"; ?>>
-                                                                    Emirald Green</option>
-                                                                <option value="Jade Green" <?php if ($paint_color == "Jade Green")
-                                                                    echo "selected"; ?>>Jade Green</option>
-                                                            </select>
-
-                                                            <label>Supplier:</label>
-                                                            <select name="supplier_name" id="supplier_name" required>
-                                                                <option value="">-- Select --</option>
-                                                                <option value="Nippon" <?php if ($supplier_name == "Nippon")
-                                                                    echo "selected"; ?>>
-                                                                    Nippon</option>
-                                                                <option value="Treasure Island" <?php if ($supplier_name == "Treasure Island")
-                                                                    echo "selected"; ?>>Treasure Island</option>
-                                                                <option value="Inkote" <?php if ($supplier_name == "Inkote")
-                                                                    echo "selected"; ?>>
-                                                                    Inkote</option>
-                                                                <option value="Century" <?php if ($supplier_name == "Century")
-                                                                    echo "selected"; ?>>
-                                                                    Century</option>
-                                                            </select>
-                                                            <br><br>
-                                                            <label>Batch #:</label>
-                                                            <input type="text" class="form-control" name="batchNumber"
-                                                                id="batchNumber" autocomplete="off" required
-                                                                value="<?php echo $batchNumber; ?>">
-                                                            <br>
-
-                                                            <label>Diameter:</label>
-                                                            <input type="text" class="form-control" name="diameter"
-                                                                id="diameter" autocomplete="off"
-                                                                value="<?php echo $diameter; ?>">
-                                                            <br>
-                                                            <label>Height:</label>
-                                                            <input type="text" class="form-control" name="height"
-                                                                id="height" autocomplete="off"
-                                                                value="<?php echo $height; ?>">
-                                                            <br>
-                                                            <label>Paint ratio:</label>
-                                                            <input type="text" class="form-control" name="paintRatio"
-                                                                id="paintRatio" autocomplete="off"
-                                                                value="<?php echo $paintRatio; ?>">
-                                                            <br>
-                                                            <label>Acetate ratio:</label>
-                                                            <input type="text" class="form-control" name="acetateRatio"
-                                                                id="acetateRatio" autocomplete="off"
-                                                                value="<?php echo $acetateRatio; ?>">
-
-                                                        </fieldset>
-                                                        <br><br>
-
-                                                        <fieldset>
-                                                            <legend style="color:blue;font-weight:bold;">Ending
-                                                                Inventory:</legend><br><br>
-
-
-                                                            <label>Diameter:</label>
-                                                            <input type="text" class="form-control"
-                                                                name="Endingdiameter" id="Endingdiameter"
-                                                                autocomplete="off"
-                                                                value="<?php echo $Endingdiameter; ?>">
-                                                            <br>
-                                                            <label>Height:</label>
-                                                            <input type="text" class="form-control" name="Endingheight"
-                                                                id="Endingheight" autocomplete="off"
-                                                                value="<?php echo $Endingheight; ?>">
-                                                            <br>
-                                                            <label>Paint ratio:</label>
-                                                            <input type="text" class="form-control"
-                                                                name="EndingpaintRatio" id="EndingpaintRatio"
-                                                                autocomplete="off"
-                                                                value="<?php echo $EndingpaintRatio; ?>">
-                                                            <br>
-                                                            <label>Acetate ratio:</label>
-                                                            <input type="text" class="form-control"
-                                                                name="EndingacetateRatio" id="EndingacetateRatio"
-                                                                autocomplete="off"
-                                                                value="<?php echo $EndingacetateRatio; ?>">
-
-                                                        </fieldset>
-                                                        <br><br>
-
-                                                        <div class="modal-footer">
-
-                                                            <button type="submit" name="updatedata"
-                                                                class="btn btn-info text-light">Update</button>
-                                                            <button class="btn btn-danger" class="btn-close"
-                                                                data-bs-dismiss="modal"
-                                                                style="color:white">Cancel</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
+                                            </form>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
 
-                                    </tr>
-                                </tbody>
+                            </tr>
+                        </tbody>
 
-                            </table>
-                        </div>
+                    </table>
+                </div>
             </div>
         </div>
 
-     <!--Top menu -->
-     <div class="sidebar">
-           <!--profile image & text-->
-           <div class="profile">
-            <img src="IMAGES/logo.jpg" alt="profile_picture">
-            <h3>Mindanao Container Corporation</h3>
-            <!--<p>purok-8,Villanueva,Mis or.</p> -->
-        </div>
+        <!--Top menu -->
+        <div class="sidebar">
+            <!--profile image & text-->
+            <div class="profile">
+                <img src="IMAGES/logo.jpg" alt="profile_picture">
+                <h3>Mindanao Container Corporation</h3>
+                <!--<p>purok-8,Villanueva,Mis or.</p> -->
+            </div>
             <!--menu item-->
             <ul>
-            <li>
-                <!-- Hidden hyperlink -->
-                <a href="hidden_profile.php" style="display:none;">Hidden Link
+                <li>
+                    <!-- Hidden hyperlink -->
+                    <a href="hidden_profile.php" style="display:none;">Hidden Link
 
-                </a>
-            </li>
-            <li>
+                    </a>
+                </li>
+                <li>
                     <a href="profile.php" style="display:none;">
                         <span class="icon"><i class="fa-solid fa-user"></i></span>
                         <span class="item">Profile</span>
@@ -858,181 +938,270 @@ body.active .wrapper .section {
                     </a>
                 </li>
                 <li>
-              
+
             </ul>
-            
+
+            <!--FOR CLOCK-->
+            <div class="clockcontainer">
+                <div class="clock">
+                    <span id="hrs"></span>
+                    <span>:</span>
+                    <span id="min"></span>
+                    <span>:</span>
+                    <span id="sec"></span>
+                    <span id="ampm"></span>
+
+                </div>
+            </div>
+
         </div>
-        </div>
+    </div>
     </div>
 
 
     <!--###################################################################################################-->
-     <!-- Delete Modal -->
+    <!-- Delete Modal -->
 
-<div class="modal" id="deletemodal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color: red; color: white;">
-                <h5 class="modal-title center-modal-title">DELETE</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-
-            <form action="volume-delete.php" method="post">
-                
-                <input type="hidden" name="userID" id="confirm_delete_id">
-
-                <h4 style="text-align:center;">Are you sure you want to delete it?</h4>
-
-            
-                <div class="modal-footer">
-
-                <button type="submit" name="deletedata" class="btn btn-primary" >Yes</button>
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" style="color: white">No</button>
+    <div class="modal" id="deletemodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: red; color: white;">
+                    <h5 class="modal-title center-modal-title">DELETE</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
-            </form>
+
+                <form action="volume-delete.php" method="post">
+
+                    <input type="hidden" name="userID" id="confirm_delete_id">
+
+                    <h4 style="text-align:center;">Are you sure you want to delete it?</h4>
+
+
+                    <div class="modal-footer">
+
+                        <button type="submit" name="deletedata" class="btn btn-primary">Yes</button>
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                            style="color: white">No</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
 
     <!-- Clickable image modal -->
     <div class="modal fade" id="clickable_image" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
 
-                            <div class="profile">
-                                <div class="admin_modal">
-                                    <a href="#" id="image">
-                                        <img src="uploaded_image/<?php echo $Profile_image; ?>">
-                                    </a>
-                                </div>
-
-                                 <h1 style="margin-top:20px;">
-                                 <?php echo $Name; ?>
-                                </h1>
-
-                                    <div id="update_profile">
-                                    <a href="profile.php"><button class="btn btn-primary btn-lg" style="font-size:25px; margin-top:20px;">Update profile</button></a>
-                                    </div>
+                        <div class="profile">
+                            <div class="admin_modal">
+                                <a href="#" id="image">
+                                    <img src="uploaded_image/<?php echo $Profile_image; ?>">
+                                </a>
                             </div>
 
+                            <h1 style="margin-top:20px;">
+                                <?php echo $Name; ?>
+                            </h1>
+
+                            <div id="update_profile">
+                                <a href="profile.php"><button class="btn btn-primary btn-lg"
+                                        style="font-size:25px; margin-top:20px;">Update profile</button></a>
+                            </div>
                         </div>
+
                     </div>
-                
                 </div>
+
             </div>
         </div>
+    </div>
 
-       <!--FOR DATA TABLES SCRIPT-->
-        <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-     <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-     <script>
-          $(document).ready(function(){
+    
+
+    <!--DATA TABLES-->
+    <script>
+        $(document).ready(function () {
             new DataTable('#datatables', {
-            scrollX: true,
-            scrollY: true
-            
+                scrollX: true,
+                scrollY: true
+
+            });
         });
-     });
-     </script>
+    </script>
+
+    <!-- DATE FILTER RANGE -->
+<script>
+    let minDate, maxDate;
+    let table;
+
+    // Custom filtering function which will search data in column four between two values
+    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+        let min = minDate.valueAsDate;
+        let max = maxDate.valueAsDate;
+        let date = new Date(data[0]); // Assuming your date is in the first column
+
+        if (
+            (!min && !max) ||
+            (!min && date <= max) ||
+            (min <= date && !max) ||
+            (min <= date && date <= max)
+        ) {
+            return true;
+        }
+        return false;
+    });
+
+    // Create date inputs
+    minDate = document.getElementById('min');
+    maxDate = document.getElementById('max');
+
+    // Function to initialize DataTable
+    function initializeDataTable() {
+        
+
+        // Initialize DataTable
+        table = $('#datatables').DataTable();
+
+        // Refilter the table
+        document.querySelectorAll('#min, #max').forEach((el) => {
+            el.addEventListener('change', () => table.draw());
+        });
+    }
+
+    // Initialize DataTable on document ready
+    $(document).ready(function () {
+        initializeDataTable();
+    });
+</script>
 
 
-<!--For UPDATE modal-->
-<!--Reminder: Javascript is so sensitive..kailangan na puro small letter
+
+    <!--FOR CLOCK SCRIPT-->
+    <script>
+        let hrs = document.getElementById("hrs");
+        let min = document.getElementById("min");
+        let sec = document.getElementById("sec");
+        let ampm = document.getElementById("ampm");
+
+        setInterval(() => {
+            let currentTime = new Date();
+            let hours = currentTime.getHours();
+            let period = "AM";
+
+            if (hours >= 12) {
+                period = "PM";
+                if (hours > 12) {
+                    hours -= 12;
+                }
+            }
+
+            hrs.innerHTML = (hours < 10 ? "0" : '') + hours;
+            min.innerHTML = (currentTime.getMinutes() < 10 ? "0" : '') + currentTime.getMinutes();
+            sec.innerHTML = (currentTime.getSeconds() < 10 ? "0" : '') + currentTime.getSeconds();
+            ampm.innerHTML = period;
+        }, 1000)
+    </script>
+
+
+    <!--For UPDATE modal-->
+    <!--Reminder: Javascript is so sensitive..kailangan na puro small letter
 ang e-assign na attributes name sa js to populate the value of the attributes
 in HTML. For example: (data-ending-paint-ratio) kailangan na small letter tanan.-->
-<script>
-$(document).ready(function () {
-    $('.edit-row .editbtn').on('click', function () {
-        var row = $(this).closest('.edit-row');
-        var userID = row.data('entry-id');
-        var date = row.data('date');
-        var paint_color = row.data('paint-color');
-        var supplier_name = row.data('supplier-name');
-        var batchNumber = row.data('batch-number');
-        var diameter = row.data('diameter');
-        var height = row.data('height');
-        var paintRatio = row.data('paint-ratio');
-        var acetateRatio = row.data('acetate-ratio');
-        var Endingdiameter = row.data('endingdiameter');
-        var Endingheight = row.data('endingheight');
-        var EndingpaintRatio = row.data('endingpaintratio');
-        var EndingacetateRatio = row.data('endingacetateratio');
-       
-        console.log(date);
-        console.log(paint_color);
-        console.log(supplier_name);
-        console.log(batchNumber);
-        console.log(diameter);
-        console.log(height);
-        console.log(paintRatio);
-        console.log(acetateRatio);
-        console.log('Endingdiameter:', Endingdiameter);
-console.log('Endingheight:', Endingheight);
-console.log('EndingpaintRatio:', EndingpaintRatio);
-console.log('EndingacetateRatio:', EndingacetateRatio);
+    <script>
+        $(document).ready(function () {
+            $('.edit-row .editbtn').on('click', function () {
+                var row = $(this).closest('.edit-row');
+                var userID = row.data('entry-id');
+                var date = row.data('date');
+                var paint_color = row.data('paint-color');
+                var supplier_name = row.data('supplier-name');
+                var batchNumber = row.data('batch-number');
+                var diameter = row.data('diameter');
+                var height = row.data('height');
+                var paintRatio = row.data('paint-ratio');
+                var acetateRatio = row.data('acetate-ratio');
+                var Endingdiameter = row.data('endingdiameter');
+                var Endingheight = row.data('endingheight');
+                var EndingpaintRatio = row.data('endingpaintratio');
+                var EndingacetateRatio = row.data('endingacetateratio');
+
+                console.log(date);
+                console.log(paint_color);
+                console.log(supplier_name);
+                console.log(batchNumber);
+                console.log(diameter);
+                console.log(height);
+                console.log(paintRatio);
+                console.log(acetateRatio);
+                console.log('Endingdiameter:', Endingdiameter);
+                console.log('Endingheight:', Endingheight);
+                console.log('EndingpaintRatio:', EndingpaintRatio);
+                console.log('EndingacetateRatio:', EndingacetateRatio);
 
 
-        $('#editmodal #update_id').val(userID);
-        $('#editmodal #date').val(date);
-        $('#editmodal #paint_color').val(paint_color);
-        $('#editmodal #supplier_name').val(supplier_name);
-        $('#editmodal #batchNumber').val(batchNumber);
-        $('#editmodal #diameter').val(diameter);
-        $('#editmodal #height').val(height);
-        $('#editmodal #paintRatio').val(paintRatio);
-        $('#editmodal #acetateRatio').val(acetateRatio);
-        $('#editmodal #Endingdiameter').val(Endingdiameter);
-        $('#editmodal #Endingheight').val(Endingheight);
-        $('#editmodal #EndingpaintRatio').val(EndingpaintRatio);
-        $('#editmodal #EndingacetateRatio').val(EndingacetateRatio);
-       
-
-        $('#editmodal').modal('show');
-    });
-});
-</script>
+                $('#editmodal #update_id').val(userID);
+                $('#editmodal #date').val(date);
+                $('#editmodal #paint_color').val(paint_color);
+                $('#editmodal #supplier_name').val(supplier_name);
+                $('#editmodal #batchNumber').val(batchNumber);
+                $('#editmodal #diameter').val(diameter);
+                $('#editmodal #height').val(height);
+                $('#editmodal #paintRatio').val(paintRatio);
+                $('#editmodal #acetateRatio').val(acetateRatio);
+                $('#editmodal #Endingdiameter').val(Endingdiameter);
+                $('#editmodal #Endingheight').val(Endingheight);
+                $('#editmodal #EndingpaintRatio').val(EndingpaintRatio);
+                $('#editmodal #EndingacetateRatio').val(EndingacetateRatio);
 
 
-<!--For delete modal-->
-<script>
-$(document).ready(function () {
-    $('.edit-row .confirm_dltbtn').on('click', function () {
-        var userID = $(this).closest('.edit-row').data('entry-id');
-        $('#deletemodal #confirm_delete_id').val(userID);
-        $('#deletemodal').modal('show');
-    });
-});
-</script>
+                $('#editmodal').modal('show');
+            });
+        });
+    </script>
 
 
-<!-- FOR clickable image dropdown -->
-<script>
-    function handleDropdownChange(select) {
-        var selectedValue = select.value;
+    <!--For delete modal-->
+    <script>
+        $(document).ready(function () {
+            $('.edit-row .confirm_dltbtn').on('click', function () {
+                var userID = $(this).closest('.edit-row').data('entry-id');
+                $('#deletemodal #confirm_delete_id').val(userID);
+                $('#deletemodal').modal('show');
+            });
+        });
+    </script>
 
-        if (selectedValue === "edit_profile") {
-            // Redirect to the edit profile page
-            window.location.href = "profile.php"; // Change the URL accordingly
-        } else if (selectedValue === "logout") {
-            // Redirect to the logout page
-            window.location.href = "login.php"; // Change the URL accordingly
+
+    <!-- FOR clickable image dropdown -->
+    <script>
+        function handleDropdownChange(select) {
+            var selectedValue = select.value;
+
+            if (selectedValue === "edit_profile") {
+                // Redirect to the edit profile page
+                window.location.href = "profile.php"; // Change the URL accordingly
+            } else if (selectedValue === "logout") {
+                // Redirect to the logout page
+                window.location.href = "logout.php"; // Change the URL accordingly
+            }
         }
-    }
-</script>
+    </script>
 
     <!--FOR SIDEBAR-->
-<script>
-    var hamburger = document.querySelector(".hamburger");
-    hamburger.addEventListener("click", function(){
-        document.querySelector("body").classList.toggle("active");
-    })
-  </script>
-    
+    <script>
+        var hamburger = document.querySelector(".hamburger");
+        hamburger.addEventListener("click", function () {
+            document.querySelector("body").classList.toggle("active");
+        })
+    </script>
+
 </body>
+
 </html>

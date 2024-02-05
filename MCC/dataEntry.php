@@ -1,5 +1,13 @@
 <!--FOR ADMIN PROFILE-->
 <?php
+// Include the session check at the beginning of restricted pages
+session_start();
+
+// Check if the user is not logged in or is not an admin or operator
+if (!isset($_SESSION['Username']) || ($_SESSION['Level'] != 'Admin' && $_SESSION['Level'] != 'Operator')) {
+    header('Location: login.php'); // Redirect to the login page if not authenticated
+    exit();
+}
 
 include 'connect.php';
 
@@ -13,10 +21,8 @@ $row = mysqli_fetch_assoc($result);
 $Name = $row['Name']; /*column name in the database */
 $Username = $row['Username'];
 $Profile_image = $row['Profile_image'];
-?>
 
-<?php
-include 'connect.php';
+
 
 
 
@@ -76,30 +82,8 @@ if (isset($_POST['submit'])) {
     // Get the supplierID of the newly inserted supplier
     $supplierID = mysqli_insert_id($con);
 
-    // Insert into tbl_received
-    $sql = "INSERT INTO `tbl_received` (userID, receiver_name) VALUES ('$id','$receiver_name')";
-    $result = mysqli_query($con, $sql);
-
-    if (!$result) {
-        die(mysqli_error($con));
-    }
-
-    // Get the receiveID of the newly inserted receive
-    $receiveID = mysqli_insert_id($con);
-
-    // Insert into tbl_receivedetails
-    $sql = "INSERT INTO `tbl_receivedetails` (receiveID, details) VALUES ('$receiveID', '$details' )";
-    $result = mysqli_query($con, $sql);
-
-    if (!$result) {
-        die(mysqli_error($con));
-    }
-
-    // Get the DetailsID of the newly inserted Details
-    $DetailsID = mysqli_insert_id($con);
-
     // Insert into tbl_paint
-    $sql = "INSERT INTO `tbl_paint` (paint_color, supplierID, DetailsID) VALUES ('$paint_color', '$supplierID', '$DetailsID' )";
+    $sql = "INSERT INTO `tbl_paint` (paint_color, supplierID) VALUES ('$paint_color', '$supplierID')";
     $result = mysqli_query($con, $sql);
 
     if (!$result) {
@@ -513,27 +497,33 @@ if (isset($_POST['submit'])) {
             flex: 1 1 150px;
             margin-top: 20px;
             margin-left: 30px;
+            height: 100%;
 
 
         }
 
         .left {
 
-            background-color: rgb(31, 102, 234);
+            background-color:rgb(31, 102, 234);
             padding: 3em 0 3em 0;
             flex: 1 1 100px;
             margin-left: auto;
             text-align: center;
             padding-left: 8%;
+            
 
 
 
         }
+      
 
         .main2 {
             display: flex;
             flex: 1;
-
+            padding-top: 2%;
+            padding-left: 2%;
+            padding-right:2%;
+            height: 100%;
 
         }
 
@@ -547,10 +537,12 @@ if (isset($_POST['submit'])) {
         }
 
         footer {
-            background-color: rgb(31, 102, 234);
+            background-color: rgb(225, 225, 212);
             color: white;
             padding: 2em 0 2em 0;
-            text-align: right;
+            text-align: center;
+            height: 100%;
+            
         }
 
 
@@ -600,15 +592,6 @@ if (isset($_POST['submit'])) {
             margin-left: 45px;
         }
 
-        .operational_btn {
-            margin-right: 42%;
-            padding-left: 80px;
-            padding-right: 80px;
-            padding-top: 15px;
-            padding-bottom: 15px;
-            font-size: 50px;
-        }
-
 
         /*FOR UPDATE SUCCESSFUL */
         /* Customize modal styles */
@@ -651,6 +634,35 @@ if (isset($_POST['submit'])) {
             text-align: center;
         }
 
+        /* FOR CLOCK */
+
+        .clockcontainer {
+            width: 295px;
+            height: 180px;
+            position: absolute;
+            top: 95%;
+
+
+        }
+
+        .clock {
+
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .clock span {
+            font-size: 20px;
+            width: 30px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+        }
+
 
 
         /*FOR SYSTEM RESPONSIVE */
@@ -662,6 +674,7 @@ if (isset($_POST['submit'])) {
         <div class="section">
 
             <div class="admin_profile">
+
                 <img src="uploaded_image/<?php echo $Profile_image; ?>" class="img-admin" id="image">
 
                 <select class="dropdown" required onchange="handleDropdownChange(this)">
@@ -867,8 +880,8 @@ if (isset($_POST['submit'])) {
 
                         </div>
                         <footer>
-                            <button type="submit" id="update" class="btn btn-success btn-lg operational_btn"
-                                name="submit" style="font-size:20px; border-color:white;">Add</button>
+                            <button type="submit" id="update" class="btn btn-primary btn-lg"
+                                name="submit" style="font-size:20px; border-color:white; width:10%; padding-top:1%;padding-bottom:1%;">Add</button>
 
                         </footer>
 
@@ -926,8 +939,24 @@ if (isset($_POST['submit'])) {
 
                 </ul>
 
+                <!--FOR CLOCK-->
+                <div class="clockcontainer">
+                    <div class="clock">
+                        <span id="hrs"></span>
+                        <span>:</span>
+                        <span id="min"></span>
+                        <span>:</span>
+                        <span id="sec"></span>
+                        <span id="ampm"></span>
+
+                    </div>
+                </div>
+
             </div>
+
+
         </div>
+
 
     </div>
 
@@ -950,7 +979,7 @@ if (isset($_POST['submit'])) {
         </div>
     </div>
 
-    <!-- FOR clickable image dropdown -->
+    <!-- FOR clickable image dropdown SCRIPT-->
     <script>
         function handleDropdownChange(select) {
             var selectedValue = select.value;
@@ -960,12 +989,40 @@ if (isset($_POST['submit'])) {
                 window.location.href = "profile.php"; // Change the URL accordingly
             } else if (selectedValue === "logout") {
                 // Redirect to the logout page
-                window.location.href = "login.php"; // Change the URL accordingly
+                window.location.href = "logout.php"; // Change the URL accordingly
             }
         }
     </script>
 
-    <!--FOR SIDEBAR-->
+
+    <!--FOR CLOCK SCRIPT-->
+    <script>
+        let hrs = document.getElementById("hrs");
+        let min = document.getElementById("min");
+        let sec = document.getElementById("sec");
+        let ampm = document.getElementById("ampm");
+
+        setInterval(() => {
+            let currentTime = new Date();
+            let hours = currentTime.getHours();
+            let period = "AM";
+
+            if (hours >= 12) {
+                period = "PM";
+                if (hours > 12) {
+                    hours -= 12;
+                }
+            }
+
+            hrs.innerHTML = (hours < 10 ? "0" : '') + hours;
+            min.innerHTML = (currentTime.getMinutes() < 10 ? "0" : '') + currentTime.getMinutes();
+            sec.innerHTML = (currentTime.getSeconds() < 10 ? "0" : '') + currentTime.getSeconds();
+            ampm.innerHTML = period;
+        }, 1000)
+    </script>
+
+
+    <!--FOR SIDEBAR SCRIPT-->
     <script>
         var hamburger = document.querySelector(".hamburger");
         hamburger.addEventListener("click", function () {
@@ -973,7 +1030,7 @@ if (isset($_POST['submit'])) {
         })
     </script>
 
-    <!--FOR LOGOUT MODAL-->
+    <!--FOR LOGOUT SCRIPT-->
     <script>
         // Show the logout modal when the logout button is clicked
         document.getElementById('logoutButton').addEventListener('click', function () {

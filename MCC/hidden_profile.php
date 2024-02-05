@@ -1,4 +1,12 @@
 <?php
+// Include the session check at the beginning of restricted pages
+session_start();
+
+// Check if the user is not logged in or is not an admin or operator
+if (!isset($_SESSION['Username']) || ($_SESSION['Level'] != 'Admin' && $_SESSION['Level'] != 'Operator')) {
+    header('Location: login.php'); // Redirect to the login page if not authenticated
+    exit();
+}
 
 include 'connect.php';
 
@@ -537,6 +545,35 @@ if (isset($_POST['submit'])) {
             text-align: center;
         }
 
+        /* FOR CLOCK */
+
+        .clockcontainer {
+            width: 295px;
+            height: 180px;
+            position: absolute;
+            top: 95%;
+
+
+        }
+
+        .clock {
+
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .clock span {
+            font-size: 20px;
+            width: 30px;
+            display: inline-block;
+            text-align: center;
+            position: relative;
+        }
+
         /*FOR SYSTEM RESPONSIVE */
     </style>
 </head>
@@ -651,6 +688,19 @@ if (isset($_POST['submit'])) {
 
                 </ul>
 
+                <!--FOR CLOCK-->
+                <div class="clockcontainer">
+                    <div class="clock">
+                        <span id="hrs"></span>
+                        <span>:</span>
+                        <span id="min"></span>
+                        <span>:</span>
+                        <span id="sec"></span>
+                        <span id="ampm"></span>
+
+                    </div>
+                </div>
+
             </div>
         </div>
 
@@ -703,9 +753,35 @@ if (isset($_POST['submit'])) {
                 window.location.href = "profile.php"; // Change the URL accordingly
             } else if (selectedValue === "logout") {
                 // Redirect to the logout page
-                window.location.href = "login.php"; // Change the URL accordingly
+                window.location.href = "logout.php"; // Change the URL accordingly
             }
         }
+    </script>
+
+    <!--FOR CLOCK SCRIPT-->
+    <script>
+        let hrs = document.getElementById("hrs");
+        let min = document.getElementById("min");
+        let sec = document.getElementById("sec");
+        let ampm = document.getElementById("ampm");
+
+        setInterval(() => {
+            let currentTime = new Date();
+            let hours = currentTime.getHours();
+            let period = "AM";
+
+            if (hours >= 12) {
+                period = "PM";
+                if (hours > 12) {
+                    hours -= 12;
+                }
+            }
+
+            hrs.innerHTML = (hours < 10 ? "0" : '') + hours;
+            min.innerHTML = (currentTime.getMinutes() < 10 ? "0" : '') + currentTime.getMinutes();
+            sec.innerHTML = (currentTime.getSeconds() < 10 ? "0" : '') + currentTime.getSeconds();
+            ampm.innerHTML = period;
+        }, 1000)
     </script>
 
     <!--FOR SIDEBAR-->

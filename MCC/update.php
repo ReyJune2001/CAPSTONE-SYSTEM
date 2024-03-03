@@ -1,4 +1,3 @@
-<!--FOR ADMIN PROFILE-->
 <?php
 // Include the session check at the beginning of restricted pages
 session_start();
@@ -11,9 +10,9 @@ if (!isset($_SESSION['Username']) || ($_SESSION['Level'] != 'Admin' && $_SESSION
 
 include 'connect.php';
 
-$id = 1;
+$userid = 1;
 
-$sql = "Select * from `tbl_user` where userID=$id";
+$sql = "Select * from `tbl_user` where userID=$userid";
 $result = mysqli_query($con, $sql);
 $row = mysqli_fetch_assoc($result);
 
@@ -21,18 +20,63 @@ $row = mysqli_fetch_assoc($result);
 $Name = $row['Name']; /*column name in the database */
 $Username = $row['Username'];
 $Profile_image = $row['Profile_image'];
+?>
 
 
+<?php
+include 'connect.php';
 
+if (isset($_GET['data-entry-id'])) {
+    $id = $_GET['data-entry-id'];
+    // Fetch the data corresponding to the entry ID
 
+    $sql = "SELECT
+                paint.paint_color,
+                supplier.supplier_name, supplier.newSupplier_name,
+                customer.customer_name,
+                entry.*
+            FROM tbl_entry AS entry
+            LEFT JOIN tbl_paint AS paint ON entry.paintID = paint.paintID
+            LEFT JOIN tbl_supplier AS supplier ON paint.supplierID = supplier.supplierID
+            LEFT JOIN tbl_customer AS customer ON entry.customerID = customer.customerID
+            WHERE entry.EntryID = $id";
 
-//FOR INSERT DATA INTO DATABSE
+    $result = mysqli_query($con, $sql);
 
-$date = $paint_color = $supplier_name = $batchNumber = $diameter = $height = $paintRatio = $acetateRatio = $newSupplier_name =
-    $NewacetateL = $NewpaintL = $sprayViscosity = $customer_name = $quantity = $Endingdiameter = $Endingheight =
-    $EndingpaintRatio = $EndingacetateRatio = $paintYield = $acetateYield = $remarks = $DetailsID = $supplierID = $receiveID = $details = $receiver_name = '';
+    // Check if the query was successful
+    if ($result) {
+        $row = mysqli_fetch_assoc($result);
 
-if (isset($_POST['submit'])) {
+        // Populate variables with fetched data
+        $date = $row['date'];
+        $paint_color = $row['paint_color'];
+        $supplier_name = $row['supplier_name'];
+        $batchNumber = $row['batchNumber'];
+        $diameter = $row['diameter'];
+        $height = $row['height'];
+        $paintRatio = $row['paintRatio'];
+        $acetateRatio = $row['acetateRatio'];
+        $Endingdiameter = $row['Endingdiameter'];
+        $Endingheight = $row['Endingheight'];
+        $EndingpaintRatio = $row['EndingpaintRatio'];
+        $EndingacetateRatio = $row['EndingacetateRatio'];
+        $newSupplier_name = $row['newSupplier_name'];
+        $NewpaintL = $row['NewpaintL'];
+        $NewacetateL = $row['NewacetateL'];
+        $sprayViscosity = $row['sprayViscosity'];
+        $customer_name = $row['customer_name'];
+        $quantity = $row['quantity'];
+        $paintYield = $row['paintYield'];
+        $acetateYield = $row['acetateYield'];
+        $remarks = $row['remarks'];
+    } else {
+        // Handle error if query fails
+        echo "Error fetching data: " . mysqli_error($con);
+    }
+}
+
+// Insert data into the entry table
+if (isset($_POST['add'])) {
     $date = $_POST['date'];
     $paint_color = $_POST['paint_color'];
     $supplier_name = $_POST['supplier_name'];
@@ -60,16 +104,7 @@ if (isset($_POST['submit'])) {
     na mag insert ka nga magkasunod-sunod og foreign key, dependi kong unsay
     una nga table with foreign key */
 
-    // Insert into tbl_customer
-    $sql = "INSERT INTO `tbl_customer` (customer_name, userID) VALUES ('$customer_name', '$id')";
-    $result = mysqli_query($con, $sql);
 
-    if (!$result) {
-        die(mysqli_error($con));
-    }
-
-    // Get the customerID of the newly inserted customer
-    $customerID = mysqli_insert_id($con);
 
     // Insert into tbl_supplier
     $sql = "INSERT INTO `tbl_supplier` (supplier_name, newSupplier_name) VALUES ('$supplier_name', '$newSupplier_name')";
@@ -82,6 +117,17 @@ if (isset($_POST['submit'])) {
     // Get the supplierID of the newly inserted supplier
     $supplierID = mysqli_insert_id($con);
 
+    // Insert into tbl_customer
+    $sql = "INSERT INTO `tbl_customer` (customer_name, userID) VALUES ('$customer_name', '$userid')";
+    $result = mysqli_query($con, $sql);
+
+    if (!$result) {
+        die(mysqli_error($con));
+    }
+
+    // Get the customerID of the newly inserted customer
+    $customerID = mysqli_insert_id($con);
+
     // Insert into tbl_paint
     $sql = "INSERT INTO `tbl_paint` (paint_color, supplierID) VALUES ('$paint_color', '$supplierID')";
     $result = mysqli_query($con, $sql);
@@ -93,9 +139,11 @@ if (isset($_POST['submit'])) {
     // Get the paintID of the newly inserted paint
     $paintID = mysqli_insert_id($con);
 
+
+
     // Insert into tbl_entry
     $sql = "INSERT INTO `tbl_entry` (userID, customerID, paintID, date, batchNumber, diameter, height, paintRatio, acetateRatio, NewacetateL, NewpaintL, sprayViscosity, quantity, Endingdiameter, Endingheight, EndingpaintRatio, EndingacetateRatio, paintYield, acetateYield, remarks)
-    VALUES ('$id', '$customerID', '$paintID', '$date', '$batchNumber', '$diameter', '$height', '$paintRatio', '$acetateRatio', '$NewacetateL', '$NewpaintL', '$sprayViscosity', '$quantity', '$Endingdiameter', '$Endingheight', '$EndingpaintRatio', '$EndingacetateRatio', '$paintYield', '$acetateYield', '$remarks')";
+    VALUES ('$userid', '$customerID', '$paintID', '$date', '$batchNumber', '$diameter', '$height', '$paintRatio', '$acetateRatio', '$NewacetateL', '$NewpaintL', '$sprayViscosity', '$quantity', '$Endingdiameter', '$Endingheight', '$EndingpaintRatio', '$EndingacetateRatio', '$paintYield', '$acetateYield', '$remarks')";
 
     $result = mysqli_query($con, $sql);
 
@@ -106,15 +154,82 @@ if (isset($_POST['submit'])) {
     // Get the EntryID of the newly inserted Entry
     $EntryID = mysqli_insert_id($con);
 
-    
+
     if ($result) {
         $updateSuccess = true;
     } else {
         die(mysqli_error($con));
     }
 }
-?>
 
+
+// UPDATE DATA
+if (isset($_POST['update'])) {
+    $id = $_POST['userID'];
+    $date = $_POST['date'];
+    $paint_color = $_POST['paint_color'];
+    $supplier_name = $_POST['supplier_name'];
+    $batchNumber = $_POST['batchNumber'];
+    $diameter = $_POST['diameter'];
+    $height = $_POST['height'];
+    $paintRatio = $_POST['paintRatio'];
+    $acetateRatio = $_POST['acetateRatio'];
+    $Endingdiameter = $_POST['Endingdiameter'];
+    $Endingheight = $_POST['Endingheight'];
+    $EndingpaintRatio = $_POST['EndingpaintRatio'];
+    $EndingacetateRatio = $_POST['EndingacetateRatio'];
+    $newSupplier_name = $_POST['newSupplier_name'];
+    $NewpaintL = $_POST['NewpaintL'];
+    $NewacetateL = $_POST['NewacetateL'];
+    $sprayViscosity = $_POST['sprayViscosity'];
+    $customer_name = $_POST['customer_name'];
+    $quantity = $_POST['quantity'];
+    $paintYield = $_POST['paintYield'];
+    $acetateYield = $_POST['acetateYield'];
+    $remarks = $_POST['remarks'];
+
+
+    // Update supplier table
+    $sql = "UPDATE `tbl_supplier` SET supplier_name='$supplier_name', newSupplier_name='$newSupplier_name' WHERE supplierID=$id";
+    $result = mysqli_query($con, $sql);
+
+
+    if ($result) {
+        // Update paint table
+        $sql = "UPDATE `tbl_paint` SET paint_color='$paint_color' WHERE paintID=$id";
+        $result = mysqli_query($con, $sql);
+    }
+
+    if ($result) {
+        // Update entry table
+        $sql = "UPDATE `tbl_entry` SET date='$date', batchNumber='$batchNumber', diameter='$diameter', 
+        height='$height', paintRatio='$paintRatio', acetateRatio='$acetateRatio', 
+        Endingdiameter='$Endingdiameter', Endingheight='$Endingheight', EndingpaintRatio='$EndingpaintRatio',
+         EndingacetateRatio='$EndingacetateRatio', NewacetateL='$NewacetateL', 
+            NewpaintL='$NewpaintL', sprayViscosity='$sprayViscosity', quantity='$quantity', 
+            paintYield='$paintYield', acetateYield='$acetateYield', remarks='$remarks' 
+            WHERE EntryID=$id";
+        $result = mysqli_query($con, $sql);
+
+        if ($result) {
+            // Update customer table
+            $sql = "UPDATE `tbl_customer` SET customer_name='$customer_name' WHERE customerID=$id";
+            $result = mysqli_query($con, $sql);
+
+            if ($result) {
+                // Redirect to monitoring.php after successful update
+                header('location: monitoring.php');
+            } else {
+                die(mysqli_error($con));
+            }
+        } else {
+            die(mysqli_error($con));
+        }
+    } else {
+        die(mysqli_error($con));
+    }
+}
+?>
 
 
 
@@ -470,25 +585,25 @@ if (isset($_POST['submit'])) {
 
         .left {
 
-            background-color:rgb(31, 102, 234);
+            background-color: rgb(31, 102, 234);
             padding: 3em 0 3em 0;
             flex: 1 1 100px;
             margin-left: auto;
             text-align: center;
             padding-left: 8%;
-            
+
 
 
 
         }
-      
+
 
         .main2 {
             display: flex;
             flex: 1;
             padding-top: 2%;
             padding-left: 2%;
-            padding-right:2%;
+            padding-right: 2%;
             height: 100%;
 
         }
@@ -508,7 +623,7 @@ if (isset($_POST['submit'])) {
             padding: 2em 0 2em 0;
             text-align: center;
             height: 100%;
-            
+
         }
 
 
@@ -665,6 +780,7 @@ if (isset($_POST['submit'])) {
 
             <!--MAIN CONTENT-->
             <form method="post">
+                <input type="hidden" name="userID" value="<?php echo $id; ?>">
                 <fieldset>
                     <div class="main1">
                         <div class="main2">
@@ -679,7 +795,7 @@ if (isset($_POST['submit'])) {
                                     <input type="date" style="text-align: center;" class="input1" name="date"
                                         autocomplete="off" value="<?php echo $date; ?>" required>
                                     <label style="margin-left:75px;">Diameter:</label>
-                                    <input type="text" style="text-align: center;" class="input1" name="diameter"
+                                    <input type="number" style="text-align: center;" class="input1" name="diameter"
                                         autocomplete="off" value="<?php echo $diameter; ?>" required>
                                 </div>
 
@@ -715,7 +831,7 @@ if (isset($_POST['submit'])) {
                                             echo 'selected'; ?>>Jade Green</option>
                                     </select>
                                     <label style="margin-left:90px;">Height:</label>
-                                    <input type="text" style="text-align: center;" class="input1" name="height"
+                                    <input type="number" style="text-align: center;" class="input1" name="height"
                                         autocomplete="off" value="<?php echo $height; ?>" required>
                                 </div>
 
@@ -736,18 +852,18 @@ if (isset($_POST['submit'])) {
                                             Century</option>
                                     </select>
                                     <label style="margin-left:67px;">Paint ratio:</label>
-                                    <input type="text" style="text-align: center;" class="input1" name="paintRatio"
+                                    <input type="number" style="text-align: center;" class="input1" name="paintRatio"
                                         autocomplete="off" value="<?php echo $paintRatio; ?>" required>
 
                                 </div>
 
                                 <div class="form-column">
                                     <label style="margin-left:20px;">Batch No:</label>
-                                    <input type="text" style="text-align: center;" class="input1" name="batchNumber"
+                                    <input type="number" style="text-align: center;" class="input1" name="batchNumber"
                                         autocomplete="off" value="<?php echo $batchNumber; ?>" required>
 
                                     <label style="margin-left:50px;">Acetate ratio:</label>
-                                    <input type="text" style="text-align: center;" class="input1" name="acetateRatio"
+                                    <input type="number" style="text-align: center;" class="input1" name="acetateRatio"
                                         autocomplete="off" value="<?php echo $acetateRatio; ?>" required>
                                 </div>
                                 <br>
@@ -778,20 +894,21 @@ if (isset($_POST['submit'])) {
                                         autocomplete="off" value="<?php echo $customer_name; ?>" required>
                                     <br>
                                     <label style="margin-left:38px;">Paint (L):</label>
-                                    <input type="text" style="text-align: center;" class="input2" name="NewpaintL"
+                                    <input type="number" style="text-align: center;" class="input2" name="NewpaintL"
                                         autocomplete="off" value="<?php echo $NewpaintL; ?>" required>
                                     <label style="margin-left:71px;">Quantity:</label>
-                                    <input type="text" style="text-align: center;" class="input2" name="quantity"
+                                    <input type="number" style="text-align: center;" class="input2" name="quantity"
                                         autocomplete="off" value="<?php echo $quantity; ?>" required>
                                     <br>
                                     <label style="margin-left:22px;">Acetate (L):</label>
-                                    <input type="text" style="text-align: center;" class="input2" name="NewacetateL"
+                                    <input type="number" style="text-align: center;" class="input2" name="NewacetateL"
                                         autocomplete="off" value="<?php echo $NewacetateL; ?>" required>
                                     <br>
 
                                     <label>Spay Viscosity:</label>
-                                    <input type="text" style="text-align: center;" class="input2" name="sprayViscosity"
-                                        autocomplete="off" value="<?php echo $sprayViscosity; ?>" required>
+                                    <input type="number" style="text-align: center;" class="input2"
+                                        name="sprayViscosity" autocomplete="off" value="<?php echo $sprayViscosity; ?>"
+                                        required>
                                     <br>
                                 </div>
                             </aside>
@@ -803,23 +920,25 @@ if (isset($_POST['submit'])) {
                                 <br><br>
 
                                 <label style="margin-left:25px;">Diameter:</label>
-                                <input type="text" style="text-align: center;" class="input1" name="Endingdiameter"
+                                <input type="number" style="text-align: center;" class="input1" name="Endingdiameter"
                                     autocomplete="off" value="<?php echo $Endingdiameter; ?>" required>
                                 <br>
 
                                 <label style="margin-left:39px;">Height:</label>
-                                <input type="text" style="text-align: center;" class="input1" name="Endingheight"
+                                <input type="number" style="text-align: center;" class="input1" name="Endingheight"
                                     autocomplete="off" value="<?php echo $Endingheight; ?>" required>
                                 <br>
 
                                 <label style="margin-left:18px;">Paint ratio:</label>
-                                <input type="text" style="text-align: center;" class="input1" name="EndingpaintRatio"
+                                <input type="number" style="text-align: center;" class="input1" name="EndingpaintRatio"
                                     autocomplete="off" value="<?php echo $EndingpaintRatio; ?>" required>
                                 <br>
                                 <label>Acetate ratio:</label>
-                                <input type="text" style="text-align: center;" class="input1" name="EndingacetateRatio"
-                                    autocomplete="off" value="<?php echo $EndingacetateRatio; ?>" required>
+                                <input type="number" style="text-align: center;" class="input1"
+                                    name="EndingacetateRatio" autocomplete="off"
+                                    value="<?php echo $EndingacetateRatio; ?>" required>
                                 <br><br>
+
 
                                 <div class="yield">
                                     <legend style=" color:white; font-weight:bold; margin-left:30px;">Yield</legend>
@@ -827,34 +946,35 @@ if (isset($_POST['submit'])) {
 
                                     <br><br>
                                     <label style="margin-left:50px;">Paint:</label>
-                                    <input type="text" style="text-align: center;" class="input1" name="paintYield"
+                                    <input type="number" style="text-align: center;" class="input1" name="paintYield"
                                         autocomplete="off" value="<?php echo $paintYield; ?>" required>
                                     <br>
                                     <label style="margin-left:35px;">Acetate:</label>
-                                    <input type="text" style="text-align: center;" class="input1" name="acetateYield"
+                                    <input type="number" style="text-align: center;" class="input1" name="acetateYield"
                                         autocomplete="off" value="<?php echo $acetateYield; ?>" required>
                                     <br>
                                 </div>
                                 <br><br>
                                 <div class="remarks">
                                     <label style="margin-left:28px;">Remarks:</label>
-                                    <input type="text" style="height:60px; text-align: center;" class="input1" name="remarks"
-                                        autocomplete="off" value="<?php echo $remarks; ?>" required>
+                                    <input type="text" style="height:60px; text-align: center;" class="input1"
+                                        name="remarks" autocomplete="off" value="<?php echo $remarks; ?>" required>
 
                                 </div>
                             </aside>
 
                         </div>
                         <footer>
-                            <button type="submit" id="update" class="btn btn-primary btn-lg"
-                                name="submit" style="font-size:20px; border-color:white; width:10%; padding-top:1%;padding-bottom:1%;">Add</button>
+                            <button type="submit" id="update" class="btn btn-primary btn-lg" name="update"
+                                style="font-size:20px; border-color:white; width:10%; padding-top:1%;padding-bottom:1%;">Update</button>
+                            <button type="submit" id="add" class="btn btn-success btn-lg" name="add"
+                                style="font-size:20px; border-color:white; width:10%; padding-top:1%;padding-bottom:1%;">Add</button>
 
                         </footer>
 
                     </div>
                 </fieldset>
             </form>
-
 
 
             <!--Top menu -->
@@ -879,7 +999,7 @@ if (isset($_POST['submit'])) {
                         </a>
                     </li>
                     <li>
-                        <a href="dataEntry.php" class="active">
+                        <a href="dataEntry.php">
                             <span class="icon"><i class="fa-regular fa-keyboard"></i></span>
                             <span class="item">Data Entry</span>
                         </a>
@@ -900,6 +1020,13 @@ if (isset($_POST['submit'])) {
                         <a href="report.php">
                             <span class="icon"><i class="fa-regular fa-folder"></i></span>
                             <span class="item">Reports</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="update.php" style="display:none;">
+                            <span class="icon"><i class="fa-regular fa-folder"></i></span>
+                            <span class="item">Volume Update</span>
                         </a>
                     </li>
 
@@ -939,11 +1066,72 @@ if (isset($_POST['submit'])) {
                     <h5 style="text-align:center;">Your Entry data has been added successfully!</h5>
                 </div>
                 <div class="modal-footer">
-                    <a href="dataEntry.php" class="btn btn-primary">OK</a>
+                    <a href="volume.php" class="btn btn-primary">OK</a>
                 </div>
             </div>
         </div>
     </div>
+
+    <!--FOR REAL-TIME DATA OF YIELD-->
+    <script>
+        // Add event listener to input fields for acetate yield
+        document.querySelectorAll('input[name="NewacetateL"], input[name="quantity"]').forEach(function (input) {
+            input.addEventListener('input', function () {
+                // Get values from input fields
+                var acetateLitersInput = document.querySelector('input[name="NewacetateL"]');
+                var quantityInput = document.querySelector('input[name="quantity"]');
+
+                var acetateLiters = parseFloat(acetateLitersInput.value);
+                var quantity = parseInt(quantityInput.value);
+
+            
+
+                // Send data to the server for calculation
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "calculate_yield.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // Parse the JSON response
+                        var response = JSON.parse(xhr.responseText);
+                        // Update the acetate yield field with the calculated value
+                        document.querySelector('input[name="acetateYield"]').value = response.acetateYield;
+                    }
+                };
+                xhr.send("NewacetateL=" + acetateLiters + "&quantity=" + quantity);
+            });
+        });
+
+
+
+        // Add event listener to input fields for paint yield
+        document.querySelectorAll('input[name="NewpaintL"], input[name="quantity"]').forEach(function (input) {
+            input.addEventListener('input', function () {
+                // Get values from input fields
+                var paintLitersInput = document.querySelector('input[name="NewpaintL"]');
+                var quantityInput = document.querySelector('input[name="quantity"]');
+
+                var paintLiters = parseFloat(paintLitersInput.value);
+                var quantity = parseInt(quantityInput.value);
+
+                // Send data to the server for calculation
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "calculate_yield.php", true);
+                xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        // Parse the JSON response
+                        var response = JSON.parse(xhr.responseText);
+                        // Update the paint yield field with the calculated value
+                        document.querySelector('input[name="paintYield"]').value = response.paintYield;
+                    }
+                };
+                xhr.send("NewpaintL=" + paintLiters + "&quantity=" + quantity);
+            });
+        });
+
+    </script>
+
 
     <!-- FOR clickable image dropdown SCRIPT-->
     <script>

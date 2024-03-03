@@ -45,34 +45,18 @@ if (!$result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <title>Paint-Acetate Yield Monitoring</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
-
-
-    <!--FOR DATATABLES STYLING-->
+    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
+    <title>Paint-Acetate Yield Monitoring</title>
     
-    <!--FOR DATA TABLES SCRIPT-->
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-    <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
-
     <style>
         * {
 
@@ -526,7 +510,6 @@ if (!$result) {
         .main1 {
             background-color: rgb(225, 225, 212);
             padding: 2%;
-            padding-bottom: 0px;
             flex: 1 1 150px;
             margin-top: 20px;
             margin-left: 30px;
@@ -555,35 +538,6 @@ if (!$result) {
             padding: 8px;
         }
 
-        /* FOR CLOCK */
-
-        .clockcontainer {
-            width: 295px;
-            height: 180px;
-            position: absolute;
-            top: 95%;
-
-
-        }
-
-        .clock {
-
-            color: white;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-        }
-
-        .clock span {
-            font-size: 20px;
-            width: 30px;
-            display: inline-block;
-            text-align: center;
-            position: relative;
-        }
-
         /*FOR FILTER BAR */
         .filterfield {
             width: 150px;
@@ -594,6 +548,28 @@ if (!$result) {
             border-radius: 5px;
 
         }
+
+    /*FOR EXPORT BUTTONS */
+    div.dt-buttons > .dt-button,
+    div.dt-buttons > div.dt-button-split .dt-button {
+    position: relative;
+    display: inline-block;
+    box-sizing: border-box;
+    margin-left: .167em;
+    margin-right: .167em;
+    margin-bottom: .333em;
+    padding: .5em 1em;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    cursor: pointer;
+    font-size: .88em;
+    line-height: 1.6em;
+    color: black;
+    white-space: nowrap;
+    overflow: hidden;
+    background: white;
+    transition: background-color 0.3s; /* Add transition for smooth hover effect */
+}
 
 
         /*FOR SYSTEM RESPONSIVE */
@@ -734,26 +710,73 @@ if (!$result) {
                             
 
                             while ($row = mysqli_fetch_assoc($result)) {
+
+                                 // Extract values from the row
+                                 
+                                 $initialPLiter = $row['initialPLiter'];
+                                 $NewpaintL = $row['NewpaintL'];
+                                 $endingPLiter = $row['endingPLiter'];
+                                 $initialALiter = $row['initialALiter'];
+                                 $NewacetateL = $row['NewacetateL'];
+                                 $endingALiter = $row['endingALiter'];
+                                 $quantity = $row['quantity'];
+
+
+                                 // Calculate total Paint Liter
+                                $totalPLiter = ($initialPLiter + $NewpaintL - $endingPLiter);
+                                // Round off the total Paint Liter to the nearest hundredth
+                                $roundedTotalPLiter = round($totalPLiter, 2);
+                                // Insert the total Paint Liter value into the database
+                                $insertQuery = "UPDATE tbl_entry SET totalPLiter = $roundedTotalPLiter WHERE EntryID = {$row['EntryID']}";
+                                mysqli_query($con, $insertQuery);
+
+
+                                 // Calculate total Acetate Liter
+                                 $totalALiter = ($initialALiter + $NewacetateL - $endingALiter);
+                                 // Round off the total Acetate Liter to the nearest hundredth
+                                 $roundedTotalALiter = round($totalALiter, 2);
+                                 // Insert the total Acetate Liter value into the database
+                                 $insertQuery = "UPDATE tbl_entry SET totalALiter = $roundedTotalALiter WHERE EntryID = {$row['EntryID']}";
+                                 mysqli_query($con, $insertQuery);
+
+
+                                 // Calculate the Paint Yield
+                                 $PaintYield = ( $quantity / $roundedTotalPLiter);
+                                 // Round off the Paint Yield to the nearest hundredth
+                                 $roundedPaintYield = round($PaintYield, 2);
+                                 // Insert the Paint Yield value into the database
+                                 $insertQuery = "UPDATE tbl_entry SET paintYield = $roundedPaintYield WHERE EntryID = {$row['EntryID']}";
+                                 mysqli_query($con, $insertQuery);
+
+                                 // Calculate the Acetate Yield
+                                 $AcetateYield = ( $quantity / $roundedTotalALiter);
+                                 // Round off the Acetate Yield to the nearest hundredth
+                                 $roundedAcetateYield = round($AcetateYield, 2);
+                                 // Insert the Acetate Yield value into the database
+                                 $insertQuery = "UPDATE tbl_entry SET acetateYield = $roundedAcetateYield WHERE EntryID = {$row['EntryID']}";
+                                 mysqli_query($con, $insertQuery);
+
+
                                 echo "<tr class='edit-row' data-entry-id='{$row['EntryID']}' data-date='{$row['date']}' data-paint-color='{$row['paint_color']}' data-supplier-name='{$row['supplier_name']}' data-batch-number='{$row['batchNumber']}' data-new-supplier-name='{$row['newSupplier_name']}' data-new-paint-l='{$row['NewpaintL']}' data-new-acetate-l='{$row['NewacetateL']}' data-spray-viscosity='{$row['sprayViscosity']}' data-customer-name='{$row['customer_name']}' data-quantity='{$row['quantity']}' data-paint-yield='{$row['paintYield']}' data-acetate-yield='{$row['acetateYield']}' data-remarks='{$row['remarks']}'>";
                                 echo "<td class='date-cell'>{$row['date']}</td>";
                                 echo "<td>{$row['paint_color']}</td>";
                                 echo "<td>{$row['supplier_name']}</td>";
                                 echo "<td>{$row['batchNumber']}</td>";
-                                echo "<td style='color:blue;'>25</td>";
-                                echo "<td style='color:blue;'>25</td>";
+                                echo "<td>{$row['initialPLiter']}</td>";
+                                echo "<td>{$row['initialALiter']}</td>";
                                 echo "<td>{$row['newSupplier_name']}</td>";
-                                echo "<td style='color:blue;'>202024234</td>";
+                                echo "<td>202024234</td>";
                                 echo "<td>{$row['NewpaintL']}</td>";
                                 echo "<td>{$row['NewacetateL']}</td>";
                                 echo "<td>{$row['sprayViscosity']}</td>";
-                                echo "<td style='color:blue;'>23.2</td>";
-                                echo "<td style='color:blue;'>32.3</td>";
-                                echo "<td style='color:blue;'>34.4</td>";
-                                echo "<td style='color:blue;'>45.5</td>";
+                                echo "<td>{$row['endingPLiter']}</td>";
+                                echo "<td>{$row['endingALiter']}</td>";
+                                echo "<td style='color:blue;'>$roundedTotalPLiter</td>";
+                                echo "<td style='color:blue;'>$roundedTotalALiter</td>";
                                 echo "<td>{$row['customer_name']}</td>";
                                 echo "<td>{$row['quantity']}</td>";
-                                echo "<td>{$row['paintYield']}</td>";
-                                echo "<td>{$row['acetateYield']}</td>";
+                                echo "<td style='color:blue;'>$roundedPaintYield</td>";
+                                echo "<td style='color:blue;'>$roundedAcetateYield</td>";
                                 echo "<td style='color:red;'>12.2</td>";
                                 echo "<td style='color:red;'>1</td>";
                                 echo "<td style='color:red;'>2</td>";
@@ -764,8 +787,8 @@ if (!$result) {
                                 echo "<td style='color:red;'>10</td>";
                                 echo "<td>{$row['remarks']}</td>";
                                 echo "<td class='crud'><div style='display: flex; gap: 10px;'>
-                <button class='btn btn-info text-light editbtn'>Update</button>
-                <button class='btn btn-danger confirm_dltbtn' data-entry-id='{$row['EntryID']}'>Delete</button>
+                                <a href='update.php?data-entry-id={$row['EntryID']}'><button class='btn btn-info text-light'>Edit</button></a>
+                                <button class='btn btn-danger confirm_dltbtn' data-entry-id='{$row['EntryID']}'>Delete</button>
                 </div></td>";
                                 // Add more table data based on your columns
                                 echo "</tr>";
@@ -793,168 +816,6 @@ if (!$result) {
 
                             }
                             ?>
-
-                            <!--Update data modal-->
-
-                            <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header" style="background-color: #337ab7; color: white;">
-                                            <h5 class="modal-title center-modal-title">UPDATE</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
-                                            <form method="post" action="monitoring-update.php" id="updateForm">
-                                                <input type="hidden" name="userID" id="update_id">
-                                                <fieldset>
-                                                    <label style="color:blue;font-weight:bold;">Date:</label>
-                                                    <input type="date" class="form-control" id="date" name="date"
-                                                        autocomplete="off" required value="<?php echo $date; ?>">
-                                                </fieldset>
-                                                <br><br>
-                                                <fieldset>
-                                                    <legend style="color:blue; font-weight:bold;">Initial Inventory of
-                                                        Paint Mix</legend><br><br>
-                                                    <label>Paint Color:</label>
-                                                    <select name="paint_color" id="paint_color" required>
-                                                        <option value="">-- Select --</option>
-                                                        <option value="Royal Blue" <?php if ($paint_color == "Royal Blue")
-                                                            echo "selected"; ?>>Royal Blue</option>
-                                                        <option value="Deft Blue" <?php if ($paint_color == "Deft Blue")
-                                                            echo "selected"; ?>>Deft Blue</option>
-                                                        <option value="Buff" <?php if ($paint_color == "Buff")
-                                                            echo "selected"; ?>>Buff</option>
-                                                        <option value="Golden Brown" <?php if ($paint_color == "Golden Brown")
-                                                            echo "selected"; ?>>Golden Brown</option>
-                                                        <option value="Clear" <?php if ($paint_color == "Clear")
-                                                            echo "selected"; ?>>Clear</option>
-                                                        <option value="White" <?php if ($paint_color == "White")
-                                                            echo "selected"; ?>>White</option>
-                                                        <option value="Black" <?php if ($paint_color == "Black")
-                                                            echo "selected"; ?>>Black</option>
-                                                        <option value="Alpha Gray" <?php if ($paint_color == "Alpha Gray")
-                                                            echo "selected"; ?>>Alpha Gray</option>
-                                                        <option value="Nile Green" <?php if ($paint_color == "Nile Green")
-                                                            echo "selected"; ?>>Nile Green</option>
-                                                        <option value="Emirald Green" <?php if ($paint_color == "Emirald Green")
-                                                            echo "selected"; ?>>Emirald Green</option>
-                                                        <option value="Jade Green" <?php if ($paint_color == "Jade Green")
-                                                            echo "selected"; ?>>Jade Green</option>
-                                                    </select>
-
-                                                    <label>Supplier:</label>
-                                                    <select name="supplier_name" id="supplier_name" required>
-                                                        <option value="">-- Select --</option>
-                                                        <option value="Nippon" <?php if ($supplier_name == "Nippon")
-                                                            echo "selected"; ?>>Nippon</option>
-                                                        <option value="Treasure Island" <?php if ($supplier_name == "Treasure Island")
-                                                            echo "selected"; ?>>
-                                                            Treasure Island</option>
-                                                        <option value="Inkote" <?php if ($supplier_name == "Inkote")
-                                                            echo "selected"; ?>>Inkote</option>
-                                                        <option value="Century" <?php if ($supplier_name == "Century")
-                                                            echo "selected"; ?>>Century</option>
-                                                    </select>
-                                                    <br><br>
-                                                    <label>Batch #:</label>
-                                                    <input type="text" class="form-control" name="batchNumber"
-                                                        id="batchNumber" autocomplete="off" required
-                                                        value="<?php echo $batchNumber; ?>">
-
-                                                    <br>
-                                                </fieldset>
-                                                <br><br>
-
-                                                <fieldset>
-                                                    <legend style="color:blue;font-weight:bold;">New Paint Mix</legend>
-                                                    <br><br>
-                                                    <label>Supplier:</label>
-                                                    <select name="newSupplier_name" id="newSupplier_name" required>
-                                                        <option value="">-- Select --</option>
-                                                        <option value="Nippon" <?php if ($newSupplier_name == "Nippon")
-                                                            echo "selected"; ?>>Nippon</option>
-                                                        <option value="Treasure Island" <?php if ($newSupplier_name == "Treasure Island")
-                                                            echo "selected"; ?>>
-                                                            Treasure Island</option>
-                                                        <option value="Inkote" <?php if ($newSupplier_name == "Inkote")
-                                                            echo "selected"; ?>>Inkote</option>
-                                                        <option value="Century" <?php if ($newSupplier_name == "Century")
-                                                            echo "selected"; ?>>Century</option>
-                                                    </select>
-
-                                                    <br><br>
-
-                                                    <label>Paint Liter:</label>
-                                                    <input type="text" class="form-control" name="NewpaintL"
-                                                        id="NewpaintL" autocomplete="off" required
-                                                        value="<?php echo $NewpaintL; ?>">
-                                                    <br>
-                                                    <label>Acetate Liter:</label>
-                                                    <input type="text" class="form-control" name="NewacetateL"
-                                                        id="NewacetateL" autocomplete="off" required
-                                                        value="<?php echo $NewacetateL; ?>">
-                                                </fieldset>
-                                                <br>
-
-                                                <fieldset>
-                                                    <label>Spray Viscosity:</label>
-                                                    <input type="text" class="form-control" name="sprayViscosity"
-                                                        id="sprayViscosity" autocomplete="off" required
-                                                        value="<?php echo $sprayViscosity; ?>">
-                                                </fieldset>
-                                                <br><br>
-
-                                                <fieldset>
-                                                    <legend style="color:blue;font-weight:bold;">Production Output
-                                                    </legend><br><br>
-                                                    <label>Customer:</label>
-                                                    <input type="text" class="form-control" name="customer_name"
-                                                        id="customer_name" autocomplete="off" required
-                                                        value="<?php echo $customer_name; ?>">
-                                                    <br>
-                                                    <label>Quantity du:</label>
-                                                    <input type="text" class="form-control" name="quantity"
-                                                        id="quantity" autocomplete="off" required
-                                                        value="<?php echo $quantity; ?>">
-                                                </fieldset>
-                                                <br><br>
-
-                                                <fieldset>
-                                                    <legend style="color:blue;font-weight:bold;">Yield</legend><br><br>
-                                                    <label>Paint Yield:</label>
-                                                    <input type="text" class="form-control" name="paintYield"
-                                                        id="paintYield" autocomplete="off" required
-                                                        value="<?php echo $paintYield; ?>">
-                                                    <br>
-                                                    <label>Acetate Yield:</label>
-                                                    <input type="text" class="form-control" name="acetateYield"
-                                                        id="acetateYield" autocomplete="off" required
-                                                        value="<?php echo $acetateYield; ?>">
-                                                </fieldset>
-                                                <br><br>
-
-                                                <fieldset>
-                                                    <label style="color:red;font-weight:bold;">Abnormalities Encountered
-                                                        others Remarks: </label>
-                                                    <textarea class="remarks form-control" name="remarks" id="remarks"
-                                                        autocomplete="off" required><?php echo $remarks; ?></textarea>
-                                                </fieldset>
-                                                <br>
-
-                                                <div class="modal-footer">
-
-                                                    <button type="submit" name="updatedata"
-                                                        class="btn btn-info text-light">Update</button>
-                                                    <button class="btn btn-danger" class="btn-close"
-                                                        data-bs-dismiss="modal" style="color:white">Cancel</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             </tr>
                         </tbody>
                     </table>
@@ -1093,17 +954,45 @@ if (!$result) {
         </div>
     </div>
 
+      <!-- Bootstrap JS -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+
+    <!-- DataTables Buttons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
 
     <!--DATA TABLES-->
     <script>
         $(document).ready(function () {
             new DataTable('#datatables', {
                 scrollX: true,
-                scrollY: true
+                scrollY: true,
+
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'print',
+
+                    {
+                        extend: 'pdf',
+                        orientation: 'landscape',
+                        pageSize: 'LEGAL'
+                    }
+                ]
 
             });
         });
     </script>
+
 
 
     <!-- DATE FILTER RANGE -->
@@ -1148,75 +1037,6 @@ if (!$result) {
         // Initialize DataTable on document ready
         $(document).ready(function () {
             initializeDataTable();
-        });
-    </script>
-
-    <!--FOR CLOCK SCRIPT-->
-    <script>
-        let hrs = document.getElementById("hrs");
-        let min = document.getElementById("min");
-        let sec = document.getElementById("sec");
-        let ampm = document.getElementById("ampm");
-
-        setInterval(() => {
-            let currentTime = new Date();
-            let hours = currentTime.getHours();
-            let period = "AM";
-
-            if (hours >= 12) {
-                period = "PM";
-                if (hours > 12) {
-                    hours -= 12;
-                }
-            }
-
-            hrs.innerHTML = (hours < 10 ? "0" : '') + hours;
-            min.innerHTML = (currentTime.getMinutes() < 10 ? "0" : '') + currentTime.getMinutes();
-            sec.innerHTML = (currentTime.getSeconds() < 10 ? "0" : '') + currentTime.getSeconds();
-            ampm.innerHTML = period;
-        }, 1000)
-    </script>
-
-    <!--For UPDATE modal-->
-    <!--Reminder: Javascript is so sensitive..kailangan na puro small letter
-ang e-assign na attributes name sa js to populate the value of the attributes
-in HTML. For example: (data-ending-paint-ratio) kailangan na small letter tanan.-->
-    <script>
-        $(document).ready(function () {
-            $('.edit-row .editbtn').on('click', function () {
-                var row = $(this).closest('.edit-row');
-                var userID = row.data('entry-id');
-                var date = row.data('date');
-                var paintColor = row.data('paint-color');
-                var supplierName = row.data('supplier-name');
-                var batchNumber = row.data('batch-number');
-                var newSupplierName = row.data('new-supplier-name');
-                var newPaintL = row.data('new-paint-l');
-                var newAcetateL = row.data('new-acetate-l');
-                var sprayViscosity = row.data('spray-viscosity');
-                var customerName = row.data('customer-name');
-                var quantity = row.data('quantity');
-                var paintYield = row.data('paint-yield');
-                var acetateYield = row.data('acetate-yield');
-                var remarks = row.data('remarks');
-
-                $('#editmodal #update_id').val(userID);
-                $('#editmodal #date').val(date);
-                $('#editmodal #paint_color').val(paintColor);
-                $('#editmodal #supplier_name').val(supplierName);
-                $('#editmodal #batchNumber').val(batchNumber);
-                $('#editmodal #newSupplier_name').val(newSupplierName);
-                $('#editmodal #NewpaintL').val(newPaintL);
-                $('#editmodal #NewacetateL').val(newAcetateL);
-                $('#editmodal #sprayViscosity').val(sprayViscosity);
-                $('#editmodal #customer_name').val(customerName);
-                $('#editmodal #quantity').val(quantity);
-                $('#editmodal #paintYield').val(paintYield);
-                $('#editmodal #acetateYield').val(acetateYield);
-                $('#editmodal #remarks').val(remarks);
-
-                $('#editmodal').modal('show');
-            });
         });
     </script>
 

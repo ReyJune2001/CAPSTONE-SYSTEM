@@ -45,33 +45,21 @@ if (!$result) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-    <title>Paint-Acetate Volume</title>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
-        crossorigin="anonymous"></script>
-
-    <!--FOR DATATABLES STYLING-->
+    <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.5.1/css/dataTables.dateTime.min.css">
-    
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.2/css/buttons.dataTables.min.css">
 
-    <!--FOR DATA TABLES SCRIPT-->
-    <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
-    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
-    <script src="https://cdn.datatables.net/datetime/1.5.1/js/dataTables.dateTime.min.js"></script>
+    <title>Paint-Acetate Volume</title>
 
     <style>
         * {
@@ -526,7 +514,6 @@ if (!$result) {
         .main1 {
             background-color: rgb(225, 225, 212);
             padding: 2%;
-            padding-bottom: 0px;
             flex: 1 1 150px;
             margin-top: 20px;
             margin-left: 30px;
@@ -546,45 +533,6 @@ if (!$result) {
             margin-left: 3px;
         }
 
-        /* FOR SHOW ENTRIES */
-        .dataTables_wrapper .dataTables_length select {
-            border: 1px solid #aaa;
-            border-radius: 3px;
-            padding: 5px;
-            background-color: white;
-            padding: 8px;
-        }
-
-
-        /* FOR CLOCK */
-
-        .clockcontainer {
-            width: 295px;
-            height: 180px;
-            position: absolute;
-            top: 95%;
-
-
-        }
-
-        .clock {
-
-            color: white;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-        }
-
-        .clock span {
-            font-size: 20px;
-            width: 30px;
-            display: inline-block;
-            text-align: center;
-            position: relative;
-        }
-
         /*FOR FILTER BAR */
         .filterfield {
             width: 150px;
@@ -596,7 +544,28 @@ if (!$result) {
 
         }
 
-
+        /*FOR EXPORT BUTTONS */
+        div.dt-buttons>.dt-button,
+        div.dt-buttons>div.dt-button-split .dt-button {
+            position: relative;
+            display: inline-block;
+            box-sizing: border-box;
+            margin-left: .167em;
+            margin-right: .167em;
+            margin-bottom: .333em;
+            padding: .5em 1em;
+            border: 1px solid rgba(0, 0, 0, 0.3);
+            border-radius: 2px;
+            cursor: pointer;
+            font-size: .88em;
+            line-height: 1.6em;
+            color: black;
+            white-space: nowrap;
+            overflow: hidden;
+            background: white;
+            transition: background-color 0.3s;
+            /* Add transition for smooth hover effect */
+        }
 
         /*FOR SYSTEM RESPONSIVE */
     </style>
@@ -631,21 +600,21 @@ if (!$result) {
             <div class="main1">
                 <!--Filter bar-->
                 <div class="col-md-8">
-                <div class="form-group">
-                    <label style="margin-left:20%;">From date:</label>
-                    <input type="date" style="text-align: center;" class="filterfield" id="min" name="min"
-                        autocomplete="off" required>
+                    <div class="form-group">
+                        <label style="margin-left:20%;">From date:</label>
+                        <input type="date" style="text-align: center;" class="filterfield" id="min" name="min"
+                            autocomplete="off" required>
 
-                    <label style="margin-left:3%;">To date:</label>
-                    <input type="date" style="text-align: center;" class="filterfield" id="max" name="max"
-                        autocomplete="off" required>
+                        <label style="margin-left:3%;">To date:</label>
+                        <input type="date" style="text-align: center;" class="filterfield" id="max" name="max"
+                            autocomplete="off" required>
 
+                    </div>
                 </div>
-            </div>
 
                 <div class="main2">
 
-                
+
 
                     <table id="datatables" class="display" style="width:100%;">
                         <thead>
@@ -690,199 +659,101 @@ if (!$result) {
                             // Loop through the results and display data in the table
                             
                             while ($row = mysqli_fetch_assoc($result)) {
-                                echo "<tr class='edit-row' data-entry-id='{$row['EntryID']}' data-date='{$row['date']}' data-paint-color='{$row['paint_color']}'
-                data-supplier-name='{$row['supplier_name']}' data-batch-number='{$row['batchNumber']}' data-diameter='{$row['diameter']}'
-                data-height='{$row['height']}' data-paint-ratio='{$row['paintRatio']}' data-acetate-ratio='{$row['acetateRatio']}' 
-                data-endingdiameter='{$row['Endingdiameter']}' data-endingheight='{$row['Endingheight']}' data-endingpaintratio='{$row['EndingpaintRatio']}'
-                data-endingacetateratio='{$row['EndingacetateRatio']}'>";
+
+                                // Extract values from the row
+                                $pi = 3.1416;
+                                $diameter = $row['diameter'];
+                                $Endingdiameter = $row['Endingdiameter'];
+                                $height = $row['height'];
+                                $Endingheight = $row['Endingheight'];
+                                $conversionFactor = 0.0163871;
+                                $paintRatio = $row['paintRatio'];
+                                $EndingpaintRatio = $row['EndingpaintRatio'];
+                                $acetateRatio = $row['acetateRatio'];
+                                $EndingacetateRatio = $row['EndingacetateRatio'];
+
+
+                                // Calculate volume
+                                $Initialvolume = ($pi * $diameter * $diameter * $height * $conversionFactor) / 4;
+                                // Round off the volume to the nearest hundredth
+                                $roundedVolume = round($Initialvolume, 2);
+                                // Insert the volume value into the database
+                                $insertQuery = "UPDATE tbl_entry SET Initialvolume = $roundedVolume WHERE EntryID = {$row['EntryID']}";
+                                mysqli_query($con, $insertQuery);
+
+
+                                // Calculate Initial Paint Liter
+                                $initialPLiter = ($roundedVolume * $paintRatio);
+                                $roundedPLiter = round($initialPLiter, 2);
+                                // Insert the initial Paint Liter value into the database
+                                $insertQuery = "UPDATE tbl_entry SET initialPLiter = $roundedPLiter WHERE EntryID = {$row['EntryID']}";
+                                mysqli_query($con, $insertQuery);
+
+
+                                // Calculate Initial Acetate Liter
+                                $initialALiter = ($roundedVolume * $acetateRatio);
+                                $roundedALiter = round($initialALiter, 2);
+                                // Insert the initial Paint Liter value into the database
+                                $insertQuery = "UPDATE tbl_entry SET initialALiter = $roundedALiter WHERE EntryID = {$row['EntryID']}";
+                                mysqli_query($con, $insertQuery);
+
+
+                                 // Calculate Ending volume
+                                 $Endingvolume = ($pi * $Endingdiameter * $Endingdiameter * $Endingheight * $conversionFactor) / 4;
+                                 // Round off the  ending volume to the nearest hundredth
+                                 $roundedEndVolume = round($Endingvolume, 2);
+                                 // Insert the ending volume value into the database
+                                 $insertQuery = "UPDATE tbl_entry SET Endingvolume = $roundedEndVolume WHERE EntryID = {$row['EntryID']}";
+                                 mysqli_query($con, $insertQuery);
+
+                                 // Calculate Ending Paint Liter
+                                $endingPLiter = ($roundedEndVolume * $EndingpaintRatio);
+                                $roundedEndPLiter = round($endingPLiter, 2);
+                                // Insert the Ending Paint Liter value into the database
+                                $insertQuery = "UPDATE tbl_entry SET endingPLiter = $roundedEndPLiter WHERE EntryID = {$row['EntryID']}";
+                                mysqli_query($con, $insertQuery);
+
+
+                                // Calculate Ending Acetate Liter
+                                $endingALiter = ($roundedEndVolume * $EndingacetateRatio);
+                                $roundedEndALiter = round($endingALiter, 2);
+                                // Insert the ending Paint Liter value into the database
+                                $insertQuery = "UPDATE tbl_entry SET endingALiter = $roundedEndALiter WHERE EntryID = {$row['EntryID']}";
+                                mysqli_query($con, $insertQuery);
+
+                                echo "<tr class='edit-row' data-entry-id='{$row['EntryID']}'>";
                                 echo "<td class='date-cell'>{$row['date']}</td>";
                                 echo "<td>{$row['paint_color']}</td>";
                                 echo "<td>{$row['supplier_name']}</td>";
                                 echo "<td>{$row['batchNumber']}</td>";
-                                echo "<td style='color:blue;'>3.1416</td>";
+                                echo "<td>$pi</td>";
                                 echo "<td>{$row['diameter']}</td>";
                                 echo "<td>{$row['height']}</td>";
-                                echo "<td style='color:blue;'>0.5263526</td>";
-                                echo "<td style='color:blue;'>104.3</td>";
+                                echo "<td>$conversionFactor</td>";
+                                echo "<td style='color:blue;'>$roundedVolume</td>"; // Output table row with calculated volume and its value will be displayed in DB
                                 echo "<td>{$row['paintRatio']}</td>";
                                 echo "<td>{$row['acetateRatio']}</td>";
-                                echo "<td style='color:blue;'>22.2</td>";
-                                echo "<td style='color:blue;'>25.3</td>";
-                                echo "<td style='color:red;'>3.1416</td>";
+                                echo "<td style='color:blue;'>$roundedPLiter</td>";
+                                echo "<td style='color:blue;'>$roundedALiter</td>";
+                                echo "<td>3.1416</td>";
                                 echo "<td>{$row['Endingdiameter']}</td>";
                                 echo "<td>{$row['Endingheight']}</td>";
-                                echo "<td style='color:red;'>0.0163871</td>";
-                                echo "<td style='color:red;'>50.0</td>";
+                                echo "<td>0.0163871</td>";
+                                echo "<td style='color:blue;'>$roundedEndVolume</td>";
                                 echo "<td>{$row['EndingpaintRatio']}</td>";
                                 echo "<td>{$row['EndingacetateRatio']}</td>";
-                                echo "<td style='color:red;'>25.5</td>";
-                                echo "<td style='color:red;'>25.5</td>";
+                                echo "<td style='color:blue;'>$roundedEndPLiter</td>";
+                                echo "<td style='color:blue;'>$roundedEndALiter</td>";
                                 echo "<td class='crud'><div style='display: flex; gap: 10px;'>
-                <button class='btn btn-info text-light editbtn'>Update</button>
-                <button class='btn btn-danger confirm_dltbtn' data-entry-id='{$row['EntryID']}'>Delete</button>
+                                <a href='update.php?data-entry-id={$row['EntryID']}'><button class='btn btn-info text-light'>Edit</button></a>
+                                <button class='btn btn-danger confirm_dltbtn' data-entry-id='{$row['EntryID']}'>Delete</button>
                 </div></td>";
 
                                 // Add more table data based on your columns
                                 echo "</tr>";
 
-                                // Save data from the current row for later use in the modal
-                                $id = $row['EntryID'];
-                                $date = $row['date'];
-                                $paint_color = $row['paint_color'];
-                                $supplier_name = $row['supplier_name'];
-                                $batchNumber = $row['batchNumber'];
-                                $diameter = $row['diameter'];
-                                $height = $row['height'];
-                                $paintRatio = $row['paintRatio'];
-                                $acetateRatio = $row['acetateRatio'];
-                                $Endingdiameter = $row['Endingdiameter'];
-                                $Endingheight = $row['Endingheight'];
-                                $EndingpaintRatio = $row['EndingpaintRatio'];
-                                $EndingacetateRatio = $row['EndingacetateRatio'];
-
                             }
                             ?>
-
-                            <!--########################################################################################-->
-                            <!--Update data modal-->
-
-                            <div class="modal fade" id="editmodal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header" style="background-color: #337ab7; color: white;">
-                                            <h5 class="modal-title center-modal-title">UPDATE</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                                        </div>
-                                        <div class="modal-body" style="max-height: 500px; overflow-y: auto;">
-                                            <form method="post" action="volume-update.php" id="updateForm">
-                                                <input type="hidden" name="userID" id="update_id">
-                                                <fieldset>
-                                                    <label style="color:blue;font-weight:bold;">Date:</label>
-                                                    <input type="date" class="form-control" id="date" name="date"
-                                                        autocomplete="off" required value="<?php echo $date; ?>">
-                                                </fieldset>
-                                                <br><br>
-                                                <fieldset>
-                                                    <legend style="color:blue; font-weight:bold;">Initial
-                                                        Inventory of Paint Mix</legend><br><br>
-
-                                                    <label>Paint Color:</label>
-                                                    <select name="paint_color" id="paint_color" required>
-                                                        <option value="">-- Select --</option>
-                                                        <option value="Royal Blue" <?php if ($paint_color == "Royal Blue")
-                                                            echo "selected"; ?>>
-                                                            Royal Blue</option>
-                                                        <option value="Deft Blue" <?php if ($paint_color == "Deft Blue")
-                                                            echo "selected"; ?>>Deft Blue</option>
-                                                        <option value="Buff" <?php if ($paint_color == "Buff")
-                                                            echo "selected"; ?>>Buff</option>
-                                                        <option value="Golden Brown" <?php if ($paint_color == "Golden Brown")
-                                                            echo "selected"; ?>>
-                                                            Golden Brown</option>
-                                                        <option value="Clear" <?php if ($paint_color == "Clear")
-                                                            echo "selected"; ?>>Clear</option>
-                                                        <option value="White" <?php if ($paint_color == "White")
-                                                            echo "selected"; ?>>White</option>
-                                                        <option value="Black" <?php if ($paint_color == "Black")
-                                                            echo "selected"; ?>>Black</option>
-                                                        <option value="Alpha Gray" <?php if ($paint_color == "Alpha Gray")
-                                                            echo "selected"; ?>>
-                                                            Alpha Gray</option>
-                                                        <option value="Nile Green" <?php if ($paint_color == "Nile Green")
-                                                            echo "selected"; ?>>Nile Green</option>
-                                                        <option value="Emirald Green" <?php if ($paint_color == "Emirald Green")
-                                                            echo "selected"; ?>>
-                                                            Emirald Green</option>
-                                                        <option value="Jade Green" <?php if ($paint_color == "Jade Green")
-                                                            echo "selected"; ?>>Jade Green</option>
-                                                    </select>
-
-                                                    <label>Supplier:</label>
-                                                    <select name="supplier_name" id="supplier_name" required>
-                                                        <option value="">-- Select --</option>
-                                                        <option value="Nippon" <?php if ($supplier_name == "Nippon")
-                                                            echo "selected"; ?>>
-                                                            Nippon</option>
-                                                        <option value="Treasure Island" <?php if ($supplier_name == "Treasure Island")
-                                                            echo "selected"; ?>>Treasure Island</option>
-                                                        <option value="Inkote" <?php if ($supplier_name == "Inkote")
-                                                            echo "selected"; ?>>
-                                                            Inkote</option>
-                                                        <option value="Century" <?php if ($supplier_name == "Century")
-                                                            echo "selected"; ?>>
-                                                            Century</option>
-                                                    </select>
-                                                    <br><br>
-                                                    <label>Batch #:</label>
-                                                    <input type="text" class="form-control" name="batchNumber"
-                                                        id="batchNumber" autocomplete="off" required
-                                                        value="<?php echo $batchNumber; ?>">
-                                                    <br>
-
-                                                    <label>Diameter:</label>
-                                                    <input type="text" class="form-control" name="diameter"
-                                                        id="diameter" autocomplete="off"
-                                                        value="<?php echo $diameter; ?>">
-                                                    <br>
-                                                    <label>Height:</label>
-                                                    <input type="text" class="form-control" name="height" id="height"
-                                                        autocomplete="off" value="<?php echo $height; ?>">
-                                                    <br>
-                                                    <label>Paint ratio:</label>
-                                                    <input type="text" class="form-control" name="paintRatio"
-                                                        id="paintRatio" autocomplete="off"
-                                                        value="<?php echo $paintRatio; ?>">
-                                                    <br>
-                                                    <label>Acetate ratio:</label>
-                                                    <input type="text" class="form-control" name="acetateRatio"
-                                                        id="acetateRatio" autocomplete="off"
-                                                        value="<?php echo $acetateRatio; ?>">
-
-                                                </fieldset>
-                                                <br><br>
-
-                                                <fieldset>
-                                                    <legend style="color:blue;font-weight:bold;">Ending
-                                                        Inventory:</legend><br><br>
-
-
-                                                    <label>Diameter:</label>
-                                                    <input type="text" class="form-control" name="Endingdiameter"
-                                                        id="Endingdiameter" autocomplete="off"
-                                                        value="<?php echo $Endingdiameter; ?>">
-                                                    <br>
-                                                    <label>Height:</label>
-                                                    <input type="text" class="form-control" name="Endingheight"
-                                                        id="Endingheight" autocomplete="off"
-                                                        value="<?php echo $Endingheight; ?>">
-                                                    <br>
-                                                    <label>Paint ratio:</label>
-                                                    <input type="text" class="form-control" name="EndingpaintRatio"
-                                                        id="EndingpaintRatio" autocomplete="off"
-                                                        value="<?php echo $EndingpaintRatio; ?>">
-                                                    <br>
-                                                    <label>Acetate ratio:</label>
-                                                    <input type="text" class="form-control" name="EndingacetateRatio"
-                                                        id="EndingacetateRatio" autocomplete="off"
-                                                        value="<?php echo $EndingacetateRatio; ?>">
-
-                                                </fieldset>
-                                                <br><br>
-
-                                                <div class="modal-footer">
-
-                                                    <button type="submit" name="updatedata"
-                                                        class="btn btn-info text-light">Update</button>
-                                                    <button class="btn btn-danger" class="btn-close"
-                                                        data-bs-dismiss="modal" style="color:white">Cancel</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                             </tr>
                         </tbody>
 
@@ -938,21 +809,14 @@ if (!$result) {
                     </a>
                 </li>
                 <li>
+                    <a href="update.php" style="display:none;">
+                        <span class="icon"><i class="fa-regular fa-folder"></i></span>
+                        <span class="item">Update</span>
+                    </a>
+                </li>
+
 
             </ul>
-
-            <!--FOR CLOCK-->
-            <div class="clockcontainer">
-                <div class="clock">
-                    <span id="hrs"></span>
-                    <span>:</span>
-                    <span id="min"></span>
-                    <span>:</span>
-                    <span id="sec"></span>
-                    <span id="ampm"></span>
-
-                </div>
-            </div>
 
         </div>
     </div>
@@ -1023,148 +887,96 @@ if (!$result) {
         </div>
     </div>
 
-    
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.2/moment.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/dataTables.buttons.min.js"></script>
+
+    <!-- DataTables Buttons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
+        integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.2/js/buttons.print.min.js"></script>
 
     <!--DATA TABLES-->
     <script>
         $(document).ready(function () {
             new DataTable('#datatables', {
                 scrollX: true,
-                scrollY: true
+                scrollY: true,
+
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'print',
+
+                    {
+                        extend: 'pdf',
+                        orientation: 'landscape',
+                        pageSize: 'LEGAL'
+                    }
+                ]
 
             });
         });
     </script>
 
     <!-- DATE FILTER RANGE -->
-<script>
-    let minDate, maxDate;
-    let table;
-
-    // Custom filtering function which will search data in column four between two values
-    $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
-        let min = minDate.valueAsDate;
-        let max = maxDate.valueAsDate;
-        let date = new Date(data[0]); // Assuming your date is in the first column
-
-        if (
-            (!min && !max) ||
-            (!min && date <= max) ||
-            (min <= date && !max) ||
-            (min <= date && date <= max)
-        ) {
-            return true;
-        }
-        return false;
-    });
-
-    // Create date inputs
-    minDate = document.getElementById('min');
-    maxDate = document.getElementById('max');
-
-    // Function to initialize DataTable
-    function initializeDataTable() {
-        
-
-        // Initialize DataTable
-        table = $('#datatables').DataTable();
-
-        // Refilter the table
-        document.querySelectorAll('#min, #max').forEach((el) => {
-            el.addEventListener('change', () => table.draw());
-        });
-    }
-
-    // Initialize DataTable on document ready
-    $(document).ready(function () {
-        initializeDataTable();
-    });
-</script>
-
-
-
-    <!--FOR CLOCK SCRIPT-->
     <script>
-        let hrs = document.getElementById("hrs");
-        let min = document.getElementById("min");
-        let sec = document.getElementById("sec");
-        let ampm = document.getElementById("ampm");
+        let minDate, maxDate;
+        let table;
 
-        setInterval(() => {
-            let currentTime = new Date();
-            let hours = currentTime.getHours();
-            let period = "AM";
+        // Custom filtering function which will search data in column four between two values
+        $.fn.dataTable.ext.search.push(function (settings, data, dataIndex) {
+            let min = minDate.valueAsDate;
+            let max = maxDate.valueAsDate;
+            let date = new Date(data[0]); // Assuming your date is in the first column
 
-            if (hours >= 12) {
-                period = "PM";
-                if (hours > 12) {
-                    hours -= 12;
-                }
+            if (
+                (!min && !max) ||
+                (!min && date <= max) ||
+                (min <= date && !max) ||
+                (min <= date && date <= max)
+            ) {
+                return true;
             }
+            return false;
+        });
 
-            hrs.innerHTML = (hours < 10 ? "0" : '') + hours;
-            min.innerHTML = (currentTime.getMinutes() < 10 ? "0" : '') + currentTime.getMinutes();
-            sec.innerHTML = (currentTime.getSeconds() < 10 ? "0" : '') + currentTime.getSeconds();
-            ampm.innerHTML = period;
-        }, 1000)
-    </script>
+        // Create date inputs
+        minDate = document.getElementById('min');
+        maxDate = document.getElementById('max');
 
-
-    <!--For UPDATE modal-->
-    <!--Reminder: Javascript is so sensitive..kailangan na puro small letter
-ang e-assign na attributes name sa js to populate the value of the attributes
-in HTML. For example: (data-ending-paint-ratio) kailangan na small letter tanan.-->
-    <script>
-        $(document).ready(function () {
-            $('.edit-row .editbtn').on('click', function () {
-                var row = $(this).closest('.edit-row');
-                var userID = row.data('entry-id');
-                var date = row.data('date');
-                var paint_color = row.data('paint-color');
-                var supplier_name = row.data('supplier-name');
-                var batchNumber = row.data('batch-number');
-                var diameter = row.data('diameter');
-                var height = row.data('height');
-                var paintRatio = row.data('paint-ratio');
-                var acetateRatio = row.data('acetate-ratio');
-                var Endingdiameter = row.data('endingdiameter');
-                var Endingheight = row.data('endingheight');
-                var EndingpaintRatio = row.data('endingpaintratio');
-                var EndingacetateRatio = row.data('endingacetateratio');
-
-                console.log(date);
-                console.log(paint_color);
-                console.log(supplier_name);
-                console.log(batchNumber);
-                console.log(diameter);
-                console.log(height);
-                console.log(paintRatio);
-                console.log(acetateRatio);
-                console.log('Endingdiameter:', Endingdiameter);
-                console.log('Endingheight:', Endingheight);
-                console.log('EndingpaintRatio:', EndingpaintRatio);
-                console.log('EndingacetateRatio:', EndingacetateRatio);
+        // Function to initialize DataTable
+        function initializeDataTable() {
 
 
-                $('#editmodal #update_id').val(userID);
-                $('#editmodal #date').val(date);
-                $('#editmodal #paint_color').val(paint_color);
-                $('#editmodal #supplier_name').val(supplier_name);
-                $('#editmodal #batchNumber').val(batchNumber);
-                $('#editmodal #diameter').val(diameter);
-                $('#editmodal #height').val(height);
-                $('#editmodal #paintRatio').val(paintRatio);
-                $('#editmodal #acetateRatio').val(acetateRatio);
-                $('#editmodal #Endingdiameter').val(Endingdiameter);
-                $('#editmodal #Endingheight').val(Endingheight);
-                $('#editmodal #EndingpaintRatio').val(EndingpaintRatio);
-                $('#editmodal #EndingacetateRatio').val(EndingacetateRatio);
+            // Initialize DataTable
+            table = $('#datatables').DataTable();
 
-
-                $('#editmodal').modal('show');
+            // Refilter the table
+            document.querySelectorAll('#min, #max').forEach((el) => {
+                el.addEventListener('change', () => table.draw());
             });
+        }
+
+        // Initialize DataTable on document ready
+        $(document).ready(function () {
+            initializeDataTable();
         });
     </script>
+
 
 
     <!--For delete modal-->
